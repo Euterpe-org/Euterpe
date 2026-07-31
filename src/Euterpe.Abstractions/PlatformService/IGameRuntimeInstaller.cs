@@ -1,5 +1,6 @@
 namespace Euterpe.Abstractions;
 
+[PlatformService]
 public interface IGameRuntimeInstaller
 {
     /// <summary>

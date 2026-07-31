@@ -1,5 +1,6 @@
 namespace Euterpe.Abstractions;
 
+[PlatformService(ServiceRegistrationLifetime.AppSingleton)]
 public interface IDotNetSdkInstaller
 {
     /// <summary>

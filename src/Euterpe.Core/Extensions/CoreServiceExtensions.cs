@@ -10,7 +10,7 @@ using Velopack.Sources;
 
 namespace Euterpe.Core.Extensions;
 
-public static class CoreServiceExtensions
+public static partial class CoreServiceExtensions
 {
     extension(IServiceCollection services)
     {
@@ -161,56 +161,6 @@ public static class CoreServiceExtensions
             builder.RegisterType<UninstallConflictsStep>().As<ISetupStep>().PropertiesAutowired().InstancePerLifetimeScope();
 
             builder.RegisterPerPlatformGameServices();
-        }
-
-        private void RegisterPerPlatformAppServices()
-        {
-#pragma warning disable CA1416
-#if WINDOWS
-            builder.RegisterType<WindowsSystemAssociationSetup>().As<ISystemAssociationSetup>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<WindowsSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
-#elif LINUX
-            builder.RegisterType<LinuxSystemAssociationSetup>().As<ISystemAssociationSetup>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<LinuxSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
-#elif MACOS
-            builder.RegisterType<MacOsSystemAssociationSetup>().As<ISystemAssociationSetup>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsDotNetSdkInstaller>().As<IDotNetSdkInstaller>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsLauncher>().As<IPlatformLauncher>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsPlatformInfo>().As<IPlatformInfo>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsSecureStorage>().As<IPlatformSecureStorage>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<MacOsSteamPathDiscovery>().As<ISteamPathDiscovery>().PropertiesAutowired().SingleInstance();
-#endif
-#pragma warning restore CA1416
-        }
-
-        private void RegisterPerPlatformGameServices()
-        {
-#pragma warning disable CA1416
-#if WINDOWS
-            builder.RegisterType<WindowsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<WindowsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<WindowsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<WindowsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-#elif LINUX
-            builder.RegisterType<LinuxGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<LinuxGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<LinuxGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<LinuxGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-#elif MACOS
-            builder.RegisterType<MacOsGameModTemplateInstaller>().As<IGameModTemplateInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<MacOsGamePathDiscovery>().As<IGamePathDiscovery>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<MacOsGamePathEnvironment>().As<IGamePathEnvironment>().PropertiesAutowired().InstancePerLifetimeScope();
-            builder.RegisterType<MacOsGameRuntimeInstaller>().As<IGameRuntimeInstaller>().PropertiesAutowired().InstancePerLifetimeScope();
-#endif
-#pragma warning restore CA1416
         }
     }
 }
