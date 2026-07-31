@@ -1,12 +1,34 @@
 using Euterpe.Releaser;
 
-var app = ConsoleApp.Create()
-    .ConfigureLogging(static logging => logging.AddZLoggerConsole())
-    .ConfigureServices(static services =>
+var logConfig = new LogManagerConfig
+{
+    RootLogger =
     {
-        services.AddSingleton<ReleaseProcessRunner>();
-        services.AddSingleton<RidReleaseStager>();
-    });
+        MinimumLevel = LogLevel.Info,
+        Writers =
+        {
+            new StreamLogWriter(Console.OpenStandardOutput())
+            {
+                AutoFlush = true
+            }
+        }
+    }
+};
+LogManager.Initialize(logConfig);
 
-app.Add<ReleaseCommands>();
-await app.RunAsync(args);
+try
+{
+    var app = ConsoleApp.Create()
+        .ConfigureServices(static services =>
+        {
+            services.AddSingleton<ReleaseProcessRunner>();
+            services.AddSingleton<RidReleaseStager>();
+        });
+
+    app.Add<ReleaseCommands>();
+    await app.RunAsync(args);
+}
+finally
+{
+    LogManager.Shutdown();
+}

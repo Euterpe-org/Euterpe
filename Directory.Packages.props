@@ -30,6 +30,7 @@
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10"/>
         <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.10"/>
         <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.8.0"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
@@ -59,6 +60,7 @@
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.27.0"/>
         <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.5"/>
+        <PackageVersion Include="XenoAtom.Logging" Version="1.2.0"/>
         <PackageVersion Include="ZLogger" Version="2.5.10"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.117"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.15.0"/>
