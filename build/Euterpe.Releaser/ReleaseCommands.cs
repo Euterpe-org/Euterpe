@@ -13,10 +13,9 @@ internal sealed class ReleaseCommands
 
     [Command("publish")]
     public async Task PublishAsync(
+        [FromServices] VelopackApiClient apiClient,
         CancellationToken cancellationToken = default)
     {
-        using var apiClient = new VelopackApiClient();
-
         _logger.Info($"Publishing staged Velopack version {ReleaseVersion.ToString()}");
         await apiClient.PublishAsync(ReleaseVersion, cancellationToken);
     }

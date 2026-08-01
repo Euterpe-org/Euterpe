@@ -30,6 +30,7 @@ global using Euterpe.Models.Wizard;
 global using Euterpe.Shared;
 global using Euterpe.Shared.Attributes;
 global using Euterpe.Shared.Extensions;
+global using Euterpe.Shared.Http;
 global using DotNext.Threading;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
