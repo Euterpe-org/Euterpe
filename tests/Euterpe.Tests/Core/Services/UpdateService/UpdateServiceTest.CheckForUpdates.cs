@@ -34,7 +34,7 @@ public sealed partial class UpdateServiceTest
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsNull();
         await Assert.That(downloader.LastUrl).StartsWith(
-            $"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}{EuterpeApi.Distribution.VelopackPath}/{TestRuntimeIdentifier}/releases.{expectedChannel}.json?");
+            $"{EuterpeApi.Distribution.VelopackUrl}/{TestRuntimeIdentifier}/releases.{expectedChannel}.json?");
         _logger.VerifyLog()
             .ContainingMessage($"Checking for updates on channel {expectedChannel}")
             .ContainingMessage("No new version available");
@@ -65,7 +65,7 @@ public sealed partial class UpdateServiceTest
 
         await Assert.That(await updateService.CheckForUpdatesAsync()).IsEqualTo(remoteVersion);
         await Assert.That(downloader.LastUrl).StartsWith(
-            $"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}{EuterpeApi.Distribution.VelopackPath}/{TestRuntimeIdentifier}/releases.{expectedChannel}.json?");
+            $"{EuterpeApi.Distribution.VelopackUrl}/{TestRuntimeIdentifier}/releases.{expectedChannel}.json?");
         _logger.VerifyLog()
             .ContainingMessage($"Checking for updates on channel {expectedChannel}")
             .ContainingMessage($"New version available: {remoteVersion}");

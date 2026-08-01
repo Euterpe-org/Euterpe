@@ -21,7 +21,7 @@ internal sealed partial class UpdateService
 
     private UpdateManager CreateUpdateManager(string runtimeIdentifier, string channel)
     {
-        var feedBaseUrl = $"{EuterpeApi.BaseUrl}{EuterpeApi.Distribution.BasePath}{EuterpeApi.Distribution.VelopackPath}/{runtimeIdentifier}/";
+        var feedBaseUrl = $"{EuterpeApi.Distribution.VelopackUrl}/{runtimeIdentifier}/";
         var source = new SimpleWebSource(feedBaseUrl, FeedDownloader);
         return new UpdateManager(source, new UpdateOptions { ExplicitChannel = channel }, VelopackLocatorOverride);
     }

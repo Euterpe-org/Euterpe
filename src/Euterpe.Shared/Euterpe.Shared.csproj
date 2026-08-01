@@ -5,4 +5,8 @@
         <PackageReference Include="JetBrains.Annotations"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Euterpe.Generators\Euterpe.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    </ItemGroup>
+
 </Project>

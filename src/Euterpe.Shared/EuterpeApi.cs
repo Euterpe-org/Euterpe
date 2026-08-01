@@ -1,10 +1,10 @@
 namespace Euterpe.Shared;
 
-public static class EuterpeApi
+public static partial class EuterpeApi
 {
     public const string BaseUrl = "https://euterpe-org.com/api/";
 
-    public static class Auth
+    public static partial class Auth
     {
         public const string BasePath = "auth";
 
@@ -13,26 +13,26 @@ public static class EuterpeApi
         public const string Logout = "/logout";
     }
 
-    public static class Account
+    public static partial class Account
     {
         public const string BasePath = "me";
     }
 
-    public static class Telemetry
+    public static partial class Telemetry
     {
         public const string BasePath = "telemetry";
 
         public const string Session = "/app/session";
     }
 
-    public static class Mods
+    public static partial class Mods
     {
         public const string BasePath = "mods";
 
         public const string Manifest = "/app-manifest";
     }
 
-    public static class Distribution
+    public static partial class Distribution
     {
         public const string BasePath = "distribution";
         public const string LibsPath = "/libs";
@@ -40,7 +40,7 @@ public static class EuterpeApi
         public const string VelopackPath = "/velopack";
     }
 
-    public static class Charts
+    public static partial class Charts
     {
         public const string BasePath = "charts";
 
