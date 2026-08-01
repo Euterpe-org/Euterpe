@@ -3,7 +3,9 @@ using static Euterpe.Releaser.ReleasePlanner;
 
 namespace Euterpe.Releaser;
 
-internal sealed class RidReleaseStager(ReleaseProcessRunner processRunner)
+internal sealed class RidReleaseStager(
+    ReleaseProcessRunner processRunner,
+    VelopackApiClient apiClient)
 {
     private readonly Logger _logger = LogManager.GetLogger(nameof(RidReleaseStager));
 
@@ -12,7 +14,6 @@ internal sealed class RidReleaseStager(ReleaseProcessRunner processRunner)
         SemVersion version,
         CancellationToken cancellationToken)
     {
-        using var apiClient = new VelopackApiClient();
         var context = new StageContext(Environment.CurrentDirectory, runtime, version, apiClient);
         var releaseBases = await GetReleaseBasesAsync(context, cancellationToken);
         var packageChannels = GetPackageChannels(runtime, version, releaseBases[runtime.BetaChannel] is not null);

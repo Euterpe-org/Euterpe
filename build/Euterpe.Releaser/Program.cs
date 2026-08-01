@@ -19,11 +19,7 @@ LogManager.Initialize(logConfig);
 try
 {
     var app = ConsoleApp.Create()
-        .ConfigureServices(static services =>
-        {
-            services.AddSingleton<ReleaseProcessRunner>();
-            services.AddSingleton<RidReleaseStager>();
-        });
+        .ConfigureServices(static services => services.RegisterReleaserServices());
 
     app.Add<ReleaseCommands>();
     await app.RunAsync(args);

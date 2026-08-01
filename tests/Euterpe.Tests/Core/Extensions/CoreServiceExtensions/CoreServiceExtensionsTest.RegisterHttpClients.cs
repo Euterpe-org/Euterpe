@@ -3,6 +3,7 @@ using Downloader;
 using Euterpe.Core.Extensions;
 using Euterpe.Core.Http.Clients;
 using Euterpe.Core.Http.Handlers;
+using Euterpe.Shared.Http;
 using Microsoft.Extensions.DependencyInjection;
 using TUnit.Mocks.Http;
 
