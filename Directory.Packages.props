@@ -59,7 +59,7 @@
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Velopack" Version="1.2.0"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
-        <PackageVersion Include="Verify.TUnit" Version="31.27.0"/>
+        <PackageVersion Include="Verify.TUnit" Version="31.28.0"/>
         <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.5"/>
         <PackageVersion Include="XenoAtom.Logging" Version="1.2.0"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.117"/>
