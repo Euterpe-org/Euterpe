@@ -196,12 +196,6 @@
   <data name="ChartSubmit_Title" xml:space="preserve">
     <value>提交谱面</value>
   </data>
-  <data name="Contributor_Artist" xml:space="preserve">
-    <value>艺术家</value>
-  </data>
-  <data name="Contributor_Developer" xml:space="preserve">
-    <value>开发者</value>
-  </data>
   <data name="CrashDialog_Button_Continue" xml:space="preserve">
     <value>继续运行</value>
   </data>

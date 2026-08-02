@@ -61,15 +61,17 @@ public static partial class CoreServiceExtensions
             services.AddHttpClient();
             services.AddHttpClient<EuterpeDownloadClient>().AddHttpMessageHandler<TokenQueryHandler>();
 
+            services.AddEuterpeRefitClient<IEuterpeAccountClient>(nameof(EuterpeApi.Account), EuterpeApi.Account.BasePath, true)
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeAuthClient>(nameof(EuterpeApi.Auth), EuterpeApi.Auth.BasePath)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
-            services.AddEuterpeRefitClient<IEuterpeAccountClient>(nameof(EuterpeApi.Account), EuterpeApi.Account.BasePath, true)
+            services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
+                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
+            services.AddEuterpeRefitClient<IEuterpeCreditsClient>(nameof(EuterpeApi.Public), EuterpeApi.Public.BasePath)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeDistributionClient>(nameof(EuterpeApi.Distribution), EuterpeApi.Distribution.BasePath, true)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeModClient>(nameof(EuterpeApi.Mods), EuterpeApi.Mods.BasePath, true)
-                .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
-            services.AddEuterpeRefitClient<IEuterpeChartClient>(nameof(EuterpeApi.Charts), EuterpeApi.Charts.BasePath, true)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeTelemetryClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
 

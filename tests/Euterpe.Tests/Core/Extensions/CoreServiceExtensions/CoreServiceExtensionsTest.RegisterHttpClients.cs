@@ -52,11 +52,12 @@ public sealed partial class CoreServiceExtensionsTest
 
         Type[] expectedRefitClients =
         [
-            typeof(IEuterpeAuthClient),
             typeof(IEuterpeAccountClient),
+            typeof(IEuterpeAuthClient),
+            typeof(IEuterpeChartClient),
+            typeof(IEuterpeCreditsClient),
             typeof(IEuterpeDistributionClient),
             typeof(IEuterpeModClient),
-            typeof(IEuterpeChartClient),
             typeof(IEuterpeTelemetryClient),
             typeof(IEuterpeHealthClient)
         ];

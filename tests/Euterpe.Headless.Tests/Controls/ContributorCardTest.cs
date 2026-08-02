@@ -7,6 +7,19 @@ namespace Euterpe.Headless.Tests.Controls;
 public sealed class ContributorCardTest : HeadlessTest
 {
     [Test]
+    public Task AvatarUrl_BindsToAsyncImageSource() => RunOnUI(async () =>
+    {
+        var card = new ContributorCard { AvatarUrl = "not-a-uri" };
+        var window = new Window { Content = card, Width = 400, Height = 200 };
+        window.Show();
+        Dispatcher.UIThread.RunJobs();
+
+        var avatar = card.GetVisualDescendants().OfType<AsyncImage>().FirstOrDefault();
+
+        await Assert.That(avatar?.Source).IsEqualTo("not-a-uri");
+    });
+
+    [Test]
     public Task ContributorName_BindsToTemplateTextBlock() => RunOnUI(async () =>
     {
         var card = new ContributorCard { ContributorName = "lxymahatma" };

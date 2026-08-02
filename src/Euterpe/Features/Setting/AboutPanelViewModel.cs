@@ -1,66 +1,46 @@
+using Euterpe.Contracts.Credits;
+using Euterpe.Core.Http.Clients;
+
 namespace Euterpe.Features.Setting;
 
-// ReSharper disable StringLiteralTypo
 [Route("/setting/about", DisplayName = Panel_Setting_About, Order = 0)]
 [AppSingleton]
 public sealed partial class AboutPanelViewModel : ViewModelBase
 {
-    public ContributorGroup[] ContributorGroups { get; } =
-    [
-        // Developer Team
-        new(Contributor_Developer, [
-            new Contributor("lxy",
-                "Managing and maintaining the project",
-                [
-                    ("GitHub", "https://github.com/lxymahatma"),
-                    ("Bilibili", "https://space.bilibili.com/255895683")
-                ]),
-            new Contributor("KARPED1EM",
-                "Leading UI and UX design and development",
-                [
-                    ("GitHub", "https://github.com/KARPED1EM"),
-                    ("Bilibili", "https://space.bilibili.com/312252452")
-                ]),
-            new Contributor("Balint",
-                "Building the initial prototype of MuseDashModTools",
-                [("GitHub", "https://github.com/Balint817")]),
-            new Contributor("Ultra Rabbit",
-                "Reworking the initial MuseDashModTools implementation",
-                [("GitHub", "https://github.com/TheBunnies")])
-        ]),
+    [ObservableProperty]
+    public partial ContributorGroup[] ContributorGroups { get; private set; } = [];
 
-        // Artist
-        new(Contributor_Artist, [
-            new Contributor("aquawtf",
-                "Creating the artwork used as the MelonLoader page background"),
-            new Contributor("Bigbeesushi",
-                "Creating the artwork used as the Mod Management page background",
-                [("YouTube", "https://www.youtube.com/@%E9%AD%94%E6%B3%95%E5%B8%AB%E7%8E%A5%E6%9C%88")])
-        ]),
+    [ObservableProperty]
+    public partial bool AllContributorsLoaded { get; private set; }
 
-        // Translators
-        new(Translator_ChineseSimplified, [
-            new Contributor("lxymahatma")
-        ]),
-        new(Translator_ChineseTraditional, [
-            new Contributor("Shiron Lee"),
-            new Contributor("Bigbeesushi")
-        ]),
-        new(Translator_Hungarian, [
-            new Contributor("Balint")
-        ]),
-        new(Translator_Korean, [
-            new Contributor("MEMOLie")
-        ]),
-        new(Translator_Russian, [
-            new Contributor("Ultra Rabbit"),
-            new Contributor("Ronner"),
-            new Contributor("taypexx")
-        ]),
-        new(Translator_Spanish, [
-            new Contributor("MNight4")
-        ])
-    ];
+    protected override async Task OnInitializeAsync()
+    {
+        await base.OnInitializeAsync().ConfigureAwait(false);
+
+        await LoadContributorsAsync().ConfigureAwait(false);
+
+        Logger.LogInformation("{ViewModel} Initialized", nameof(AboutPanelViewModel));
+    }
+
+    private async Task LoadContributorsAsync()
+    {
+        try
+        {
+            var response = await CreditsClient
+                .GetCreditsAsync(LanguageCodeMappings.ToCreditsLanguageCode(Config.LanguageCode))
+                .ConfigureAwait(true);
+
+            ContributorGroups = Array.ConvertAll(response.Sections, ToContributorGroup);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to load contributors");
+        }
+        finally
+        {
+            AllContributorsLoaded = true;
+        }
+    }
 
     [RelayCommand]
     private async Task CheckUpdateAsync()
@@ -86,9 +66,22 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         await UpdateDialogService.ShowAsync(newVersion, MainWindowViewModel.DialogHostId).ConfigureAwait(false);
     }
 
+    private static ContributorGroup ToContributorGroup(CreditsSection section) =>
+        new(section.Title, Array.ConvertAll(section.Items, ToContributor));
+
+    private static Contributor ToContributor(CreditsPerson person) =>
+        new(person.Name,
+            EuterpeWeb.BaseUrl + person.Avatar,
+            person.Description,
+            person.Links.Length is 0
+                ? null
+                : Array.ConvertAll(person.Links, static link => new ContributorLink(link.Name, link.Url)));
+
     #region Injections
 
+    public required Config Config { get; init; }
     public required UpdateDialogService UpdateDialogService { get; init; }
+    public required IEuterpeCreditsClient CreditsClient { get; init; }
     public required ILogger<AboutPanelViewModel> Logger { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
     public required IUpdateService UpdateService { get; init; }

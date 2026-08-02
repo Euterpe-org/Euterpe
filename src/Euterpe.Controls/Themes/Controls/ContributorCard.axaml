@@ -35,18 +35,14 @@
 
                                 <!--  Avatar  -->
                                 <Border
+                                    ClipToBounds="True"
+                                    CornerRadius="32"
                                     Height="64"
                                     Width="64">
-                                    <Image
-                                        Source="{TemplateBinding Avatar, Mode=OneWay}"
-                                        Stretch="UniformToFill">
-                                        <Image.Clip>
-                                            <EllipseGeometry
-                                                Center="32,32"
-                                                RadiusX="32"
-                                                RadiusY="32" />
-                                        </Image.Clip>
-                                    </Image>
+                                    <e:AsyncImage
+                                        DecodeHeight="64"
+                                        Source="{TemplateBinding AvatarUrl, Mode=OneWay}"
+                                        Stretch="UniformToFill" />
                                 </Border>
 
                                 <StackPanel

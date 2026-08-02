@@ -23,24 +23,6 @@ public sealed class LocalizationService
         "zh-Hant"
     ];
 
-    private Dictionary<string, string> SemiLanguageMaps { get; } = new()
-    {
-        ["en"] = "en-us",
-        ["de"] = "de-de",
-        ["es"] = "es-es",
-        ["fr"] = "fr-fr",
-        ["hr"] = "hr",
-        ["hu"] = "hu",
-        ["id"] = "en-us",
-        ["ja"] = "ja-jp",
-        ["ko"] = "ko-kr",
-        ["nl"] = "nl-nl",
-        ["pt"] = "en-us",
-        ["ru"] = "ru-ru",
-        ["zh-Hans"] = "zh-cn",
-        ["zh-Hant"] = "zh-tw"
-    };
-
     public Language GetCurrentLanguage()
     {
         CultureInfo currentCulture;
@@ -82,7 +64,7 @@ public sealed class LocalizationService
         var culture = CultureInfo.GetCultureInfo(language);
         LocalizationManager.Culture = culture;
 
-        var semiCulture = CultureInfo.GetCultureInfo(SemiLanguageMaps[culture.Name]);
+        var semiCulture = CultureInfo.GetCultureInfo(LanguageCodeMappings.ToSemiLanguageCode(culture.Name));
         SemiTheme.OverrideLocaleResources(GetCurrentApplication(), semiCulture);
         UrsaSemiTheme.OverrideLocaleResources(GetCurrentApplication(), semiCulture);
 
