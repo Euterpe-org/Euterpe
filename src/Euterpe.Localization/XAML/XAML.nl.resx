@@ -187,12 +187,6 @@
   <data name="ChartSubmit_Title" xml:space="preserve">
     <value>Chart indienen</value>
   </data>
-  <data name="Contributor_Artist" xml:space="preserve">
-    <value>Artiest</value>
-  </data>
-  <data name="Contributor_Developer" xml:space="preserve">
-    <value>Ontwikkelaar</value>
-  </data>
   <data name="CrashDialog_Button_Continue" xml:space="preserve">
     <value>Doorgaan</value>
   </data>

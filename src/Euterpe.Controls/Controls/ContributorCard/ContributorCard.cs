@@ -5,8 +5,8 @@ namespace Euterpe.Controls;
 
 public sealed class ContributorCard : TemplatedControl
 {
-    public static readonly StyledProperty<IImage> AvatarProperty =
-        AvaloniaProperty.Register<ContributorCard, IImage>(nameof(Avatar));
+    public static readonly StyledProperty<string> AvatarUrlProperty =
+        AvaloniaProperty.Register<ContributorCard, string>(nameof(AvatarUrl));
 
     public static readonly StyledProperty<string> ContributorNameProperty =
         AvaloniaProperty.Register<ContributorCard, string>(nameof(ContributorName));
@@ -20,11 +20,10 @@ public sealed class ContributorCard : TemplatedControl
     public static readonly StyledProperty<ICommand> ButtonCommandProperty =
         AvaloniaProperty.Register<ContributorCard, ICommand>(nameof(ButtonCommand));
 
-    [Content]
-    public IImage Avatar
+    public string AvatarUrl
     {
-        get => GetValue(AvatarProperty);
-        set => SetValue(AvatarProperty, value);
+        get => GetValue(AvatarUrlProperty);
+        set => SetValue(AvatarUrlProperty, value);
     }
 
     public string ContributorName
