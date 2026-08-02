@@ -10,6 +10,7 @@ namespace Euterpe.Tests.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Linux))]
 public sealed class LinuxGameRuntimeInstallerTest
 {
+    private const string RuntimeVersion = "8.0";
     private string _tempDir = null!;
 
     [Before(Test)]
@@ -32,9 +33,9 @@ public sealed class LinuxGameRuntimeInstallerTest
     public async Task CheckInstalledAsync_GameLocalRuntimePresent_ReturnsTrue()
     {
         var config = new MuseDashConfig { Folder = _tempDir };
-        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, $"{config.DotNetRuntimeMajorVersion}.0.36"));
+        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, $"{RuntimeVersion}.36"));
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsTrue();
     }
@@ -45,7 +46,7 @@ public sealed class LinuxGameRuntimeInstallerTest
         var config = new MuseDashConfig { Folder = _tempDir };
         Directory.CreateDirectory(config.DotNetRuntimeFolder);
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsFalse();
     }
@@ -54,9 +55,20 @@ public sealed class LinuxGameRuntimeInstallerTest
     public async Task CheckInstalledAsync_DifferentMajorVersionOnly_ReturnsFalse()
     {
         var config = new MuseDashConfig { Folder = _tempDir };
-        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, $"{config.DotNetRuntimeMajorVersion + 1}.0.0"));
+        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, "9.0.0"));
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
+
+        await Assert.That(installed).IsFalse();
+    }
+
+    [Test]
+    public async Task CheckInstalledAsync_DifferentMinorVersionOnly_ReturnsFalse()
+    {
+        var config = new MuseDashConfig { Folder = _tempDir };
+        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, "8.1.0"));
+
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsFalse();
     }
@@ -68,9 +80,9 @@ public sealed class LinuxGameRuntimeInstallerTest
         var desktopRuntimeFolder = Path.Combine(
             _tempDir,
             "steamapps", "compatdata", config.SteamAppId, "pfx", "drive_c", "Program Files", "dotnet", "shared", "Microsoft.WindowsDesktop.App");
-        Directory.CreateDirectory(Path.Combine(desktopRuntimeFolder, $"{config.DotNetRuntimeMajorVersion}.0.16"));
+        Directory.CreateDirectory(Path.Combine(desktopRuntimeFolder, $"{RuntimeVersion}.16"));
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsTrue();
     }
@@ -80,7 +92,7 @@ public sealed class LinuxGameRuntimeInstallerTest
     {
         var config = new MuseDashConfig { Folder = _tempDir };
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsFalse();
     }

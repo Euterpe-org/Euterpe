@@ -10,10 +10,10 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
                                               wine reg add "HKCU\Software\Wine\DllOverrides" /v "version" /t "REG_SZ" /d "native,builtin" /f
                                               """;
 
-    public Task<bool> CheckInstalledAsync() =>
-        Task.FromResult(CheckGameLocalRuntimeInstalled() || CheckProtonPrefixRuntimeInstalled());
+    public Task<bool> CheckInstalledAsync(string runtimeVersion) =>
+        Task.FromResult(CheckGameLocalRuntimeInstalled(runtimeVersion) || CheckProtonPrefixRuntimeInstalled(runtimeVersion));
 
-    public async Task InstallAsync()
+    public async Task InstallAsync(string runtimeVersion)
     {
         if (!await CheckProtontricksInstalledAsync().ConfigureAwait(false))
         {
@@ -27,11 +27,12 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
             throw new InvalidOperationException("Failed to configure wineprefix");
         }
 
+        var runtimeUrl = DotNetRuntimeDownload.GetUrl(runtimeVersion);
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.LogInformation("Downloading .NET Runtime from {RuntimeUrl} to {TempFilePath}", GameConfig.DotNetRuntimeUrl, tempFilePath);
-            await AppDownloadManager.DownloadFileAsync(GameConfig.DotNetRuntimeUrl, tempFilePath).ConfigureAwait(false);
+            Logger.LogInformation("Downloading .NET Runtime from {RuntimeUrl} to {TempFilePath}", runtimeUrl, tempFilePath);
+            await AppDownloadManager.DownloadFileAsync(runtimeUrl, tempFilePath).ConfigureAwait(false);
 
             Logger.LogInformation("Extracting .NET Runtime to {RuntimeFolder}", GameConfig.DotNetRuntimeFolder);
             await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotNetRuntimeFolder).ConfigureAwait(false);
@@ -44,7 +45,7 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
         }
     }
 
-    private bool CheckGameLocalRuntimeInstalled()
+    private bool CheckGameLocalRuntimeInstalled(string runtimeVersion)
     {
         ReadOnlySpan<string> sharedFrameworkFolders =
         [
@@ -54,24 +55,24 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
         foreach (var folder in sharedFrameworkFolders)
         {
-            if (!ContainsRequiredRuntime(folder))
+            if (!ContainsRequiredRuntime(folder, runtimeVersion))
             {
                 continue;
             }
 
-            Logger.LogInformation("Game-local .NET {RuntimeMajorVersion} runtime found: {Folder}", GameConfig.DotNetRuntimeMajorVersion, folder);
+            Logger.LogInformation("Game-local .NET {RuntimeVersion} runtime found: {Folder}", runtimeVersion, folder);
             return true;
         }
 
-        Logger.LogInformation("No game-local .NET {RuntimeMajorVersion} runtime found in {GameFolder}", GameConfig.DotNetRuntimeMajorVersion, GameConfig.Folder);
+        Logger.LogInformation("No game-local .NET {RuntimeVersion} runtime found in {GameFolder}", runtimeVersion, GameConfig.Folder);
         return false;
     }
 
-    private bool ContainsRequiredRuntime(string sharedFrameworkFolder) =>
+    private static bool ContainsRequiredRuntime(string sharedFrameworkFolder, string runtimeVersion) =>
         Directory.Exists(sharedFrameworkFolder)
-        && Directory.EnumerateDirectories(sharedFrameworkFolder, $"{GameConfig.DotNetRuntimeMajorVersion}.*", SearchOption.TopDirectoryOnly).Any();
+        && Directory.EnumerateDirectories(sharedFrameworkFolder, $"{runtimeVersion}.*", SearchOption.TopDirectoryOnly).Any();
 
-    private bool CheckProtonPrefixRuntimeInstalled()
+    private bool CheckProtonPrefixRuntimeInstalled(string runtimeVersion)
     {
         var relativePath = $"steamapps/compatdata/{GameConfig.SteamAppId}/pfx/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App";
         var runtimeRoot = Path.Combine(Config.SteamFolder, relativePath);
@@ -82,15 +83,15 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
             return false;
         }
 
-        var installed = Directory.EnumerateDirectories(runtimeRoot, $"{GameConfig.DotNetRuntimeMajorVersion}.*", SearchOption.TopDirectoryOnly).Any();
+        var installed = Directory.EnumerateDirectories(runtimeRoot, $"{runtimeVersion}.*", SearchOption.TopDirectoryOnly).Any();
 
         if (!installed)
         {
-            Logger.LogInformation(".NET Desktop Runtime {RuntimeMajorVersion} not found in {RuntimeRoot}", GameConfig.DotNetRuntimeMajorVersion, runtimeRoot);
+            Logger.LogInformation(".NET Desktop Runtime {RuntimeVersion} not found in {RuntimeRoot}", runtimeVersion, runtimeRoot);
             return false;
         }
 
-        Logger.LogInformation(".NET Desktop Runtime {RuntimeMajorVersion} found in {RuntimeRoot}", GameConfig.DotNetRuntimeMajorVersion, runtimeRoot);
+        Logger.LogInformation(".NET Desktop Runtime {RuntimeVersion} found in {RuntimeRoot}", runtimeVersion, runtimeRoot);
         return true;
     }
 

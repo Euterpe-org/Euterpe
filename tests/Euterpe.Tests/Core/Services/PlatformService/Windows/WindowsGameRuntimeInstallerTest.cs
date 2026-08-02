@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using Downloader;
 using TUnit.Core.Enums;
 
 namespace Euterpe.Tests.Core;
@@ -10,6 +11,7 @@ namespace Euterpe.Tests.Core;
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
 public sealed class WindowsGameRuntimeInstallerTest
 {
+    private const string RuntimeVersion = "8.0";
     private string _tempDir = null!;
 
     [Before(Test)]
@@ -32,9 +34,9 @@ public sealed class WindowsGameRuntimeInstallerTest
     public async Task CheckInstalledAsync_GameLocalRuntimePresent_ReturnsTrue()
     {
         var config = new MuseDashConfig { Folder = _tempDir };
-        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, $"{config.DotNetRuntimeMajorVersion}.0.36"));
+        Directory.CreateDirectory(Path.Combine(config.DotNetSharedFrameworkFolder, $"{RuntimeVersion}.36"));
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsTrue();
     }
@@ -43,17 +45,36 @@ public sealed class WindowsGameRuntimeInstallerTest
     public async Task CheckInstalledAsync_MelonLoaderLocalRuntimePresent_ReturnsTrue()
     {
         var config = new MuseDashConfig { Folder = _tempDir };
-        Directory.CreateDirectory(Path.Combine(config.MelonLoaderDotNetSharedFrameworkFolder, $"{config.DotNetRuntimeMajorVersion}.0.16"));
+        Directory.CreateDirectory(Path.Combine(config.MelonLoaderDotNetSharedFrameworkFolder, $"{RuntimeVersion}.16"));
 
-        var installed = await CreateInstaller(config).CheckInstalledAsync();
+        var installed = await CreateInstaller(config).CheckInstalledAsync(RuntimeVersion);
 
         await Assert.That(installed).IsTrue();
     }
 
-    private static WindowsGameRuntimeInstaller CreateInstaller(GameConfig gameConfig) => new()
+    [Test]
+    public async Task InstallAsync_RuntimeVersion_DownloadsMatchingRuntime()
+    {
+        var downloadManager = IAppDownloadManager.Mock();
+        var installer = CreateInstaller(new MuseDashConfig { Folder = _tempDir }, downloadManager);
+
+        await installer.InstallAsync(RuntimeVersion);
+
+        downloadManager.DownloadFileAsync(
+                "https://aka.ms/dotnet/8.0/dotnet-runtime-win-x64.zip",
+                Any<string>(),
+                Any<EventHandler<DownloadStartedEventArgs>?>(),
+                Any<IProgress<double>?>(),
+                Any<CancellationToken>())
+            .WasCalled(Times.Once);
+    }
+
+    private static WindowsGameRuntimeInstaller CreateInstaller(
+        GameConfig gameConfig,
+        IAppDownloadManager? downloadManager = null) => new()
     {
         GameConfig = gameConfig,
-        AppDownloadManager = IAppDownloadManager.Mock(),
+        AppDownloadManager = downloadManager ?? IAppDownloadManager.Mock(),
         ArchiveService = IArchiveService.Mock(),
         FileSystemService = IFileSystemService.Mock(),
         Logger = Mock.Logger<WindowsGameRuntimeInstaller>()
