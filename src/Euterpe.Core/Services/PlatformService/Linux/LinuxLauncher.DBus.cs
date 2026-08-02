@@ -21,7 +21,7 @@ internal sealed partial class LinuxLauncher
         }
         catch (DBusExceptionBase ex)
         {
-            Logger.LogDebug(ex, $"Failed to reveal file through D-Bus: {filePath}");
+            Logger.LogDebug(ex, "Failed to reveal file through D-Bus: {FilePath}", filePath);
             return false;
         }
     }

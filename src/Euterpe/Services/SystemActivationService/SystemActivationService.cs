@@ -20,7 +20,7 @@ public sealed partial class SystemActivationService
 
     public void HandleActivation(string argument)
     {
-        Logger.LogInformation($"Activation received: {argument}");
+        Logger.LogInformation("Activation received: {Argument}", argument);
 
         if (Uri.TryCreate(argument, UriKind.Absolute, out var parsed) && parsed.Scheme is ISystemAssociationSetup.DeepLinkScheme)
         {
@@ -34,7 +34,7 @@ public sealed partial class SystemActivationService
             return;
         }
 
-        Logger.LogWarning($"Unhandled activation: {argument}");
+        Logger.LogWarning("Unhandled activation: {Argument}", argument);
     }
 
     #region Injections

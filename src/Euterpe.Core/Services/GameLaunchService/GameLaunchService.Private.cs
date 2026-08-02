@@ -18,6 +18,6 @@ internal sealed partial class GameLaunchService
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        Logger.LogInformation($"Launching game {gameId} with launch arguments: {string.Join(' ', launchArguments)}");
+        Logger.LogInformation("Launching game {GameId} with launch arguments: {LaunchArguments}", gameId, string.Join(' ', launchArguments));
     }
 }

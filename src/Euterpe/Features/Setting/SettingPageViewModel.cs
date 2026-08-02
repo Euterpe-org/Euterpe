@@ -12,7 +12,7 @@ public sealed partial class SettingPageViewModel : NavViewModelBase
 
     protected override Task OnInitializeAsync()
     {
-        Logger.LogInformation($"{nameof(SettingPageViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(SettingPageViewModel));
         return base.OnInitializeAsync();
     }
 }

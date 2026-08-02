@@ -18,11 +18,11 @@ internal sealed class WindowsSystemAssociationSetup : ISystemAssociationSetup
             RegisterDeepLinkScheme(processPath);
             RegisterEpkFileAssociation(processPath);
 
-            Logger.LogInformation($"Registered deep link protocol and file association on Windows with process path: {processPath}");
+            Logger.LogInformation("Registered deep link protocol and file association on Windows with process path: {ProcessPath}", processPath);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to register deep link protocol and file association on Windows");
+            Logger.LogError(ex, "Failed to register deep link protocol and file association on Windows");
         }
 
         return Task.CompletedTask;

@@ -8,11 +8,11 @@ internal sealed partial class AppSettingService
         try
         {
             File.Move(ConfigPath, backupPath);
-            Logger.LogError(cause, $"Config file is corrupted; backed up to {backupPath} and using default settings");
+            Logger.LogError(cause, "Config file is corrupted; backed up to {BackupPath} and using default settings", backupPath);
         }
         catch (Exception moveEx)
         {
-            Logger.LogError(moveEx, $"Config file is corrupted but could not back up; using default settings. Original cause: {cause.Message}");
+            Logger.LogError(moveEx, "Config file is corrupted but could not back up; using default settings. Original cause: {CauseMessage}", cause.Message);
         }
     }
 
@@ -20,7 +20,7 @@ internal sealed partial class AppSettingService
     {
         if (Config.SteamFolder.IsNullOrEmpty() || !SteamDiscovery.CheckIsValidSteamFolder(Config.SteamFolder))
         {
-            Logger.LogError($"Stored Steam folder is invalid");
+            Logger.LogError("Stored Steam folder is invalid");
 
             if (SteamDiscovery.TryGetSteamFolder(out var steamFolder))
             {
@@ -28,7 +28,7 @@ internal sealed partial class AppSettingService
             }
             else
             {
-                Logger.LogInformation($"Letting user choose Steam folder...");
+                Logger.LogInformation("Letting user choose Steam folder...");
                 await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamFolder).ConfigureAwait(true);
                 Config.SteamFolder = await AppLocalService.GetSteamFolderAsync().ConfigureAwait(true);
             }
@@ -39,7 +39,7 @@ internal sealed partial class AppSettingService
     {
         if (Config.SteamExecPath.IsNullOrEmpty() || !SteamDiscovery.CheckIsValidSteamExecPath(Config.SteamExecPath))
         {
-            Logger.LogError($"Stored Steam executable is invalid");
+            Logger.LogError("Stored Steam executable is invalid");
 
             var detectedPath = await SteamDiscovery.GetSteamExecPathAsync().ConfigureAwait(true);
             if (!detectedPath.IsNullOrEmpty())
@@ -48,7 +48,7 @@ internal sealed partial class AppSettingService
             }
             else
             {
-                Logger.LogInformation($"Letting user choose Steam executable...");
+                Logger.LogInformation("Letting user choose Steam executable...");
                 await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamExec).ConfigureAwait(true);
                 Config.SteamExecPath = await AppLocalService.GetSteamExecPathAsync().ConfigureAwait(true);
             }

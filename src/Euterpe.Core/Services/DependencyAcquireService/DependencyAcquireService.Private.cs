@@ -15,7 +15,7 @@ internal sealed partial class DependencyAcquireService
     {
         if (await IsValidAsync(spec.FilePath, spec.ExpectedHash).ConfigureAwait(false))
         {
-            Logger.LogInformation($"{spec.Name} already exists and hash matches, skipping download");
+            Logger.LogInformation("{DependencyName} already exists and hash matches, skipping download", spec.Name);
             return;
         }
 

@@ -12,14 +12,14 @@ internal sealed class LinuxGamePathDiscovery : IGamePathDiscovery
             return true;
         }
 
-        Logger.LogInformation($"Could not get game folder from libraryfolders.vdf");
+        Logger.LogInformation("Could not get game folder from libraryfolders.vdf");
 
         if (GamePathService.TryGetGameFolderFromCommonPaths(LinuxPaths.SteamSearch, relativePath, out gameFolder))
         {
             return true;
         }
 
-        Logger.LogWarning($"Failed to auto detect game path on Linux");
+        Logger.LogWarning("Failed to auto detect game path on Linux");
         return false;
     }
 
@@ -36,11 +36,11 @@ internal sealed class LinuxGamePathDiscovery : IGamePathDiscovery
 
         if (!File.Exists(exePath) || !File.Exists(dllPath))
         {
-            Logger.LogError($"{exeName} or GameAssembly.dll not found in {folderPath}");
+            Logger.LogError("{ExeName} or GameAssembly.dll not found in {FolderPath}", exeName, folderPath);
             return false;
         }
 
-        Logger.LogInformation($"{exeName} and GameAssembly.dll found in {folderPath}");
+        Logger.LogInformation("{ExeName} and GameAssembly.dll found in {FolderPath}", exeName, folderPath);
         return true;
     }
 

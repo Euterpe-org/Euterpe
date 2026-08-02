@@ -72,7 +72,7 @@ public sealed partial class AboutPanelViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to check for updates");
+            Logger.LogError(ex, "Failed to check for updates");
             await MessageBoxService.ErrorAsync(MessageBox_Content_Update_Check_Failed).ConfigureAwait(false);
             return;
         }

@@ -14,13 +14,13 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.LogInformation($"Downloading .NET Runtime from {GameConfig.DotNetRuntimeUrl} to {tempFilePath}");
+            Logger.LogInformation("Downloading .NET Runtime from {RuntimeUrl} to {TempFilePath}", GameConfig.DotNetRuntimeUrl, tempFilePath);
             await AppDownloadManager.DownloadFileAsync(GameConfig.DotNetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
-            Logger.LogInformation($"Extracting .NET Runtime to {GameConfig.DotNetRuntimeFolder}");
+            Logger.LogInformation("Extracting .NET Runtime to {RuntimeFolder}", GameConfig.DotNetRuntimeFolder);
             await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotNetRuntimeFolder).ConfigureAwait(false);
 
-            Logger.LogInformation($".NET Runtime installed to {GameConfig.DotNetRuntimeFolder}");
+            Logger.LogInformation(".NET Runtime installed to {RuntimeFolder}", GameConfig.DotNetRuntimeFolder);
         }
         finally
         {
@@ -43,11 +43,11 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
                 continue;
             }
 
-            Logger.LogInformation($"Game-local .NET {GameConfig.DotNetRuntimeMajorVersion} runtime found: {folder}");
+            Logger.LogInformation("Game-local .NET {RuntimeMajorVersion} runtime found: {Folder}", GameConfig.DotNetRuntimeMajorVersion, folder);
             return true;
         }
 
-        Logger.LogInformation($"No game-local .NET {GameConfig.DotNetRuntimeMajorVersion} runtime found in {GameConfig.Folder}");
+        Logger.LogInformation("No game-local .NET {RuntimeMajorVersion} runtime found in {GameFolder}", GameConfig.DotNetRuntimeMajorVersion, GameConfig.Folder);
         return false;
     }
 
@@ -69,7 +69,7 @@ internal sealed class WindowsGameRuntimeInstaller : IGameRuntimeInstaller
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to check .NET runtime installation");
+            Logger.LogError(ex, "Failed to check .NET runtime installation");
             return false;
         }
     }

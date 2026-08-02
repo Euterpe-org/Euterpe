@@ -19,7 +19,7 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to check Mod Template installation");
+            Logger.LogError(ex, "Failed to check Mod Template installation");
             return false;
         }
     }
@@ -31,7 +31,7 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        Logger.LogInformation($"Mod Template installed successfully");
+        Logger.LogInformation("Mod Template installed successfully");
     }
 
     public async Task UninstallAsync()
@@ -41,7 +41,7 @@ internal sealed class WindowsGameModTemplateInstaller : IGameModTemplateInstalle
             .ExecuteAsync()
             .ConfigureAwait(false);
 
-        Logger.LogInformation($"Mod Template uninstalled successfully");
+        Logger.LogInformation("Mod Template uninstalled successfully");
     }
 
     #region Injections

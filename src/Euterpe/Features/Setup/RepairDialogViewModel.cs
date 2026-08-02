@@ -34,7 +34,7 @@ public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContex
     {
         await base.OnInitializeAsync().ConfigureAwait(false);
 
-        Logger.LogInformation($"{nameof(RepairDialogViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(RepairDialogViewModel));
     }
 
     [RelayCommand]
@@ -44,7 +44,7 @@ public sealed partial class RepairDialogViewModel : ViewModelBase, IDialogContex
     {
         Content = content;
         await content.InitializeAsync().ConfigureAwait(true);
-        content.OnEnterAsync().SafeFireAndForget(ex => Logger.LogError(ex, $"Repair OnEnter failed"));
+        content.OnEnterAsync().SafeFireAndForget(ex => Logger.LogError(ex, "Repair OnEnter failed"));
     }
 
     #region Injections

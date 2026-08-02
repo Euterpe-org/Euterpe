@@ -14,7 +14,7 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 
     protected override Task OnInitializeAsync()
     {
-        Logger.LogInformation($"{nameof(ChartingPageViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(ChartingPageViewModel));
         return base.OnInitializeAsync();
     }
 

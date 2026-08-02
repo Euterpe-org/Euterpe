@@ -79,7 +79,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Update check failed during splash");
+            Logger.LogError(ex, "Update check failed during splash");
             await MessageBoxService.ErrorAsync(MessageBox_Content_Update_Check_Failed).ConfigureAwait(false);
 
             Environment.Exit(0);

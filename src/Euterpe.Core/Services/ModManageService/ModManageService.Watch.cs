@@ -28,7 +28,7 @@ internal sealed partial class ModManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to start the mod folder watcher");
+            Logger.LogError(ex, "Failed to start the mod folder watcher");
         }
     }
 }

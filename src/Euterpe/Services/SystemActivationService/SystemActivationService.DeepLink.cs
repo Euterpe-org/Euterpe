@@ -19,7 +19,7 @@ public sealed partial class SystemActivationService
         var action = uri.Host;
         var path = Uri.UnescapeDataString(uri.AbsolutePath.TrimStart('/'));
 
-        HandleActionAsync(action, path).SafeFireAndForget(ex => Logger.LogError(ex, $"Failed to handle deep link: {uri}"));
+        HandleActionAsync(action, path).SafeFireAndForget(ex => Logger.LogError(ex, "Failed to handle deep link: {Uri}", uri));
     }
 
     private static bool ShouldActivateWindow(string query) =>
@@ -51,7 +51,7 @@ public sealed partial class SystemActivationService
                 break;
 
             default:
-                Logger.LogWarning($"Unknown deep link action '{action}' with path '{path}'");
+                Logger.LogWarning("Unknown deep link action '{Action}' with path '{Path}'", action, path);
                 break;
         }
     }

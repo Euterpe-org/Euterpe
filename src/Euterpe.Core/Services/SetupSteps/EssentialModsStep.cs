@@ -13,7 +13,7 @@ internal sealed class EssentialModsStep : ISetupStep
         var mod = ModManageService.FindModByName(AppName);
         if (mod is null)
         {
-            Logger.LogWarning($"Essential mod '{AppName}' not found");
+            Logger.LogWarning("Essential mod '{AppName}' not found", AppName);
             return;
         }
 

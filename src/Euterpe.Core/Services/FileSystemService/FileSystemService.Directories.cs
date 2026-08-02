@@ -23,7 +23,7 @@ internal sealed partial class FileSystemService
         }
         catch (Exception ex)
         {
-            Logger.LogWarning(ex, $"Failed to delete directory {directoryPath}");
+            Logger.LogWarning(ex, "Failed to delete directory {DirectoryPath}", directoryPath);
             return false;
         }
     }
@@ -42,7 +42,7 @@ internal sealed partial class FileSystemService
         }
         catch (Exception ex)
         {
-            Logger.LogWarning(ex, $"Failed to move directory from {sourcePath} to {destinationPath}");
+            Logger.LogWarning(ex, "Failed to move directory from {SourcePath} to {DestinationPath}", sourcePath, destinationPath);
             return false;
         }
     }
@@ -74,13 +74,13 @@ internal sealed partial class FileSystemService
             }
             catch (Exception ex)
             {
-                Logger.LogWarning(ex, $"Failed to move directory from {sourcePath} to {candidate}");
+                Logger.LogWarning(ex, "Failed to move directory from {SourcePath} to {Candidate}", sourcePath, candidate);
                 finalPath = string.Empty;
                 return false;
             }
         }
 
-        Logger.LogWarning($"Exhausted available-path attempts moving directory from {sourcePath} to {desiredPath}");
+        Logger.LogWarning("Exhausted available-path attempts moving directory from {SourcePath} to {DesiredPath}", sourcePath, desiredPath);
         finalPath = string.Empty;
         return false;
     }

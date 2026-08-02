@@ -34,7 +34,7 @@ internal sealed partial class ModManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to reconcile mods after MelonLoader version change");
+            Logger.LogError(ex, "Failed to reconcile mods after MelonLoader version change");
         }
     }
 
@@ -60,7 +60,7 @@ internal sealed partial class ModManageService
 
     private async Task InstallModCoreAsync(ModDto mod)
     {
-        Logger.LogInformation($"Installing mod: {mod.Name}");
+        Logger.LogInformation("Installing mod: {ModName}", mod.Name);
 
         try
         {
@@ -68,12 +68,12 @@ internal sealed partial class ModManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to install mod {mod.Name}");
+            Logger.LogError(ex, "Failed to install mod {ModName}", mod.Name);
             NotificationService.ErrorLight(Notification_Content_Mod_Install_Failed, mod.Name);
             return;
         }
 
-        Logger.LogInformation($"Mod {mod.Name} successfully installed");
+        Logger.LogInformation("Mod {ModName} successfully installed", mod.Name);
         NotificationService.SuccessLight(Notification_Content_Mod_Install_Success, mod.Name);
     }
 
@@ -101,7 +101,7 @@ internal sealed partial class ModManageService
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
-                Logger.LogError(ex, $"Failed to apply state for installed mod {request.Name} during bulk import");
+                Logger.LogError(ex, "Failed to apply state for installed mod {ModName} during bulk import", request.Name);
                 return BulkItemOutcome.Failed;
             }
         }
@@ -131,7 +131,7 @@ internal sealed partial class ModManageService
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            Logger.LogError(ex, $"Failed to install mod {request.Name} during bulk import");
+            Logger.LogError(ex, "Failed to install mod {ModName} during bulk import", request.Name);
             return BulkItemOutcome.Failed;
         }
 
@@ -140,7 +140,7 @@ internal sealed partial class ModManageService
 
     private async Task<bool> UpdateModCoreAsync(ModDto mod)
     {
-        Logger.LogInformation($"Updating mod: {mod.Name} from version {mod.LocalVersion} to version {mod.Version}");
+        Logger.LogInformation("Updating mod: {ModName} from version {ModLocalVersion} to version {ModVersion}", mod.Name, mod.LocalVersion, mod.Version);
 
         try
         {
@@ -148,17 +148,17 @@ internal sealed partial class ModManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to update mod {mod.Name}");
+            Logger.LogError(ex, "Failed to update mod {ModName}", mod.Name);
             return false;
         }
 
-        Logger.LogInformation($"Mod {mod.Name} successfully updated to version {mod.Version}");
+        Logger.LogInformation("Mod {ModName} successfully updated to version {ModVersion}", mod.Name, mod.Version);
         return true;
     }
 
     private async Task ReinstallModCoreAsync(ModDto mod)
     {
-        Logger.LogInformation($"Reinstalling mod: {mod.Name}");
+        Logger.LogInformation("Reinstalling mod: {ModName}", mod.Name);
 
         try
         {
@@ -166,22 +166,22 @@ internal sealed partial class ModManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to reinstall mod {mod.Name}");
+            Logger.LogError(ex, "Failed to reinstall mod {ModName}", mod.Name);
             NotificationService.ErrorLight(Notification_Content_Mod_Reinstall_Failed, mod.Name);
             return;
         }
 
-        Logger.LogInformation($"Mod {mod.Name} successfully reinstalled");
+        Logger.LogInformation("Mod {ModName} successfully reinstalled", mod.Name);
         NotificationService.SuccessLight(Notification_Content_Mod_Reinstall_Success, mod.Name);
     }
 
     private async Task UninstallModCoreAsync(ModDto mod)
     {
-        Logger.LogInformation($"Uninstalling mod: {mod.Name}");
+        Logger.LogInformation("Uninstalling mod: {ModName}", mod.Name);
 
         if (!FileSystemService.TryDeleteFile(Path.Combine(GameConfig.ModsFolder, mod.LocalFileName)))
         {
-            Logger.LogError($"Failed to uninstall mod {mod.Name}: could not delete file {mod.LocalFileName}");
+            Logger.LogError("Failed to uninstall mod {ModName}: could not delete file {ModLocalFileName}", mod.Name, mod.LocalFileName);
             NotificationService.ErrorLight(Notification_Content_Mod_Uninstall_Failed, mod.Name);
             return;
         }
@@ -189,13 +189,13 @@ internal sealed partial class ModManageService
         await DisableModDependentsAsync(mod).ConfigureAwait(false);
         mod.RemoveLocalInfo();
 
-        Logger.LogInformation($"Mod {mod.Name} successfully uninstalled");
+        Logger.LogInformation("Mod {ModName} successfully uninstalled", mod.Name);
         NotificationService.SuccessLight(Notification_Content_Mod_Uninstall_Success, mod.Name);
     }
 
     private async Task ToggleModCoreAsync(ModDto mod)
     {
-        Logger.LogInformation($"Toggling mod: {mod.Name}");
+        Logger.LogInformation("Toggling mod: {ModName}", mod.Name);
 
         var success = mod.IsDisabled
             ? await EnableModAsync(mod).ConfigureAwait(false)

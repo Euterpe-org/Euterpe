@@ -5,7 +5,7 @@ internal sealed partial class ChartManageService
     private async Task InitializeCoreAsync()
     {
         _sourceCache.AddOrUpdate(await LoadLocalChartsAsync(GetLocalChartFolders()).ConfigureAwait(false));
-        Logger.LogInformation($"All charts loaded");
+        Logger.LogInformation("All charts loaded");
 
         StartWatching();
     }
@@ -21,12 +21,12 @@ internal sealed partial class ChartManageService
                 return;
             }
 
-            Logger.LogInformation($"Chart {cid} downloaded and added to cache");
+            Logger.LogInformation("Chart {Cid} downloaded and added to cache", cid);
             NotificationService.SuccessLight(Notification_Content_Chart_Download_Success, chart.Manifest.Meta.Name);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to download chart {cid}");
+            Logger.LogError(ex, "Failed to download chart {Cid}", cid);
             NotificationService.ErrorLight(Notification_Content_Chart_Download_Failed, cid);
         }
     }
@@ -42,7 +42,7 @@ internal sealed partial class ChartManageService
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            Logger.LogError(ex, $"Failed to download chart {cid} during bulk import");
+            Logger.LogError(ex, "Failed to download chart {Cid} during bulk import", cid);
             return BulkItemOutcome.Failed;
         }
     }
@@ -58,19 +58,19 @@ internal sealed partial class ChartManageService
                 return new ChartUpdateResult(false, cid);
             }
 
-            Logger.LogInformation($"Chart {cid} updated");
+            Logger.LogInformation("Chart {Cid} updated", cid);
             return new ChartUpdateResult(true, chart.Manifest.Meta.Name);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to update chart {cid}");
+            Logger.LogError(ex, "Failed to update chart {Cid}", cid);
             return new ChartUpdateResult(false, cid);
         }
     }
 
     private Task RemoveChartCoreAsync(string folderPath)
     {
-        Logger.LogInformation($"Removing chart at {folderPath}");
+        Logger.LogInformation("Removing chart at {FolderPath}", folderPath);
 
         var name = _sourceCache.Lookup(folderPath) is { HasValue: true, Value: var chart }
             ? chart.Manifest.Meta.Name
@@ -78,12 +78,12 @@ internal sealed partial class ChartManageService
 
         if (RemoveLocalChart(folderPath))
         {
-            Logger.LogInformation($"Chart at {folderPath} removed");
+            Logger.LogInformation("Chart at {FolderPath} removed", folderPath);
             NotificationService.SuccessLight(Notification_Content_Chart_Remove_Success, name);
         }
         else
         {
-            Logger.LogError($"Failed to remove chart at {folderPath}");
+            Logger.LogError("Failed to remove chart at {FolderPath}", folderPath);
             NotificationService.ErrorLight(Notification_Content_Chart_Remove_Failed, name);
         }
 
@@ -112,11 +112,11 @@ internal sealed partial class ChartManageService
 
         if (RemoveLocalChart(chart.FolderPath))
         {
-            Logger.LogInformation($"Removed delisted chart {cid}");
+            Logger.LogInformation("Removed delisted chart {Cid}", cid);
         }
         else
         {
-            Logger.LogError($"Failed to remove delisted chart {cid}");
+            Logger.LogError("Failed to remove delisted chart {Cid}", cid);
         }
 
         return Task.CompletedTask;
@@ -127,7 +127,7 @@ internal sealed partial class ChartManageService
         var chart = await ChartLocalService.LoadChartFromPathAsync(chartFolder, source).ConfigureAwait(false);
         if (chart is null)
         {
-            Logger.LogWarning($"Chart at {chartFolder} could not be loaded into the cache");
+            Logger.LogWarning("Chart at {ChartFolder} could not be loaded into the cache", chartFolder);
             return null;
         }
 

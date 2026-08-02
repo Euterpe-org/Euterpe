@@ -34,7 +34,7 @@ public sealed class RolePageViewModel : SetupPageViewModelBase
             .Where(this, (_, self) => !self._applyingPreset)
             .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(SelectedRole)));
 
-        Logger.LogInformation($"{nameof(RolePageViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(RolePageViewModel));
     }
 
     private void ApplyPreset(WizardIdentity identity)
