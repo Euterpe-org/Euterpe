@@ -1,8 +1,6 @@
 using System.Collections.ObjectModel;
-using Avalonia.Input.Platform;
 using Avalonia.Platform.Storage;
 using DynamicData.Binding;
-using Euterpe.Core.Proxies;
 
 namespace Euterpe.Features.Modding;
 
@@ -93,28 +91,12 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         await ModManageService.ImportModsAsync(paths).ConfigureAwait(false);
     }
 
-    [RelayCommand]
-    private async Task ShareModsAsync()
-    {
-        if (await GameShareService.CreateInstalledModsShareLinkAsync().ConfigureAwait(true) is not { } shareLink)
-        {
-            NotificationService.NoticeLight(Notification_Content_Share_Create_Empty);
-            return;
-        }
-
-        await TopLevel.Clipboard!.SetTextAsync(shareLink).ConfigureAwait(true);
-        NotificationService.SuccessLight(Notification_Content_Share_Copy_Success);
-    }
-
     #region Injections
 
     public required Config Config { get; init; }
     public required GameConfig GameConfig { get; init; }
     public required ILogger<ModManagePanelViewModel> Logger { get; init; }
     public required IModManageService ModManageService { get; init; }
-    public required INotificationService NotificationService { get; init; }
-    public required IGameShareService GameShareService { get; init; }
-    public required TopLevelProxy TopLevel { get; init; }
 
     #endregion Injections
 }

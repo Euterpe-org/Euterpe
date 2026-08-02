@@ -8,9 +8,7 @@ public sealed partial class ShareImportDialogViewModelTest
     public async Task ImportCommand_ValidPackage_DelegatesAndShowsSummary()
     {
         var package = CreatePackage(GameId.MuseDash);
-        var result = new GameShareImportResult(
-            [new BulkItemResult("13", BulkItemOutcome.Added)],
-            [new BulkItemResult("ModA", BulkItemOutcome.AlreadyPresent)]);
+        BulkItemResult[] result = [new("13", BulkItemOutcome.Added)];
         var shareService = IGameShareService.Mock();
         shareService.TryParseShareLink("valid").Returns(package);
         shareService.ImportAsync(package, Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).Returns(result);
@@ -45,11 +43,9 @@ public sealed partial class ShareImportDialogViewModelTest
     {
         public string CreateChartShareLink(IReadOnlyCollection<int> chartIds) => throw new NotSupportedException();
 
-        public Task<string?> CreateInstalledModsShareLinkAsync() => throw new NotSupportedException();
-
         public GameSharePackage? TryParseShareLink(string text) => package;
 
-        public async Task<GameShareImportResult> ImportAsync(GameSharePackage value, IProgress<BatchProgress>? progress = null,
+        public async Task<IReadOnlyList<BulkItemResult>> ImportAsync(GameSharePackage value, IProgress<BatchProgress>? progress = null,
             CancellationToken cancellationToken = default)
         {
             await Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken).ConfigureAwait(false);

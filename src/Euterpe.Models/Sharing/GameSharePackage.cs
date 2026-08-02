@@ -5,7 +5,6 @@ namespace Euterpe.Models.Sharing;
 [GenerateShape]
 public sealed partial class GameSharePackage
 {
-    public const int CurrentSchemaVersion = 1;
     public const int MaximumChartCount = 100;
 
     [PropertyShape(Name = "schema")]
@@ -16,6 +15,4 @@ public sealed partial class GameSharePackage
 
     [PropertyShape(Name = "cids")]
     public int[] ChartIds { get; set; } = [];
-
-    public GameShareMod[] Mods { get; set; } = [];
 }

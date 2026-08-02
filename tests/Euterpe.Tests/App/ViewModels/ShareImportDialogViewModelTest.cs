@@ -19,9 +19,7 @@ public sealed partial class ShareImportDialogViewModelTest
     private static GameSharePackage CreatePackage(GameId gameId) =>
         new()
         {
-            SchemaVersion = GameSharePackage.CurrentSchemaVersion,
             GameId = gameId,
-            ChartIds = [13],
-            Mods = [new GameShareMod { Name = "ModA" }]
+            ChartIds = [13]
         };
 }

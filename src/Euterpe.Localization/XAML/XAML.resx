@@ -740,10 +740,10 @@
     <value>Paste a share code here</value>
   </data>
   <data name="Share_Import_Preview" xml:space="preserve">
-    <value>{0} charts · {1} mods</value>
+    <value>{0} charts</value>
   </data>
   <data name="Share_Import_Result" xml:space="preserve">
-    <value>Charts: {0} added · {1} present · {2} failed. Mods: {3} added · {4} present · {5} skipped.</value>
+    <value>Charts: {0} added · {1} present · {2} failed.</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>Start import</value>
