@@ -74,6 +74,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required SetupDialogService SetupDialogService { get; init; }
     public required IEuterpeAccountClient AccountClient { get; init; }
     public required IChartManageService ChartManageService { get; init; }
+    public required IDependencyAcquireService DependencyAcquireService { get; init; }
     public required IGameLaunchService GameLaunchService { get; init; }
     public required IGameSettingService GameSettingService { get; init; }
     public required IGameLocalService GameLocalService { get; init; }

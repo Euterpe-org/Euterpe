@@ -60,6 +60,7 @@ public sealed class HomePageViewModelTest
         Logger = NullLogger<HomePageViewModel>.Instance,
         GameConfig = gameConfig,
         AccountClient = null!,
+        DependencyAcquireService = IDependencyAcquireService.Mock(),
         GameLaunchService = launchService ?? IGameLaunchService.Mock(),
         GameSettingService = IGameSettingService.Mock(),
         GameLocalService = IGameLocalService.Mock(),
