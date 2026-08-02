@@ -7,5 +7,5 @@ public interface IDependencyAcquireService
         IProgress<double>? progress = null,
         CancellationToken cancellationToken = default);
 
-    Task<string> GetLatestMelonLoaderVersionAsync(CancellationToken cancellationToken = default);
+    Task<MelonLoaderRelease> GetLatestMelonLoaderReleaseAsync(CancellationToken cancellationToken = default);
 }

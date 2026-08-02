@@ -24,7 +24,7 @@ public sealed class MelonLoaderStepTest
         await step.ExecuteAsync(new Progress<string>(_ => { }));
 
         using var _ = Assert.Multiple();
-        depService.GetLatestMelonLoaderVersionAsync(Any<CancellationToken>()).WasCalled(Times.Never);
+        depService.GetLatestMelonLoaderReleaseAsync(Any<CancellationToken>()).WasCalled(Times.Never);
         localService.UninstallMelonLoaderAsync().WasCalled(Times.Once);
         depService.AcquireForMelonLoaderAsync(
                 Any<EventHandler<DownloadStartedEventArgs>?>(),

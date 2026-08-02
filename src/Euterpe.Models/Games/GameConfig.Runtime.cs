@@ -57,12 +57,6 @@ public abstract partial class GameConfig
     public string LatestLogPath => Path.Combine(MelonLoaderFolder, "Latest.log");
 
     [JsonIgnore]
-    public virtual int DotNetRuntimeMajorVersion => 6;
-
-    [JsonIgnore]
-    public string DotNetRuntimeUrl => $"https://aka.ms/dotnet/{DotNetRuntimeMajorVersion}.0/dotnet-runtime-win-x64.zip";
-
-    [JsonIgnore]
     public string DotNetRuntimeFolder => Path.Combine(Folder, "dotnet");
 
     [JsonIgnore]

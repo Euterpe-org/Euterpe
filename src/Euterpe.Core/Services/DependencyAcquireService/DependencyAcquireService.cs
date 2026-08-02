@@ -31,10 +31,11 @@ internal sealed partial class DependencyAcquireService : IDependencyAcquireServi
         }
     }
 
-    public async Task<string> GetLatestMelonLoaderVersionAsync(CancellationToken cancellationToken = default)
+    public async Task<MelonLoaderRelease> GetLatestMelonLoaderReleaseAsync(CancellationToken cancellationToken = default)
     {
         var dependencies = await GetDependenciesAsync(cancellationToken).ConfigureAwait(false);
-        return dependencies.Single(x => x.Slug is "MelonLoader").Versions.Single().Key;
+        var (version, entry) = dependencies.Single(x => x.Slug is "MelonLoader").Versions.Single();
+        return new MelonLoaderRelease(version, entry.Metadata.DotNetRuntimeVersion);
     }
 
     #region Injections

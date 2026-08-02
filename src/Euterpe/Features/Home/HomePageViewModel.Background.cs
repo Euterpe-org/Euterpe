@@ -12,13 +12,15 @@ public sealed partial class HomePageViewModel
 
     private async Task CheckModdingDependenciesAsync()
     {
-        await CheckDotNetRuntimeAsync().ConfigureAwait(true);
-        await CheckMelonLoaderAsync().ConfigureAwait(true);
+        var release = await DependencyAcquireService.GetLatestMelonLoaderReleaseAsync().ConfigureAwait(true);
+
+        await CheckDotNetRuntimeAsync(release.DotNetRuntimeVersion).ConfigureAwait(true);
+        await CheckMelonLoaderAsync(release.Version).ConfigureAwait(true);
     }
 
-    private async Task CheckDotNetRuntimeAsync()
+    private async Task CheckDotNetRuntimeAsync(string runtimeVersion)
     {
-        if (await RuntimeInstaller.CheckInstalledAsync().ConfigureAwait(true))
+        if (await RuntimeInstaller.CheckInstalledAsync(runtimeVersion).ConfigureAwait(true))
         {
             return;
         }
@@ -27,7 +29,7 @@ public sealed partial class HomePageViewModel
         await SetupDialogService.ShowOptionRepairAsync(SetupOptionKinds.DotNetRuntime).ConfigureAwait(false);
     }
 
-    private async Task CheckMelonLoaderAsync()
+    private async Task CheckMelonLoaderAsync(string latestRaw)
     {
         if (GameConfig.MelonLoaderSemVersion is not { } installedVersion)
         {
@@ -36,9 +38,7 @@ public sealed partial class HomePageViewModel
             return;
         }
 
-        var latestRaw = await DependencyAcquireService.GetLatestMelonLoaderVersionAsync().ConfigureAwait(true);
         var latestVersion = SemVersion.Parse(latestRaw);
-
         if (installedVersion.ComparePrecedenceTo(latestVersion) >= 0)
         {
             return;

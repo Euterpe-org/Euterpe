@@ -11,6 +11,7 @@ public sealed partial class DependencyAcquireServiceTest
 {
     private const string TestUnityVersion = "2019.4.32";
     private const string TestMelonLoaderVersion = "0.6.5";
+    private const string TestDotNetRuntimeVersion = "6.0";
 
     private readonly MockLogger<DependencyAcquireService> _logger = Mock.Logger<DependencyAcquireService>();
     private MuseDashConfig _game = null!;
@@ -44,7 +45,12 @@ public sealed partial class DependencyAcquireServiceTest
             Logger = _logger
         };
 
-    private static Dependency CreateDependency(string slug, string version, string sha256, string downloadUrl = "https://example.com/file") =>
+    private static Dependency CreateDependency(
+        string slug,
+        string version,
+        string sha256,
+        string downloadUrl = "https://example.com/file",
+        string dotNetRuntimeVersion = "") =>
         new()
         {
             Slug = slug,
@@ -55,14 +61,15 @@ public sealed partial class DependencyAcquireServiceTest
                 {
                     SHA256 = sha256,
                     DownloadUrl = downloadUrl,
-                    FileSize = 100
+                    FileSize = 100,
+                    Metadata = new DependencyMetadata { DotNetRuntimeVersion = dotNetRuntimeVersion }
                 }
             }
         };
 
     private static Dependency[] CreateAllMelonLoaderDeps(string sha) =>
     [
-        CreateDependency("MelonLoader", TestMelonLoaderVersion, sha),
+        CreateDependency("MelonLoader", TestMelonLoaderVersion, sha, dotNetRuntimeVersion: TestDotNetRuntimeVersion),
         CreateDependency("UnityDependencies", TestUnityVersion, sha),
         CreateDependency("Cpp2IL", "2024.1.0", sha),
         CreateDependency("Cpp2IL-Plugin", "1.0.0", sha)
