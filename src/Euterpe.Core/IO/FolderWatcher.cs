@@ -1,5 +1,5 @@
+using Euterpe.Shared.Threading;
 using Lock = System.Threading.Lock;
-using Timeout = System.Threading.Timeout;
 
 namespace Euterpe.Core;
 
@@ -7,19 +7,14 @@ namespace Euterpe.Core;
 internal sealed class FolderWatcher : IDisposable
 {
     private static readonly TimeSpan DefaultDebounce = TimeSpan.FromMilliseconds(400);
-    private readonly TimeSpan _debounce;
-    private readonly Timer _debounceTimer;
 
     private readonly Lock _gate = new();
     private readonly bool _includeSubdirectories;
     private readonly Func<string, bool> _isRelevantChange;
     private readonly ILogger _logger;
-    private readonly Func<Task> _reconcileAsync;
+    private readonly DebouncedAsyncAction _reconcileAction;
     private readonly List<FileSystemWatcher> _watchers = [];
     private bool _disposed;
-
-    private bool _reconciling;
-    private bool _rerunRequested;
 
     public FolderWatcher(
         IReadOnlyList<string> roots,
@@ -30,11 +25,12 @@ internal sealed class FolderWatcher : IDisposable
         TimeSpan? debounce = null)
     {
         _includeSubdirectories = includeSubdirectories;
-        _reconcileAsync = reconcileAsync;
         _logger = logger;
         _isRelevantChange = isRelevantChange ?? (static _ => true);
-        _debounce = debounce ?? DefaultDebounce;
-        _debounceTimer = new Timer(static state => ((FolderWatcher)state!).OnDebounceElapsed(), this, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+        _reconcileAction = new DebouncedAsyncAction(
+            debounce ?? DefaultDebounce,
+            reconcileAsync,
+            ex => _logger.LogError(ex, "Watcher-triggered reconcile failed"));
 
         foreach (var root in roots)
         {
@@ -58,7 +54,7 @@ internal sealed class FolderWatcher : IDisposable
             _watchers.Clear();
         }
 
-        _debounceTimer.Dispose();
+        _reconcileAction.Dispose();
         foreach (var watcher in watchers)
         {
             watcher.Dispose();
@@ -105,62 +101,7 @@ internal sealed class FolderWatcher : IDisposable
         ScheduleReconcile();
     }
 
-    private void ScheduleReconcile()
-    {
-        lock (_gate)
-        {
-            if (!_disposed)
-            {
-                _debounceTimer.Change(_debounce, Timeout.InfiniteTimeSpan);
-            }
-        }
-    }
-
-    private void OnDebounceElapsed()
-    {
-        lock (_gate)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-
-            if (_reconciling)
-            {
-                _rerunRequested = true;
-                return;
-            }
-
-            _reconciling = true;
-        }
-
-        _ = RunReconcileAsync();
-    }
-
-    private async Task RunReconcileAsync()
-    {
-        try
-        {
-            await _reconcileAsync().ConfigureAwait(false);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Watcher-triggered reconcile failed");
-        }
-
-        bool rerun;
-        lock (_gate)
-        {
-            _reconciling = false;
-            rerun = _rerunRequested;
-            _rerunRequested = false;
-        }
-
-        if (rerun)
-        {
-            ScheduleReconcile();
-        }
-    }
+    private void ScheduleReconcile() => _reconcileAction.Trigger();
 
     private void RearmWatcher(FileSystemWatcher deadWatcher)
     {
