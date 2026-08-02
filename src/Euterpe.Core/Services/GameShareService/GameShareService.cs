@@ -1,58 +1,33 @@
 namespace Euterpe.Core;
 
-internal sealed partial class GameShareService : IGameShareService
+internal sealed class GameShareService : IGameShareService
 {
+    private const string ShareLinkPrefix = ISystemAssociationSetup.DeepLinkScheme + "://share/";
+
     public string CreateChartShareLink(IReadOnlyCollection<int> chartIds)
     {
-        ArgumentNullException.ThrowIfNull(chartIds);
-        var distinctChartIds = chartIds.Distinct().ToArray();
-        if (distinctChartIds is []
-            || distinctChartIds.Length > GameSharePackage.MaximumChartCount
-            || distinctChartIds.Any(static chartId => chartId <= 0))
+        var package = new GameSharePackage
         {
-            throw new ArgumentException(
-                $"Chart IDs must contain between 1 and {GameSharePackage.MaximumChartCount} positive values.", nameof(chartIds));
-        }
-
-        return CreateShareLink(new GameSharePackage
-        {
-            SchemaVersion = GameSharePackage.CurrentSchemaVersion,
+            SchemaVersion = Manifest.CurrentSchema,
             GameId = GameConfig.Id,
-            ChartIds = distinctChartIds
-        });
-    }
+            ChartIds = [.. chartIds]
+        };
 
-    public async Task<string?> CreateInstalledModsShareLinkAsync()
-    {
-        await ModManageService.InitializeModsAsync().ConfigureAwait(false);
-        var mods = ModManageService.GetInstalledMods()
-            .Where(static mod => mod.HasDownloadSource)
-            .Select(static mod => new GameShareMod { Name = mod.Name, IsDisabled = mod.IsDisabled })
-            .ToArray();
-        if (mods is [])
-        {
-            return null;
-        }
-
-        return CreateShareLink(new GameSharePackage
-        {
-            SchemaVersion = GameSharePackage.CurrentSchemaVersion,
-            GameId = GameConfig.Id,
-            Mods = mods
-        });
+        return ShareLinkPrefix + MessagePackSerialization.SerializeGameSharePackage(package).ToBase64Url();
     }
 
     public GameSharePackage? TryParseShareLink(string text)
     {
-        if (ExtractShareCode(text) is not { } code)
+        var code = text.Trim();
+        if (code.StartsWith(ShareLinkPrefix, StringComparison.OrdinalIgnoreCase))
         {
-            return null;
+            code = code[ShareLinkPrefix.Length..];
         }
 
         try
         {
             var package = MessagePackSerialization.DeserializeGameSharePackage(code.FromBase64Url());
-            return IsValidPackage(package) ? package : null;
+            return package.SchemaVersion == Manifest.CurrentSchema ? package : null;
         }
         catch (Exception)
         {
@@ -60,56 +35,30 @@ internal sealed partial class GameShareService : IGameShareService
         }
     }
 
-    public async Task<GameShareImportResult> ImportAsync(GameSharePackage package, IProgress<BatchProgress>? progress = null,
+    public async Task<IReadOnlyList<BulkItemResult>> ImportAsync(
+        GameSharePackage package,
+        IProgress<BatchProgress>? progress = null,
         CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(package);
-        if (!IsValidPackage(package))
-        {
-            throw new ArgumentException("The share package is invalid.", nameof(package));
-        }
-
         if (package.GameId != GameConfig.Id)
         {
             throw new InvalidOperationException($"Cannot import a {package.GameId} share package into {GameConfig.Id}.");
         }
 
         cancellationToken.ThrowIfCancellationRequested();
-        var total = package.ChartIds.Length + package.Mods.Length;
-        IReadOnlyList<BulkItemResult> chartResults = [];
-        IReadOnlyList<BulkItemResult> modResults = [];
+        await ChartManageService.InitializeChartsAsync().ConfigureAwait(false);
+        var chartIds = package.ChartIds
+            .Select(static chartId => chartId.ToString(CultureInfo.InvariantCulture))
+            .ToArray();
 
-        if (package.ChartIds is not [])
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            await ChartManageService.InitializeChartsAsync().ConfigureAwait(false);
-            var chartIds = package.ChartIds
-                .Select(static chartId => chartId.ToString(CultureInfo.InvariantCulture))
-                .ToArray();
-            chartResults = await ChartManageService
-                .DownloadChartsAsync(chartIds, CreatePhaseProgress(progress, 0, total), cancellationToken).ConfigureAwait(false);
-        }
-
-        if (package.Mods is not [])
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            await ModManageService.InitializeModsAsync().ConfigureAwait(false);
-            var requests = package.Mods
-                .Select(static mod => new ModInstallRequest(mod.Name, mod.IsDisabled))
-                .ToArray();
-            modResults = await ModManageService
-                .InstallModsAsync(requests, CreatePhaseProgress(progress, package.ChartIds.Length, total), cancellationToken).ConfigureAwait(false);
-        }
-
-        return new GameShareImportResult(chartResults, modResults);
+        return await ChartManageService.DownloadChartsAsync(chartIds, progress, cancellationToken).ConfigureAwait(false);
     }
 
     #region Injections
 
-    public required IChartManageService ChartManageService { get; init; }
-    public required IModManageService ModManageService { get; init; }
-    public required IMessagePackSerializationService MessagePackSerialization { get; init; }
     public required GameConfig GameConfig { get; init; }
+    public required IChartManageService ChartManageService { get; init; }
+    public required IMessagePackSerializationService MessagePackSerialization { get; init; }
 
     #endregion Injections
 }

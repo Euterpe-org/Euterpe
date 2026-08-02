@@ -1,6 +1,5 @@
 using System.Reactive.Linq;
 using DynamicData;
-using Euterpe.Core.Proxies;
 using Euterpe.Features.Modding;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -40,9 +39,6 @@ public sealed class ModManagePanelViewModelTest
             Config = new Config { MuseDash = new MuseDashConfig(), MuseDash2 = new MuseDash2Config() },
             GameConfig = gameConfig,
             ModManageService = IModManageService.Mock(),
-            NotificationService = INotificationService.Mock(),
-            GameShareService = IGameShareService.Mock(),
-            TopLevel = new TopLevelProxy(),
             SelectedMod = new ModDto { Name = "TestMod", ConfigFile = "config.json" }
         };
 
@@ -134,9 +130,6 @@ public sealed class ModManagePanelViewModelTest
         Logger = NullLogger<ModManagePanelViewModel>.Instance,
         Config = new Config { MuseDash = new MuseDashConfig(), MuseDash2 = new MuseDash2Config() },
         GameConfig = new MuseDashConfig(),
-        ModManageService = modManageService ?? IModManageService.Mock(),
-        NotificationService = INotificationService.Mock(),
-        GameShareService = IGameShareService.Mock(),
-        TopLevel = new TopLevelProxy()
+        ModManageService = modManageService ?? IModManageService.Mock()
     };
 }

@@ -119,22 +119,18 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
         {
             CanImport = true;
             ValidationMessage = string.Format(CultureInfo.CurrentCulture, XAML.Share_Import_Preview,
-                package.ChartIds.Length, package.Mods.Length);
+                package.ChartIds.Length);
         }
     }
 
-    private static string FormatResult(GameShareImportResult result)
+    private static string FormatResult(IReadOnlyList<BulkItemResult> result)
     {
-        var charts = result.ChartResults;
-        var mods = result.ModResults;
         return string.Format(CultureInfo.CurrentCulture, XAML.Share_Import_Result,
-            Count(charts, BulkItemOutcome.Added), Count(charts, BulkItemOutcome.AlreadyPresent), Count(charts, BulkItemOutcome.Failed),
-            Count(mods, BulkItemOutcome.Added), Count(mods, BulkItemOutcome.AlreadyPresent),
-            Count(mods, BulkItemOutcome.Skipped) + Count(mods, BulkItemOutcome.Failed));
+            Count(BulkItemOutcome.Added), Count(BulkItemOutcome.AlreadyPresent), Count(BulkItemOutcome.Failed));
 
-        static int Count(IReadOnlyList<BulkItemResult> items, BulkItemOutcome outcome)
+        int Count(BulkItemOutcome outcome)
         {
-            return items.Count(item => item.Outcome == outcome);
+            return result.Count(item => item.Outcome == outcome);
         }
     }
 

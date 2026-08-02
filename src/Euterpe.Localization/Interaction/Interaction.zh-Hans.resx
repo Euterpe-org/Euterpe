@@ -321,9 +321,6 @@
   <data name="Notification_Content_Share_Copy_Success" xml:space="preserve">
     <value>分享码已复制</value>
   </data>
-  <data name="Notification_Content_Share_Create_Empty" xml:space="preserve">
-    <value>没有可分享的已安装在线模组</value>
-  </data>
   <data name="Title_Error" xml:space="preserve">
     <value>错误</value>
   </data>

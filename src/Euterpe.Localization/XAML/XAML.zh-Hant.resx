@@ -740,10 +740,10 @@
     <value>在此貼上分享碼</value>
   </data>
   <data name="Share_Import_Preview" xml:space="preserve">
-    <value>{0} 張譜面 · {1} 個模組</value>
+    <value>{0} 張譜面</value>
   </data>
   <data name="Share_Import_Result" xml:space="preserve">
-    <value>譜面：{0} 下載 · {1} 已有 · {2} 失敗；模組：{3} 安裝 · {4} 已有 · {5} 跳過</value>
+    <value>譜面：{0} 下載 · {1} 已有 · {2} 失敗</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>開始匯入</value>
