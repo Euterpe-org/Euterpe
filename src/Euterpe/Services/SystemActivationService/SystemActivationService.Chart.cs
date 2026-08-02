@@ -25,7 +25,7 @@ public sealed partial class SystemActivationService
                 break;
 
             default:
-                Logger.LogWarning($"Unknown chart deep link path: {path}");
+                Logger.LogWarning("Unknown chart deep link path: {Path}", path);
                 break;
         }
     }

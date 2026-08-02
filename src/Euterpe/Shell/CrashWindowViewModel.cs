@@ -41,7 +41,7 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Crash dialog clipboard copy failed");
+            Logger.LogError(ex, "Crash dialog clipboard copy failed");
             await MessageBoxService.ErrorAsync(MessageBox_Content_CrashDialog_CopyFailed).ConfigureAwait(true);
         }
     }

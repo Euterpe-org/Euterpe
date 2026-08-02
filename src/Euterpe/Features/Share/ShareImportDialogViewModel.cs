@@ -80,7 +80,7 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to import game share package");
+            Logger.LogError(ex, "Failed to import game share package");
             ResultSummary = XAML.Share_Import_Failed;
         }
         finally

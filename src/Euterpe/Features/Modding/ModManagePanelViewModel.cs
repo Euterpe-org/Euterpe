@@ -56,13 +56,13 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
         ModManageService.Connect().PopulateInto(_sourceCache);
 
         AllModsLoaded = true;
-        Logger.LogInformation($"{nameof(ModManagePanelViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(ModManagePanelViewModel));
     }
 
     [RelayCommand]
     private Task OpenConfigFileAsync()
     {
-        Logger.LogInformation($"Opening config file for mod: {SelectedMod.Name}");
+        Logger.LogInformation("Opening config file for mod: {ModName}", SelectedMod.Name);
         return Launcher.OpenFileAsync(Path.Combine(GameConfig.UserDataFolder, SelectedMod.ConfigFile));
     }
 

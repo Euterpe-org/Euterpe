@@ -12,7 +12,7 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
 
     protected override Task OnInitializeAsync()
     {
-        Logger.LogInformation($"{nameof(DownloadPanelViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(DownloadPanelViewModel));
         return base.OnInitializeAsync();
     }
 

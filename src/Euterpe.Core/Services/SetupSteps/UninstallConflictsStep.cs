@@ -22,7 +22,7 @@ internal sealed class UninstallConflictsStep : ISetupStep
                 continue;
             }
 
-            Logger.LogInformation($"Conflict detected: {modName} is installed and will be uninstalled");
+            Logger.LogInformation("Conflict detected: {ModName} is installed and will be uninstalled", modName);
             progress.Report(string.Format(XAML.Setup_Progress_UninstallingConflict, modName));
             await ModManageService.UninstallModAsync(incompatibleMod).ConfigureAwait(false);
         }

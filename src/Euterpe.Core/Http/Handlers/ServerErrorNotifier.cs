@@ -19,7 +19,7 @@ internal sealed class ServerErrorNotifier(IServiceProvider services, ILogger<Ser
             return;
         }
 
-        logger.LogWarning($"Server error {(int)response.StatusCode} on {request.Method} {request.RequestUri}");
+        logger.LogWarning("Server error {StatusCode} on {HttpMethod} {RequestUri}", (int)response.StatusCode, request.Method, request.RequestUri);
         services.GetRequiredService<INotificationService>().Warning(Notification_Content_Server_Error);
     }
 }

@@ -26,7 +26,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
         State.ObservePropertyChanged(x => x.Stage)
             .Subscribe(this, (_, self) => self.OnPropertyChanged(nameof(CanGoNext)));
 
-        Logger.LogInformation($"{nameof(ExecutionPageViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(ExecutionPageViewModel));
     }
 
     public override async Task OnEnterAsync()
@@ -34,7 +34,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
         GameSettingService.EnsureGameFolders();
 
         var selected = GameConfig.SetupOptions.Where(o => o.IsSelected).ToArray();
-        Logger.LogInformation($"Starting setup execution with {selected.Length} step(s): {string.Join(", ", selected.Select(o => o.Kinds))}");
+        Logger.LogInformation("Starting setup execution with {StepCount} step(s): {Steps}", selected.Length, string.Join(", ", selected.Select(o => o.Kinds)));
 
         foreach (var option in selected)
         {
@@ -51,7 +51,7 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
     [RelayCommand]
     private async Task RetryAsync(SetupStepState step)
     {
-        Logger.LogInformation($"User retrying step '{step.Kinds}'");
+        Logger.LogInformation("User retrying step '{StepKinds}'", step.Kinds);
 
         State.Stage = SetupExecutionStage.Running;
         try
@@ -94,18 +94,18 @@ public sealed partial class ExecutionPageViewModel : SetupPageViewModelBase
 
         var progress = new Progress<string>(msg => step.Message = msg);
 
-        Logger.LogInformation($"Running setup step '{step.Kinds}'");
+        Logger.LogInformation("Running setup step '{StepKinds}'", step.Kinds);
         try
         {
             await StepMap[step.Kinds].ExecuteAsync(progress).ConfigureAwait(true);
             step.Status = SetupStepStatus.Succeeded;
-            Logger.LogInformation($"Completed setup step '{step.Kinds}'");
+            Logger.LogInformation("Completed setup step '{StepKinds}'", step.Kinds);
         }
         catch (Exception ex)
         {
             step.Status = SetupStepStatus.Failed;
             step.ErrorMessage = XAML.Setup_Step_Failed;
-            Logger.LogError(ex, $"Setup step '{step.Kinds}' failed");
+            Logger.LogError(ex, "Setup step '{StepKinds}' failed", step.Kinds);
         }
     }
 

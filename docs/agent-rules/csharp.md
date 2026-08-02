@@ -53,6 +53,6 @@
 - Deduplicate shared one-liners into a single home (e.g. `ChartFiles.MapName`), even tiny ones.
 - Before writing anything by hand, check the packages already referenced (`Directory.Packages.props`) for an existing facility — especially the easily-forgotten ones: CommunityToolkit.Mvvm's `[NotifyPropertyChangedFor]` for dependent properties instead of manually raising `OnPropertyChanged`, R3 `Observable`s for event wiring/composition instead of manual event handlers.
 - Prefer an existing library over hand-rolling, but verify its actual behavior (decompile if needed) before adopting or rejecting it.
-- App logging uses Microsoft.Extensions.Logging backed by NLog (`Logger.LogInformation($"...")`); `Euterpe.Releaser` uses XenoAtom.Logging interpolation (`Logger.Info($"...")`).
+- App logging uses Microsoft.Extensions.Logging message templates backed by NLog (`Logger.LogInformation("Imported chart {ChartName} from {Path}", name, path)`); `Euterpe.Releaser` uses XenoAtom.Logging interpolation (`Logger.Info($"...")`).
 - DI: `public required T Name { get; init; }` properties inside `#region Injections`.
 - `.cs` files end with exactly one trailing newline (`insert_final_newline` applies to `[*.cs]` only).

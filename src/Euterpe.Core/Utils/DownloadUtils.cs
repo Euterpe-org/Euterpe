@@ -26,7 +26,7 @@ public static class DownloadUtils
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
-                logger.LogWarning(ex, $"Attempt {attempt}/{maxRetries}: download of {displayName} failed");
+                logger.LogWarning(ex, "Attempt {Attempt}/{MaxRetries}: download of {DisplayName} failed", attempt, maxRetries, displayName);
                 continue;
             }
 
@@ -41,7 +41,7 @@ public static class DownloadUtils
                 return;
             }
 
-            logger.LogWarning($"Attempt {attempt}/{maxRetries}: checksum mismatch for {displayName}, expected {expectedSha256}, got {actualSha256}");
+            logger.LogWarning("Attempt {Attempt}/{MaxRetries}: checksum mismatch for {DisplayName}, expected {ExpectedSha256}, got {ActualSha256}", attempt, maxRetries, displayName, expectedSha256, actualSha256);
         }
 
         throw new IOException($"Failed to download a valid {displayName} after {maxRetries} attempts");

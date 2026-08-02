@@ -9,7 +9,7 @@ internal sealed partial class ChartManageService
     {
         if (!Directory.Exists(GameConfig.CustomAlbumsChartsFolder))
         {
-            Logger.LogInformation($"No CustomAlbums folder at {GameConfig.CustomAlbumsChartsFolder}, nothing to migrate");
+            Logger.LogInformation("No CustomAlbums folder at {CustomAlbumsChartsFolder}, nothing to migrate", GameConfig.CustomAlbumsChartsFolder);
             return 0;
         }
 
@@ -30,7 +30,7 @@ internal sealed partial class ChartManageService
         var migrated = outcomes.Count(outcome => outcome is MigrationOutcome.Migrated);
         var unsupported = outcomes.Count(outcome => outcome is MigrationOutcome.Unsupported);
         var failed = outcomes.Count(outcome => outcome is MigrationOutcome.Failed);
-        Logger.LogInformation($"CustomAlbums migration complete: {migrated} migrated, {unsupported} unsupported, {failed} failed");
+        Logger.LogInformation("CustomAlbums migration complete: {Migrated} migrated, {Unsupported} unsupported, {Failed} failed", migrated, unsupported, failed);
 
         if (!Directory.EnumerateFileSystemEntries(GameConfig.CustomAlbumsChartsFolder).Any())
         {

@@ -16,11 +16,11 @@ internal sealed partial class UpdateService : IUpdateService
         var manager = CreateUpdateManager(runtimeIdentifier, channel);
         if (!manager.IsInstalled)
         {
-            Logger.LogInformation($"Skipping update check because the application is not running from a Velopack installation");
+            Logger.LogInformation("Skipping update check because the application is not running from a Velopack installation");
             return null;
         }
 
-        Logger.LogInformation($"Checking for updates on channel {channel} ...");
+        Logger.LogInformation("Checking for updates on channel {Channel} ...", channel);
 
         var updateInfo = await manager
             .CheckForUpdatesAsync()
@@ -29,7 +29,7 @@ internal sealed partial class UpdateService : IUpdateService
 
         if (updateInfo is null)
         {
-            Logger.LogInformation($"No new version available");
+            Logger.LogInformation("No new version available");
             return null;
         }
 
@@ -37,7 +37,7 @@ internal sealed partial class UpdateService : IUpdateService
         _updateInfo = updateInfo;
 
         var newVersion = updateInfo.TargetFullRelease.Version.ToString();
-        Logger.LogInformation($"New version available: {newVersion}");
+        Logger.LogInformation("New version available: {NewVersion}", newVersion);
         return newVersion;
     }
 

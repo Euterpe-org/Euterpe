@@ -12,7 +12,7 @@ internal sealed class ChartingToolStep : ISetupStep
 
     public Task ExecuteAsync(IProgress<string> progress, CancellationToken cancellationToken = default)
     {
-        Logger.LogWarning($"SetupStep '{Kinds}' not implemented yet");
+        Logger.LogWarning("SetupStep '{Kinds}' not implemented yet", Kinds);
         return Task.CompletedTask;
     }
 }

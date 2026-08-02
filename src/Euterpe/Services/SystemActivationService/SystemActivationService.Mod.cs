@@ -25,7 +25,7 @@ public sealed partial class SystemActivationService
                 break;
 
             default:
-                Logger.LogWarning($"Unknown mod deep link path: {path}");
+                Logger.LogWarning("Unknown mod deep link path: {Path}", path);
                 break;
         }
     }

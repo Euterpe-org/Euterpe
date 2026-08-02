@@ -30,13 +30,13 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
         var tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
         {
-            Logger.LogInformation($"Downloading .NET Runtime from {GameConfig.DotNetRuntimeUrl} to {tempFilePath}");
+            Logger.LogInformation("Downloading .NET Runtime from {RuntimeUrl} to {TempFilePath}", GameConfig.DotNetRuntimeUrl, tempFilePath);
             await AppDownloadManager.DownloadFileAsync(GameConfig.DotNetRuntimeUrl, tempFilePath).ConfigureAwait(false);
 
-            Logger.LogInformation($"Extracting .NET Runtime to {GameConfig.DotNetRuntimeFolder}");
+            Logger.LogInformation("Extracting .NET Runtime to {RuntimeFolder}", GameConfig.DotNetRuntimeFolder);
             await ArchiveService.ExtractZipFileAsync(tempFilePath, GameConfig.DotNetRuntimeFolder).ConfigureAwait(false);
 
-            Logger.LogInformation($".NET Runtime installed to {GameConfig.DotNetRuntimeFolder}");
+            Logger.LogInformation(".NET Runtime installed to {RuntimeFolder}", GameConfig.DotNetRuntimeFolder);
         }
         finally
         {
@@ -59,11 +59,11 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
                 continue;
             }
 
-            Logger.LogInformation($"Game-local .NET {GameConfig.DotNetRuntimeMajorVersion} runtime found: {folder}");
+            Logger.LogInformation("Game-local .NET {RuntimeMajorVersion} runtime found: {Folder}", GameConfig.DotNetRuntimeMajorVersion, folder);
             return true;
         }
 
-        Logger.LogInformation($"No game-local .NET {GameConfig.DotNetRuntimeMajorVersion} runtime found in {GameConfig.Folder}");
+        Logger.LogInformation("No game-local .NET {RuntimeMajorVersion} runtime found in {GameFolder}", GameConfig.DotNetRuntimeMajorVersion, GameConfig.Folder);
         return false;
     }
 
@@ -78,7 +78,7 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
         if (!Directory.Exists(runtimeRoot))
         {
-            Logger.LogInformation($".NET Desktop Runtime root path not found: {runtimeRoot}");
+            Logger.LogInformation(".NET Desktop Runtime root path not found: {RuntimeRoot}", runtimeRoot);
             return false;
         }
 
@@ -86,11 +86,11 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
         if (!installed)
         {
-            Logger.LogInformation($".NET Desktop Runtime {GameConfig.DotNetRuntimeMajorVersion} not found in {runtimeRoot}");
+            Logger.LogInformation(".NET Desktop Runtime {RuntimeMajorVersion} not found in {RuntimeRoot}", GameConfig.DotNetRuntimeMajorVersion, runtimeRoot);
             return false;
         }
 
-        Logger.LogInformation($".NET Desktop Runtime {GameConfig.DotNetRuntimeMajorVersion} found in {runtimeRoot}");
+        Logger.LogInformation(".NET Desktop Runtime {RuntimeMajorVersion} found in {RuntimeRoot}", GameConfig.DotNetRuntimeMajorVersion, runtimeRoot);
         return true;
     }
 
@@ -106,16 +106,16 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
             if (result.ExitCode is 0)
             {
-                Logger.LogInformation($"Protontricks found: {result.StandardOutput.Trim()}");
+                Logger.LogInformation("Protontricks found: {StandardOutput}", result.StandardOutput.Trim());
                 return true;
             }
 
-            Logger.LogError($"Protontricks check failed: {result.StandardError}");
+            Logger.LogError("Protontricks check failed: {StandardError}", result.StandardError);
             return false;
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Protontricks not found");
+            Logger.LogError(ex, "Protontricks not found");
             return false;
         }
     }
@@ -132,16 +132,16 @@ internal sealed class LinuxGameRuntimeInstaller : IGameRuntimeInstaller
 
             if (result.ExitCode is not 0)
             {
-                Logger.LogError($"Failed to add version dll override: {result.StandardError}");
+                Logger.LogError("Failed to add version dll override: {StandardError}", result.StandardError);
                 return false;
             }
 
-            Logger.LogInformation($"version dll override added successfully");
+            Logger.LogInformation("version dll override added successfully");
             return true;
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to apply version dll override via protontricks");
+            Logger.LogError(ex, "Failed to apply version dll override via protontricks");
             return false;
         }
     }

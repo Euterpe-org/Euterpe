@@ -16,7 +16,7 @@ public sealed class NavigationService
     {
         if (string.Equals(CurrentRoute, route, StringComparison.Ordinal))
         {
-            Logger.LogDebug($"Already at route: {route}, skipping navigation");
+            Logger.LogDebug("Already at route: {Route}, skipping navigation", route);
             return;
         }
 
@@ -40,6 +40,6 @@ public sealed class NavigationService
     public void NotifyNavigated(string route)
     {
         CurrentRoute = route;
-        Logger.LogInformation($"Navigated to: {route}");
+        Logger.LogInformation("Navigated to: {Route}", route);
     }
 }

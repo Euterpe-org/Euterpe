@@ -21,7 +21,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
         ModTemplateInstalled = await ModTemplateInstaller.CheckInstalledAsync().ConfigureAwait(true);
         EnvVariableSet = PathEnvironment.IsSet();
 
-        Logger.LogInformation($"{nameof(ModDevelopPanelViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(ModDevelopPanelViewModel));
     }
 
     [RelayCommand]
@@ -33,19 +33,19 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation($"Installing DotNet SDK...");
+        Logger.LogInformation("Installing DotNet SDK...");
         try
         {
             await SdkInstaller.InstallAsync().ConfigureAwait(true);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to install DotNet SDK");
+            Logger.LogError(ex, "Failed to install DotNet SDK");
             await MessageBoxService.ErrorAsync(MessageBox_Content_DotNetSDK_Install_Failed).ConfigureAwait(true);
             return;
         }
 
-        Logger.LogInformation($"DotNet SDK installed successfully");
+        Logger.LogInformation("DotNet SDK installed successfully");
         DotNetSdkInstalled = true;
         await MessageBoxService.SuccessAsync(MessageBox_Content_DotNetSDK_Install_Success).ConfigureAwait(false);
     }
@@ -62,17 +62,17 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation($"Installing Mod Template...");
+        Logger.LogInformation("Installing Mod Template...");
         try
         {
             await ModTemplateInstaller.InstallAsync().ConfigureAwait(true);
-            Logger.LogInformation($"Mod Template installed successfully");
+            Logger.LogInformation("Mod Template installed successfully");
             ModTemplateInstalled = true;
             await MessageBoxService.SuccessAsync(MessageBox_Content_ModTemplate_Install_Success).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to install Mod Template");
+            Logger.LogError(ex, "Failed to install Mod Template");
             await MessageBoxService.ErrorAsync(MessageBox_Content_ModTemplate_Install_Failed).ConfigureAwait(false);
         }
     }
@@ -85,17 +85,17 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation($"Uninstalling Mod Template...");
+        Logger.LogInformation("Uninstalling Mod Template...");
         try
         {
             await ModTemplateInstaller.UninstallAsync().ConfigureAwait(true);
-            Logger.LogInformation($"Mod Template uninstalled successfully");
+            Logger.LogInformation("Mod Template uninstalled successfully");
             ModTemplateInstalled = false;
             await MessageBoxService.SuccessAsync(MessageBox_Content_ModTemplate_Uninstall_Success).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to uninstall Mod Template");
+            Logger.LogError(ex, "Failed to uninstall Mod Template");
             await MessageBoxService.ErrorAsync(MessageBox_Content_ModTemplate_Uninstall_Failed).ConfigureAwait(false);
         }
     }
@@ -110,17 +110,17 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation($"Setting {GameConfig.PathEnvironmentVariableName} environment variable...");
+        Logger.LogInformation("Setting {VariableName} environment variable...", GameConfig.PathEnvironmentVariableName);
 
         var success = PathEnvironment.Set();
         if (success)
         {
-            Logger.LogInformation($"{GameConfig.PathEnvironmentVariableName} environment variable set successfully");
+            Logger.LogInformation("{VariableName} environment variable set successfully", GameConfig.PathEnvironmentVariableName);
             EnvVariableSet = true;
         }
         else
         {
-            Logger.LogError($"Failed to set {GameConfig.PathEnvironmentVariableName} environment variable");
+            Logger.LogError("Failed to set {VariableName} environment variable", GameConfig.PathEnvironmentVariableName);
             await MessageBoxService.ErrorAsync(MessageBox_Content_SetMdDirectoryEnvironment_Failed).ConfigureAwait(false);
         }
     }

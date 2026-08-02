@@ -26,7 +26,7 @@ internal sealed partial class ChartManageService
 
         if (kind is ChartDropKind.Unsupported)
         {
-            Logger.LogWarning($"Ignored dropped path (not a chart package or folder): {path}");
+            Logger.LogWarning("Ignored dropped path (not a chart package or folder): {Path}", path);
             NotificationService.ErrorLight(Notification_Content_Chart_Import_Unsupported, name);
             return false;
         }
@@ -47,7 +47,7 @@ internal sealed partial class ChartManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to import chart from {path}");
+            Logger.LogError(ex, "Failed to import chart from {Path}", path);
             NotificationService.ErrorLight(Notification_Content_Chart_Import_Failed, name);
             return false;
         }
@@ -99,11 +99,11 @@ internal sealed partial class ChartManageService
         switch (outcome)
         {
             case MigrationOutcome.Migrated:
-                Logger.LogInformation($"Imported chart {name} from {path}");
+                Logger.LogInformation("Imported chart {Name} from {Path}", name, path);
                 NotificationService.SuccessLight(Notification_Content_Chart_Import_Success, name);
                 break;
             case MigrationOutcome.Unsupported:
-                Logger.LogInformation($"Import of {name} skipped: chart cannot be migrated");
+                Logger.LogInformation("Import of {Name} skipped: chart cannot be migrated", name);
                 NotificationService.ErrorLight(Notification_Content_Chart_Import_Unmigratable, name);
                 break;
             case MigrationOutcome.Failed:

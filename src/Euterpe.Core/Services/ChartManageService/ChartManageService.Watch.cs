@@ -23,7 +23,7 @@ internal sealed partial class ChartManageService
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, $"Failed to start the chart folder watcher");
+            Logger.LogError(ex, "Failed to start the chart folder watcher");
         }
     }
 }

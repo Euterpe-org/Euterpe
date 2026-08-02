@@ -100,7 +100,7 @@ internal sealed class FolderWatcher : IDisposable
 
     private void OnFileSystemError(object sender, ErrorEventArgs e)
     {
-        _logger.LogWarning(e.GetException(), $"FileSystemWatcher error; re-arming the watcher and scheduling a reconcile");
+        _logger.LogWarning(e.GetException(), "FileSystemWatcher error; re-arming the watcher and scheduling a reconcile");
         RearmWatcher((FileSystemWatcher)sender);
         ScheduleReconcile();
     }
@@ -145,7 +145,7 @@ internal sealed class FolderWatcher : IDisposable
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Watcher-triggered reconcile failed");
+            _logger.LogError(ex, "Watcher-triggered reconcile failed");
         }
 
         bool rerun;
@@ -181,7 +181,7 @@ internal sealed class FolderWatcher : IDisposable
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Failed to re-arm the watcher on {root}");
+                _logger.LogError(ex, "Failed to re-arm the watcher on {Root}", root);
             }
         }
     }

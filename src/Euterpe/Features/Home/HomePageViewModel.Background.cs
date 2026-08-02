@@ -4,8 +4,8 @@ public sealed partial class HomePageViewModel
 {
     private void StartBackgroundTasks()
     {
-        CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.LogError(ex, $"Failed to check modding dependencies"));
-        UpdateChartsAsync().SafeFireAndForget(ex => Logger.LogError(ex, $"Failed to auto-update charts"));
+        CheckModdingDependenciesAsync().SafeFireAndForget(ex => Logger.LogError(ex, "Failed to check modding dependencies"));
+        UpdateChartsAsync().SafeFireAndForget(ex => Logger.LogError(ex, "Failed to auto-update charts"));
     }
 
     private async Task CheckModdingDependenciesAsync()
@@ -21,7 +21,7 @@ public sealed partial class HomePageViewModel
             return;
         }
 
-        Logger.LogInformation($".NET runtime not installed, opening repair dialog");
+        Logger.LogInformation(".NET runtime not installed, opening repair dialog");
         await SetupDialogService.ShowOptionRepairAsync(SetupOptionKinds.DotNetRuntime).ConfigureAwait(false);
     }
 
@@ -32,7 +32,7 @@ public sealed partial class HomePageViewModel
             return;
         }
 
-        Logger.LogInformation($"MelonLoader not installed, opening repair dialog");
+        Logger.LogInformation("MelonLoader not installed, opening repair dialog");
         await SetupDialogService.ShowOptionRepairAsync(SetupOptionKinds.MelonLoader).ConfigureAwait(false);
     }
 

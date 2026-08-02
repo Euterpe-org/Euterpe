@@ -102,7 +102,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
             .PopulateInto(_sourceCache);
         AllChartsLoaded = true;
 
-        Logger.LogInformation($"{nameof(ChartManagePanelViewModel)} Initialized");
+        Logger.LogInformation("{ViewModel} Initialized", nameof(ChartManagePanelViewModel));
     }
 
     [RelayCommand]
