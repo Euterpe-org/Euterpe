@@ -21,7 +21,7 @@ internal sealed class LinuxSteamPathDiscovery : ISteamPathDiscovery
             return true;
         }
 
-        Logger.LogWarning("Auto detect Steam install on common path failed.");
+        Logger.LogWarning("Auto detect Steam install on common path failed");
         return false;
     }
 

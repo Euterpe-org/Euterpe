@@ -87,7 +87,7 @@ internal sealed partial class AppSettingService : IAppSettingService
 
     public async Task ValidateSteamAsync()
     {
-        Logger.LogInformation("Checking for valid Steam setting...");
+        Logger.LogInformation("Checking for valid Steam setting");
 
         await CheckSteamFolderAsync().ConfigureAwait(true);
         await CheckSteamExecPathAsync().ConfigureAwait(true);

@@ -29,7 +29,7 @@ internal sealed partial class GamePathService : IGamePathService
 
         if (gameFolder is null)
         {
-            Logger.LogWarning("Failed to auto detect game path on Steam common paths.");
+            Logger.LogWarning("Failed to auto detect game path on Steam common paths");
             return false;
         }
 

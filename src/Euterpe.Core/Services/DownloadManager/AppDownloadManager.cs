@@ -30,7 +30,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
 
     public async Task DownloadAssetAsync(string downloadUrl, string filePath, string displayName, CancellationToken cancellationToken = default)
     {
-        Logger.LogInformation("Downloading {DisplayName} ...", displayName);
+        Logger.LogInformation("Downloading {DisplayName}", displayName);
 
         var stream = await DownloadClient.GetStreamAsync(downloadUrl, cancellationToken).ConfigureAwait(false);
         await using (stream.ConfigureAwait(false))

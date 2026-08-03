@@ -20,7 +20,7 @@ internal sealed partial class UpdateService : IUpdateService
             return null;
         }
 
-        Logger.LogInformation("Checking for updates on channel {Channel} ...", channel);
+        Logger.LogInformation("Checking for updates on channel {Channel}", channel);
 
         var updateInfo = await manager
             .CheckForUpdatesAsync()

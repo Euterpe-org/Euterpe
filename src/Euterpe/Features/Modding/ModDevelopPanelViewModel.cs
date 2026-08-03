@@ -33,7 +33,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation("Installing DotNet SDK...");
+        Logger.LogInformation("Installing DotNet SDK");
         try
         {
             await SdkInstaller.InstallAsync().ConfigureAwait(true);
@@ -62,7 +62,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation("Installing Mod Template...");
+        Logger.LogInformation("Installing Mod Template");
         try
         {
             await ModTemplateInstaller.InstallAsync().ConfigureAwait(true);
@@ -85,7 +85,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation("Uninstalling Mod Template...");
+        Logger.LogInformation("Uninstalling Mod Template");
         try
         {
             await ModTemplateInstaller.UninstallAsync().ConfigureAwait(true);
@@ -110,7 +110,7 @@ public sealed partial class ModDevelopPanelViewModel : ViewModelBase
             return;
         }
 
-        Logger.LogInformation("Setting {VariableName} environment variable...", GameConfig.PathEnvironmentVariableName);
+        Logger.LogInformation("Setting {VariableName} environment variable", GameConfig.PathEnvironmentVariableName);
 
         var success = PathEnvironment.Set();
         if (success)
