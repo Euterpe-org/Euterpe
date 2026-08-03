@@ -71,6 +71,7 @@ public static partial class CoreServiceExtensions
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeDistributionClient>(nameof(EuterpeApi.Distribution), EuterpeApi.Distribution.BasePath, true)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
+            services.AddEuterpeRefitClient<IEuterpeLogClient>(nameof(EuterpeApi.Logs), EuterpeApi.Logs.BasePath, true);
             services.AddEuterpeRefitClient<IEuterpeModClient>(nameof(EuterpeApi.Mods), EuterpeApi.Mods.BasePath, true)
                 .AddStandardResilienceHandler(HttpResiliencePolicies.ConfigureApi);
             services.AddEuterpeRefitClient<IEuterpeTelemetryClient>(nameof(EuterpeApi.Telemetry), EuterpeApi.Telemetry.BasePath);
@@ -106,6 +107,7 @@ public static partial class CoreServiceExtensions
             builder.RegisterType<AudioPlayerService>().As<IAudioPlayerService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AudioConverterService>().As<IAudioConverterService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<CrashLogUploadService>().As<ICrashLogUploadService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DialogService>().As<IDialogService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<FileSystemPickerService>().As<IFileSystemPickerService>().PropertiesAutowired().SingleInstance();

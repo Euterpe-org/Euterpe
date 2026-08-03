@@ -50,6 +50,7 @@ public sealed partial class CoreServiceExtensionsTest
             typeof(IAppSettingService),
             typeof(IArchiveService),
             typeof(IAuthService),
+            typeof(ICrashLogUploadService),
             typeof(IFileSystemService),
             typeof(IFileSystemPickerService),
             typeof(IJsonSerializationService),
