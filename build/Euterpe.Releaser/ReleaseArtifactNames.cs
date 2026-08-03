@@ -10,4 +10,7 @@ internal static class ReleaseArtifactNames
 
     public static string GetInstallerFileName(ReleaseRuntime runtime, string channel) =>
         $"{PackageId}-{channel}{runtime.InstallerFileSuffix}";
+
+    public static string GetGitHubInstallerFileName(ReleaseRuntime runtime) =>
+        $"{PackageId}-{runtime.Rid}{runtime.InstallerFileSuffix}";
 }
