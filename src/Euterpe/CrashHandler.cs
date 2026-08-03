@@ -33,6 +33,7 @@ internal static class CrashHandler
         }
 
         CrashWindowShowing = true;
+        StartCrashLogUpload();
 
         bool shouldContinue;
         try
@@ -57,6 +58,20 @@ internal static class CrashHandler
         if (!shouldContinue)
         {
             Environment.Exit(1);
+        }
+    }
+
+    private static void StartCrashLogUpload()
+    {
+        try
+        {
+            Resolve<ICrashLogUploadService>()
+                .UploadAppLogAsync()
+                .SafeFireAndForget(ex => Resolve<ILogger<App>>().LogWarning(ex, "Failed to start crash log upload"));
+        }
+        catch (Exception ex)
+        {
+            Resolve<ILogger<App>>().LogWarning(ex, "Failed to start crash log upload");
         }
     }
 }

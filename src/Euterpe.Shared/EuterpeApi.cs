@@ -34,6 +34,13 @@ public static partial class EuterpeApi
         public const string VelopackPath = "/velopack";
     }
 
+    public static partial class Logs
+    {
+        public const string BasePath = "logs";
+
+        public const string Upload = "/upload";
+    }
+
     public static partial class Mods
     {
         public const string BasePath = "mods";
