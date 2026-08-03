@@ -4,6 +4,9 @@
     "rollForward": "latestMajor",
     "allowPrerelease": true
   },
+  "msbuild-sdks": {
+    "StuDev.AotAnywhere": "1.0.4"
+  },
   "test": {
     "runner": "Microsoft.Testing.Platform"
   }

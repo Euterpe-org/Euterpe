@@ -43,7 +43,11 @@ jobs:
         include:
           - rid: linux-x64
             os: ubuntu-latest
+          - rid: linux-arm64
+            os: ubuntu-latest
           - rid: win-x64
+            os: windows-latest
+          - rid: win-arm64
             os: windows-latest
     runs-on: ${{ matrix.os }}
 

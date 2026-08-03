@@ -1,4 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Sdk Name="StuDev.AotAnywhere"/>
+
     <Import Condition="'$(IsPublishing)' == 'true'" Project="..\..\Publish.props"/>
 
     <PropertyGroup>
