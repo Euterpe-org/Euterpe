@@ -30,4 +30,13 @@ public sealed class ReleaseArtifactNamesTest
                 "linux-x64-beta"))
             .IsEqualTo("Euterpe-linux-x64-beta.AppImage");
     }
+
+    [Test]
+    public async Task GetGitHubInstallerFileName_SupportedRuntimes_ReturnsPublicNames()
+    {
+        await Assert.That(ReleaseArtifactNames.GetGitHubInstallerFileName(ReleaseRuntime.Parse("win-x64")))
+            .IsEqualTo("Euterpe-win-x64-Setup.exe");
+        await Assert.That(ReleaseArtifactNames.GetGitHubInstallerFileName(ReleaseRuntime.Parse("linux-arm64")))
+            .IsEqualTo("Euterpe-linux-arm64.AppImage");
+    }
 }

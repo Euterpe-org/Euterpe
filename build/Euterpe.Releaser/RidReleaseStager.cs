@@ -36,6 +36,8 @@ internal sealed class RidReleaseStager(
                 applicationDirectory,
                 cancellationToken);
         }
+
+        ExportGitHubInstaller(context);
     }
 
     private async Task StageChannelAsync(
@@ -112,6 +114,23 @@ internal sealed class RidReleaseStager(
                 context.Runtime.Rid
             ],
             cancellationToken);
+    }
+
+    private void ExportGitHubInstaller(StageContext context)
+    {
+        var channel = GetPrimaryChannel(context.Runtime, context.Version);
+        var sourcePath = Path.Combine(
+            context.RepositoryRoot,
+            "artifacts",
+            "releases",
+            channel,
+            GetInstallerFileName(context.Runtime, channel));
+        var outputDirectory = Path.Combine(context.RepositoryRoot, "artifacts", "github-release");
+        var destinationPath = Path.Combine(outputDirectory, GetGitHubInstallerFileName(context.Runtime));
+
+        Directory.CreateDirectory(outputDirectory);
+        File.Copy(sourcePath, destinationPath, true);
+        _logger.Info($"Exported GitHub Release installer to {destinationPath}");
     }
 
     private async Task PackChannelAsync(

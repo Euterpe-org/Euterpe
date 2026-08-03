@@ -86,9 +86,7 @@ jobs:
           tag_name: ${{ github.ref_name }}
           draft: true
           fail_on_unmatched_files: false
-          files: |
-            artifacts/releases/${{ matrix.rid }}-${{ contains(github.ref_name, '-') && 'beta' || 'stable' }}/*.exe
-            artifacts/releases/${{ matrix.rid }}-${{ contains(github.ref_name, '-') && 'beta' || 'stable' }}/*.AppImage
+          files: artifacts/github-release/*
 
   publish:
     name: Publish release
