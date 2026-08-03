@@ -1,10 +1,12 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cl="clr-namespace:Coachlight.Avalonia.Targeting;assembly=Coachlight.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:log="using:Microsoft.Extensions.Logging"
     xmlns:logger="using:Euterpe.Core.Logger"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="using:Euterpe.Services"
     xmlns:vm="using:Euterpe.Features.Logging"
     x:Class="Euterpe.Features.Logging.AppLogPanel"
     x:DataType="vm:AppLogPanelViewModel"
@@ -25,6 +27,7 @@
         Classes="LogContainer">
         <ListBox
             x:Name="LogListBox"
+            cl:Coachmark.Id="{x:Static services:UserGuideService.AppLogTargetId}"
             Classes="LogList"
             ItemsSource="{Binding LogMessagesView}">
             <ListBox.ItemTemplate>

@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:charting="using:Euterpe.Features.Charting"
+    xmlns:cl="using:Coachlight.Avalonia.Targeting"
     xmlns:constants="using:Euterpe.Shared"
     xmlns:converters="using:Euterpe.Converters"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
@@ -10,6 +11,7 @@
     xmlns:logging="using:Euterpe.Features.Logging"
     xmlns:modding="using:Euterpe.Features.Modding"
     xmlns:models="using:Euterpe.Controls.Models"
+    xmlns:services="using:Euterpe.Services"
     xmlns:setting="using:Euterpe.Features.Setting"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.Shell"
@@ -56,6 +58,7 @@
             Grid.Column="0"
             MinWidth="85">
             <u:NavMenu
+                cl:Coachmark.Id="{x:Static services:UserGuideService.MainNavigationTargetId}"
                 DockPanel.Dock="Top"
                 HeaderBinding="{Binding ., Mode=OneTime}"
                 IconBinding="{Binding IconResourceKey, Mode=OneTime}"

@@ -339,4 +339,40 @@
   <data name="Title_Warning" xml:space="preserve">
     <value>警告</value>
   </data>
+  <data name="UserGuide_Content_AppLog" xml:space="preserve">
+    <value>Euterpe 的執行日誌會顯示在這裡，方便查看程式活動和排查問題。</value>
+  </data>
+  <data name="UserGuide_Content_ChartManage" xml:space="preserve">
+    <value>可以在這條工具列中選擇來源、搜尋、排序和重設篩選。</value>
+  </data>
+  <data name="UserGuide_Content_Launch" xml:space="preserve">
+    <value>在這裡選擇原版或模組模式，然後啟動遊戲。</value>
+  </data>
+  <data name="UserGuide_Content_LogFolders" xml:space="preserve">
+    <value>使用「開啟」選單可以直接開啟 Euterpe 或遊戲日誌資料夾。</value>
+  </data>
+  <data name="UserGuide_Content_MainNavigation" xml:space="preserve">
+    <value>從這裡切換模組、譜面、日誌和設定等功能。</value>
+  </data>
+  <data name="UserGuide_Content_ModManage" xml:space="preserve">
+    <value>在這裡搜尋和篩選模組，也可以將模組檔案拖入頁面進行匯入。</value>
+  </data>
+  <data name="UserGuide_Content_Transition" xml:space="preserve">
+    <value>接下來看看{0}。</value>
+  </data>
+  <data name="UserGuide_Content_Welcome" xml:space="preserve">
+    <value>設定已經完成。接下來快速瞭解一下主要功能。</value>
+  </data>
+  <data name="UserGuide_Title_Launch" xml:space="preserve">
+    <value>啟動遊戲</value>
+  </data>
+  <data name="UserGuide_Title_LogFolders" xml:space="preserve">
+    <value>開啟日誌資料夾</value>
+  </data>
+  <data name="UserGuide_Title_MainNavigation" xml:space="preserve">
+    <value>功能導覽</value>
+  </data>
+  <data name="UserGuide_Title_Welcome" xml:space="preserve">
+    <value>準備完成</value>
+  </data>
 </root>

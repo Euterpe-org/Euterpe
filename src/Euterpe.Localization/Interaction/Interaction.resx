@@ -339,4 +339,40 @@
   <data name="Title_Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="UserGuide_Content_AppLog" xml:space="preserve">
+    <value>Euterpe's runtime logs appear here, making it easier to inspect activity and diagnose problems.</value>
+  </data>
+  <data name="UserGuide_Content_ChartManage" xml:space="preserve">
+    <value>Choose a source, search, sort, and reset filters from this toolbar.</value>
+  </data>
+  <data name="UserGuide_Content_Launch" xml:space="preserve">
+    <value>Choose vanilla or modded mode here, then launch the game.</value>
+  </data>
+  <data name="UserGuide_Content_LogFolders" xml:space="preserve">
+    <value>Use the Open menu to open Euterpe or game log folders directly.</value>
+  </data>
+  <data name="UserGuide_Content_MainNavigation" xml:space="preserve">
+    <value>Switch between modding, charts, logs, and settings from here.</value>
+  </data>
+  <data name="UserGuide_Content_ModManage" xml:space="preserve">
+    <value>Search and filter mods here. You can also drag mod files onto this page to import them.</value>
+  </data>
+  <data name="UserGuide_Content_Transition" xml:space="preserve">
+    <value>Next, let's take a look at {0}.</value>
+  </data>
+  <data name="UserGuide_Content_Welcome" xml:space="preserve">
+    <value>Setup is complete. Let's take a quick tour of the main features.</value>
+  </data>
+  <data name="UserGuide_Title_Launch" xml:space="preserve">
+    <value>Launch the game</value>
+  </data>
+  <data name="UserGuide_Title_LogFolders" xml:space="preserve">
+    <value>Open log folders</value>
+  </data>
+  <data name="UserGuide_Title_MainNavigation" xml:space="preserve">
+    <value>Explore Euterpe</value>
+  </data>
+  <data name="UserGuide_Title_Welcome" xml:space="preserve">
+    <value>You're ready to go</value>
+  </data>
 </root>

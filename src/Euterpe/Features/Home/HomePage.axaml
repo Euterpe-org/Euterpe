@@ -1,10 +1,12 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cl="using:Coachlight.Avalonia.Targeting"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
-    xmlns:gif="clr-namespace:Avalonia.Labs.Gif;assembly=Avalonia.Labs.Gif"
+    xmlns:gif="using:Avalonia.Labs.Gif"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
     xmlns:m="using:Euterpe.Markup"
+    xmlns:services="using:Euterpe.Services"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:vm="using:Euterpe.Features.Home"
     x:Class="Euterpe.Features.Home.HomePage"
@@ -62,6 +64,7 @@
 
             <!--  Play Button  -->
             <e:PlayButton
+                cl:Coachmark.Id="{x:Static services:UserGuideService.PlayButtonTargetId}"
                 Command="{Binding LaunchGameCommand, Mode=OneTime}"
                 Content="{Localize {x:Static loc:XAMLLiteral.Button_LaunchGame}}"
                 HorizontalAlignment="Right"

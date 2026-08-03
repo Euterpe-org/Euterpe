@@ -8,6 +8,15 @@
     x:DataType="vm:AppViewModel"
     RequestedThemeVariant="Dark">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude
+                    Source="avares://Coachlight.Avalonia/Themes/Coachlight.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
     <Application.Styles>
         <e:EuterpeTheme />
         <semi:SemiTheme />

@@ -15,6 +15,7 @@ public static partial class ServiceExtensions
             builder.RegisterType<LocalizationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<NavigationService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<UpdateDialogService>().PropertiesAutowired().SingleInstance();
+            builder.RegisterType<UserGuideService>().PropertiesAutowired().SingleInstance();
 
             builder.RegisterType<UpdateDialogViewModel>().PropertiesAutowired().InstancePerDependency();
 

@@ -339,4 +339,40 @@
   <data name="Title_Warning" xml:space="preserve">
     <value>警告</value>
   </data>
+  <data name="UserGuide_Content_AppLog" xml:space="preserve">
+    <value>Euterpe 的运行日志会显示在这里，便于查看程序活动和排查问题。</value>
+  </data>
+  <data name="UserGuide_Content_ChartManage" xml:space="preserve">
+    <value>可以在这条工具栏中选择来源、搜索、排序和重置筛选。</value>
+  </data>
+  <data name="UserGuide_Content_Launch" xml:space="preserve">
+    <value>在这里选择原版或模组模式，然后启动游戏。</value>
+  </data>
+  <data name="UserGuide_Content_LogFolders" xml:space="preserve">
+    <value>使用“打开”菜单可以直接打开 Euterpe 或游戏日志文件夹。</value>
+  </data>
+  <data name="UserGuide_Content_MainNavigation" xml:space="preserve">
+    <value>从这里切换模组、谱面、日志和设置等功能。</value>
+  </data>
+  <data name="UserGuide_Content_ModManage" xml:space="preserve">
+    <value>在这里搜索和筛选模组，也可以将模组文件拖入页面进行导入。</value>
+  </data>
+  <data name="UserGuide_Content_Transition" xml:space="preserve">
+    <value>接下来看看{0}。</value>
+  </data>
+  <data name="UserGuide_Content_Welcome" xml:space="preserve">
+    <value>设置已经完成。接下来快速了解一下主要功能。</value>
+  </data>
+  <data name="UserGuide_Title_Launch" xml:space="preserve">
+    <value>启动游戏</value>
+  </data>
+  <data name="UserGuide_Title_LogFolders" xml:space="preserve">
+    <value>打开日志文件夹</value>
+  </data>
+  <data name="UserGuide_Title_MainNavigation" xml:space="preserve">
+    <value>功能导航</value>
+  </data>
+  <data name="UserGuide_Title_Welcome" xml:space="preserve">
+    <value>准备完成</value>
+  </data>
 </root>

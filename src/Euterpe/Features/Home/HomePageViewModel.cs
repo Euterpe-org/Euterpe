@@ -19,6 +19,9 @@ public sealed partial class HomePageViewModel : ViewModelBase
 
         await EnsureSetupAsync().ConfigureAwait(true);
         await LoadGameStateAsync().ConfigureAwait(true);
+
+        await UserGuideService.ShowSetupGuideAsync().ConfigureAwait(true);
+
         StartBackgroundTasks();
 
         Logger.LogInformation("{ViewModel} Initialized", nameof(HomePageViewModel));
@@ -73,6 +76,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required GameConfig GameConfig { get; init; }
     public required NavigationService NavigationService { get; init; }
     public required SetupDialogService SetupDialogService { get; init; }
+    public required UserGuideService UserGuideService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
     public required IDependencyAcquireService DependencyAcquireService { get; init; }
     public required IEuterpeAccountClient AccountClient { get; init; }

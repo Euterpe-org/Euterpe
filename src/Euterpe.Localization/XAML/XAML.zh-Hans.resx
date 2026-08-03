@@ -31,6 +31,9 @@
   <data name="Button_Confirm" xml:space="preserve">
     <value>确认</value>
   </data>
+  <data name="Button_Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
   <data name="Button_HelpTranslate" xml:space="preserve">
     <value>帮助翻译</value>
   </data>
@@ -54,6 +57,9 @@
   </data>
   <data name="Button_Retry" xml:space="preserve">
     <value>重试</value>
+  </data>
+  <data name="Button_Skip" xml:space="preserve">
+    <value>跳过</value>
   </data>
   <data name="Button_SourceCode" xml:space="preserve">
     <value>源代码</value>
