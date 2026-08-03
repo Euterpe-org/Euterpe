@@ -17,7 +17,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public async Task<string> DownloadChartAsync(string cid, IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
     {
-        Logger.LogInformation("Downloading chart {Cid} ...", cid);
+        Logger.LogInformation("Downloading chart {Cid}", cid);
 
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
         var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
@@ -43,7 +43,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
     public async Task<string> UpdateChartAsync(string cid, IReadOnlyCollection<string> changedFiles, IReadOnlyCollection<string> deletedFiles,
         CancellationToken cancellationToken = default)
     {
-        Logger.LogInformation("Updating chart {Cid} ({ChangedFilesCount} changed, {DeletedFilesCount} deleted file(s)) ...", cid, changedFiles.Count, deletedFiles.Count);
+        Logger.LogInformation("Updating chart {Cid} ({ChangedFilesCount} changed, {DeletedFilesCount} deleted file(s))", cid, changedFiles.Count, deletedFiles.Count);
 
         var workFolder = Path.Combine(GameConfig.TempChartsFolder, cid);
         var destinationFolder = Path.Combine(GameConfig.OnlineChartsFolder, cid);
@@ -83,7 +83,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public async Task<CheckChartUpdatesResponse> CheckChartUpdatesAsync(CheckChartUpdatesRequest request, CancellationToken cancellationToken = default)
     {
-        Logger.LogInformation("Checking updates for {ChartCount} chart(s) ...", request.Charts.Count);
+        Logger.LogInformation("Checking updates for {ChartCount} chart(s)", request.Charts.Count);
 
         try
         {
@@ -98,7 +98,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public async Task<Mod[]> FetchModListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.LogInformation("Fetching mods ...");
+        Logger.LogInformation("Fetching mods");
 
         try
         {
@@ -113,7 +113,7 @@ internal sealed partial class GameDownloadManager : IGameDownloadManager
 
     public async Task<Lib[]> FetchLibListAsync(CancellationToken cancellationToken = default)
     {
-        Logger.LogInformation("Fetching libs ...");
+        Logger.LogInformation("Fetching libs");
 
         try
         {

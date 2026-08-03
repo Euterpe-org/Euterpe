@@ -44,7 +44,7 @@ internal sealed partial class GamePathService
         var targetLibrary = libraryFolders.FirstOrDefault(library => library.Apps.ContainsKey(appId));
         if (targetLibrary is null)
         {
-            Logger.LogWarning("AppId {AppId} not found in any Steam library.", appId);
+            Logger.LogWarning("AppId {AppId} not found in any Steam library", appId);
             return false;
         }
 
@@ -69,7 +69,7 @@ internal sealed partial class GamePathService
             return true;
         }
 
-        Logger.LogWarning("Game folder not found in any Steam library paths.");
+        Logger.LogWarning("Game folder not found in any Steam library paths");
         return false;
     }
 }

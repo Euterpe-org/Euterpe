@@ -28,7 +28,7 @@ internal sealed partial class AppSettingService
             }
             else
             {
-                Logger.LogInformation("Letting user choose Steam folder...");
+                Logger.LogInformation("Letting user choose Steam folder");
                 await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamFolder).ConfigureAwait(true);
                 Config.SteamFolder = await AppLocalService.GetSteamFolderAsync().ConfigureAwait(true);
             }
@@ -48,7 +48,7 @@ internal sealed partial class AppSettingService
             }
             else
             {
-                Logger.LogInformation("Letting user choose Steam executable...");
+                Logger.LogInformation("Letting user choose Steam executable");
                 await MessageBoxService.NoticeOverlayAsync(MessageBox_Content_ChooseSteamExec).ConfigureAwait(true);
                 Config.SteamExecPath = await AppLocalService.GetSteamExecPathAsync().ConfigureAwait(true);
             }
