@@ -101,7 +101,7 @@ internal sealed class AppDownloadManager : IAppDownloadManager
         try
         {
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
-            var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            using var response = await Client.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.Forbidden)
             {

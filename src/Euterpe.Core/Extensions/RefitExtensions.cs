@@ -6,7 +6,9 @@ namespace Euterpe.Core.Extensions;
 
 public static class RefitExtensions
 {
-    private static readonly RefitSettings RefitSettings = new()
+    private static readonly RefitSettings RefitSettings = CreateRefitSettings();
+
+    internal static RefitSettings CreateRefitSettings() => new()
     {
         ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
     };

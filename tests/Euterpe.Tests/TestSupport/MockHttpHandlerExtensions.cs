@@ -1,4 +1,4 @@
-using Euterpe.Core.JsonContexts;
+using Euterpe.Core.Extensions;
 using Refit;
 using TUnit.Mocks.Http;
 
@@ -7,8 +7,7 @@ namespace Euterpe.Tests.TestSupport;
 internal static class MockHttpHandlerExtensions
 {
     public static T CreateEuterpeClient<T>(this MockHttpHandler handler, string basePath) =>
-        RestService.ForGenerated<T>(handler.ThrowOnUnmatched().CreateClient($"{EuterpeApi.BaseUrl}{basePath}"), new RefitSettings
-        {
-            ContentSerializer = new SystemTextJsonContentSerializer(SnakeCaseJsonContext.Default.Options)
-        });
+        RestService.ForGenerated<T>(
+            handler.ThrowOnUnmatched().CreateClient($"{EuterpeApi.BaseUrl}{basePath}"),
+            RefitExtensions.CreateRefitSettings());
 }
