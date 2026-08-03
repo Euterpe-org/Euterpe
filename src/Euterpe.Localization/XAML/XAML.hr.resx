@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>Poništi</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>Odaberi</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>Odabrano: {0}</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>Mogu se dijeliti samo online chartovi, najviše 100 odjednom</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>Razvrstaj po</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Postavljanje Euterpe</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>Odustani</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>Uvoz otkazan</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>Uvoz nije uspio</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>Uvezi kod za dijeljenje</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>Nevažeći kod za dijeljenje</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>Ovdje zalijepite kod za dijeljenje</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>{0} chartova</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>Chartovi: {0} dodano · {1} već postoji · {2} neuspjelo.</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>Započni uvoz</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>Ovaj je kod za {0}. Najprije prijeđite na tu igru.</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>Dijeli</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>Prijavite se i autorizirajte u pregledniku</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>Stabilno</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>Nova je verzija spremna i automatski će se instalirati.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>Euterpe će se automatski ponovno pokrenuti kada ažuriranje bude spremno.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>Preuzimanje ažuriranja…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>Ciljna verzija</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Ažuriranje Euterpea</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Odaberi svoju ulogu i zadatke za početak</value>

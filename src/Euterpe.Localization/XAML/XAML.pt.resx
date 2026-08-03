@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>Redefinir</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>Selecionar</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>{0} selecionados</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>Somente charts online podem ser compartilhados, até 100 por vez</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>Ordenar por</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Configurando o Euterpe</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>Importação cancelada</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>Falha na importação</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>Importar um código de compartilhamento</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>Código de compartilhamento inválido</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>Cole um código de compartilhamento aqui</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>{0} charts</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>Charts: {0} adicionados · {1} existentes · {2} com falha.</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>Iniciar importação</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>Este código é para {0}. Primeiro, mude para esse jogo.</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>Compartilhar</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>Faça login e autorize no navegador</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>Estável</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>Uma nova versão está pronta e será instalada automaticamente.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>O Euterpe será reiniciado automaticamente quando a atualização estiver pronta.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>Baixando atualização…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>Versão de destino</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Atualizando o Euterpe</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Escolha sua função e tarefas para começar</value>

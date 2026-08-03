@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>초기화</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>선택</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>{0}개 선택됨</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>온라인 채보만 공유할 수 있으며, 한 번에 최대 100개까지 가능합니다</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>정렬 기준</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe 설정 중</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>가져오기가 취소되었습니다</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>가져오기에 실패했습니다</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>공유 코드 가져오기</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>잘못된 공유 코드입니다</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>여기에 공유 코드를 붙여넣으세요</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>채보 {0}개</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>채보: {0}개 추가 · {1}개 이미 있음 · {2}개 실패</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>가져오기 시작</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>이 코드는 {0}용입니다. 먼저 해당 게임으로 전환하세요.</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>공유</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>브라우저에서 로그인하고 승인해 주세요</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>안정 버전</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>새 버전이 준비되었으며 자동으로 설치됩니다.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>업데이트가 준비되면 Euterpe가 자동으로 다시 시작됩니다.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>업데이트 다운로드 중…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>대상 버전</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Euterpe 업데이트 중</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>역할과 작업을 선택하여 시작하세요</value>

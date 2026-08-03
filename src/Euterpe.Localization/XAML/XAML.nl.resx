@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>Herstellen</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>Selecteren</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>{0} geselecteerd</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>Alleen online charts kunnen worden gedeeld, maximaal 100 tegelijk</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>Sorteren op</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe instellen</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>Import geannuleerd</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>Importeren mislukt</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>Een deelcode importeren</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>Ongeldige deelcode</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>Plak hier een deelcode</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>{0} charts</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>Charts: {0} toegevoegd · {1} aanwezig · {2} mislukt.</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>Import starten</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>Deze code is voor {0}. Schakel eerst over naar die game.</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>Delen</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>Log in en autoriseer in de browser</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>Stabiel</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>Een nieuwe versie staat klaar en wordt automatisch geïnstalleerd.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>Euterpe wordt automatisch opnieuw gestart wanneer de update gereed is.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>Update downloaden…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>Doelversie</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Euterpe bijwerken</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Kies uw rol en taken om te beginnen</value>

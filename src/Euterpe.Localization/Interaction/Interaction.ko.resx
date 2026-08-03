@@ -43,6 +43,9 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>네</value>
   </data>
+  <data name="MessageBox_Content_Chart_BulkDelete_Confirm" xml:space="preserve">
+    <value>선택한 채보 {0}개를 삭제하시겠습니까?</value>
+  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Steam 실행 파일을 선택해 주세요</value>
   </data>
@@ -158,6 +161,12 @@
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>오디오 재생에 실패했습니다</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Partial" xml:space="preserve">
+    <value>채보 {0}개 삭제, {1}개 실패</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Success" xml:space="preserve">
+    <value>채보 {0}개를 삭제했습니다</value>
   </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>채보 {0} 다운로드에 실패했습니다</value>
@@ -308,6 +317,9 @@
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>서버가 일시적으로 응답하지 않습니다. 잠시 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="Notification_Content_Share_Copy_Success" xml:space="preserve">
+    <value>공유 코드를 복사했습니다</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>오류</value>
