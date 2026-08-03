@@ -1,3 +1,4 @@
+using System.Net;
 using Euterpe.Contracts.Account;
 using Euterpe.Core.Http.Clients;
 using Euterpe.Tests.TestSupport;
@@ -41,5 +42,38 @@ public sealed class IEuterpeAuthClientTest
         await Assert.That(body).Contains("\"client_id\":\"cid\"");
         await Assert.That(body).Contains("\"code_verifier\":\"verifier\"");
         await Assert.That(body).Contains("\"redirect_uri\"");
+    }
+
+    [Test]
+    public async Task RefreshTokenAsync_RequestBodyAndResponse_UseExpectedWireContract()
+    {
+        using var http = Mock.HttpHandler();
+        http.OnPost("/api/auth/refresh")
+            .RespondWithJson("""{"access_token":"new-at","refresh_token":"new-rt"}""");
+        var api = http.CreateEuterpeClient<IEuterpeAuthClient>(Auth.BasePath);
+
+        var response = await api.RefreshTokenAsync(new RefreshRequest("old-rt"));
+
+        var request = http.Requests.Single();
+        using var assertions = Assert.Multiple();
+        await Assert.That(response.AccessToken).IsEqualTo("new-at");
+        await Assert.That(response.RefreshToken).IsEqualTo("new-rt");
+        await Assert.That(request.RequestUri!.AbsoluteUri).IsEqualTo("https://euterpe-org.com/api/auth/refresh");
+        await Assert.That(request.Body).IsEqualTo("""{"refresh_token":"old-rt"}""");
+    }
+
+    [Test]
+    public async Task LogoutAsync_RequestBody_UsesExpectedWireContract()
+    {
+        using var http = Mock.HttpHandler();
+        http.OnPost("/api/auth/logout").Respond(HttpStatusCode.NoContent);
+        var api = http.CreateEuterpeClient<IEuterpeAuthClient>(Auth.BasePath);
+
+        await api.LogoutAsync(new LogoutRequest("refresh-token"));
+
+        var request = http.Requests.Single();
+        using var assertions = Assert.Multiple();
+        await Assert.That(request.RequestUri!.AbsoluteUri).IsEqualTo("https://euterpe-org.com/api/auth/logout");
+        await Assert.That(request.Body).IsEqualTo("""{"refresh_token":"refresh-token"}""");
     }
 }

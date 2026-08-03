@@ -11,7 +11,8 @@ namespace Euterpe.Tests.Core.Extensions;
 
 public sealed partial class CoreServiceExtensionsTest
 {
-    private static ServiceProvider BuildModsPipelineProvider(
+    private static ServiceProvider BuildRefitPipelineProvider(
+        string clientName,
         IAuthService authService,
         MockHttpHandler primary,
         INotificationService? notificationService = null)
@@ -22,7 +23,7 @@ public sealed partial class CoreServiceExtensionsTest
         services.AddSingleton(authService);
         services.AddSingleton(notificationService ?? INotificationService.Mock());
         // Refit configures a per-name primary handler, so reconfigure the mock after registration.
-        services.AddHttpClient(nameof(EuterpeApi.Mods)).ConfigurePrimaryHttpMessageHandler(() => primary);
+        services.AddHttpClient(clientName).ConfigurePrimaryHttpMessageHandler(() => primary);
         return services.BuildServiceProvider();
     }
 
@@ -82,7 +83,7 @@ public sealed partial class CoreServiceExtensionsTest
         var manifest = primary.OnGet("/api/mods/app-manifest");
         manifest.Respond(HttpStatusCode.Unauthorized);
         manifest.RespondWithJson("[]");
-        await using var provider = BuildModsPipelineProvider(auth, primary);
+        await using var provider = BuildRefitPipelineProvider(nameof(EuterpeApi.Mods), auth, primary);
 
         var mods = await provider.GetRequiredService<IEuterpeModClient>().GetModManifestAsync();
 
@@ -109,7 +110,7 @@ public sealed partial class CoreServiceExtensionsTest
         var manifest = primary.OnGet("/api/mods/app-manifest");
         manifest.Respond(HttpStatusCode.InternalServerError);
         manifest.RespondWithJson("[]");
-        await using var provider = BuildModsPipelineProvider(auth, primary, notification);
+        await using var provider = BuildRefitPipelineProvider(nameof(EuterpeApi.Mods), auth, primary, notification);
 
         var mods = await provider.GetRequiredService<IEuterpeModClient>().GetModManifestAsync();
 
