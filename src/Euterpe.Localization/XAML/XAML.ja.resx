@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>リセット</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>選択</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>{0} 件選択中</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>共有できるのはオンライン譜面のみです。一度に最大 100 件まで共有できます</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>並べ替え</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Euterpe セットアップ中</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>インポートをキャンセルしました</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>インポートに失敗しました</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>共有コードをインポート</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>無効な共有コードです</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>ここに共有コードを貼り付けてください</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>譜面 {0} 件</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>譜面：追加 {0} 件 · 登録済み {1} 件 · 失敗 {2} 件</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>インポートを開始</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>このコードは {0} 用です。先にそのゲームに切り替えてください。</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>共有</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>ブラウザでログインして承認してください</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>安定版</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>新しいバージョンの準備ができました。自動的にインストールされます。</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>更新の準備が整うと、Euterpe は自動的に再起動します。</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>更新をダウンロード中…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>対象バージョン</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Euterpe を更新中</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>ロールとタスクを選んで始めましょう</value>

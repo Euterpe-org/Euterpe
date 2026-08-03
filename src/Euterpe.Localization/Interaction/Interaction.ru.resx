@@ -43,6 +43,9 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="MessageBox_Content_Chart_BulkDelete_Confirm" xml:space="preserve">
+    <value>Удалить выбранные чарты ({0})?</value>
+  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Выберите исполняемый файл Steam</value>
   </data>
@@ -158,6 +161,12 @@
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Не удалось воспроизвести аудио</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Partial" xml:space="preserve">
+    <value>Удалено чартов: {0}, не удалось: {1}</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Success" xml:space="preserve">
+    <value>Удалено чартов: {0}</value>
   </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>Не удалось скачать чарт {0}</value>
@@ -308,6 +317,9 @@
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>Сервер временно недоступен. Пожалуйста, повторите попытку через некоторое время.</value>
+  </data>
+  <data name="Notification_Content_Share_Copy_Success" xml:space="preserve">
+    <value>Код общего доступа скопирован</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Ошибка</value>

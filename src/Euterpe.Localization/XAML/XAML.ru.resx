@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>Сбросить</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>Выбрать</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>Выбрано: {0}</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>Можно делиться только онлайн-чартами, не более 100 за раз</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>Сортировать по</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Настройка Euterpe</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>Импорт отменён</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>Не удалось импортировать</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>Импортировать код общего доступа</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>Недопустимый код общего доступа</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>Вставьте сюда код общего доступа</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>Чартов: {0}</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>Чарты: {0} добавлено · {1} уже есть · {2} не удалось.</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>Начать импорт</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>Этот код предназначен для {0}. Сначала переключитесь на эту игру.</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>Поделиться</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>Войдите и авторизуйтесь в браузере</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>Стабильный</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>Новая версия готова и будет установлена автоматически.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>Euterpe автоматически перезапустится, когда обновление будет готово.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>Скачивание обновления…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>Целевая версия</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Обновление Euterpe</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Выберите свою роль и задачи для начала</value>

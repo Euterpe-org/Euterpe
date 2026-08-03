@@ -139,6 +139,15 @@
   <data name="ChartManage_Reset" xml:space="preserve">
     <value>Réinitialiser</value>
   </data>
+  <data name="ChartManage_Select" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="ChartManage_SelectedCount" xml:space="preserve">
+    <value>{0} sélectionnés</value>
+  </data>
+  <data name="ChartManage_ShareHint" xml:space="preserve">
+    <value>Seuls les charts en ligne peuvent être partagés, jusqu'à 100 à la fois</value>
+  </data>
   <data name="ChartManage_SortBy" xml:space="preserve">
     <value>Trier par</value>
   </data>
@@ -712,6 +721,39 @@
   <data name="Setup_Title_SettingUp" xml:space="preserve">
     <value>Configuration d'Euterpe</value>
   </data>
+  <data name="Share_Import_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Share_Import_Canceled" xml:space="preserve">
+    <value>Importation annulée</value>
+  </data>
+  <data name="Share_Import_Failed" xml:space="preserve">
+    <value>Échec de l'importation</value>
+  </data>
+  <data name="Share_Import_Header" xml:space="preserve">
+    <value>Importer un code de partage</value>
+  </data>
+  <data name="Share_Import_Invalid" xml:space="preserve">
+    <value>Code de partage non valide</value>
+  </data>
+  <data name="Share_Import_Placeholder" xml:space="preserve">
+    <value>Collez un code de partage ici</value>
+  </data>
+  <data name="Share_Import_Preview" xml:space="preserve">
+    <value>{0} charts</value>
+  </data>
+  <data name="Share_Import_Result" xml:space="preserve">
+    <value>Charts : {0} ajoutés · {1} déjà présents · {2} échecs.</value>
+  </data>
+  <data name="Share_Import_Start" xml:space="preserve">
+    <value>Démarrer l'importation</value>
+  </data>
+  <data name="Share_Import_WrongGame" xml:space="preserve">
+    <value>Ce code est destiné à {0}. Passez d'abord à ce jeu.</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>Partager</value>
+  </data>
   <data name="Splash_LoginPrompt" xml:space="preserve">
     <value>Veuillez vous connecter et autoriser dans le navigateur</value>
   </data>
@@ -741,6 +783,21 @@
   </data>
   <data name="UpdateChannel_Stable" xml:space="preserve">
     <value>Stable</value>
+  </data>
+  <data name="UpdateDialog_Description" xml:space="preserve">
+    <value>Une nouvelle version est prête et sera installée automatiquement.</value>
+  </data>
+  <data name="UpdateDialog_RestartHint" xml:space="preserve">
+    <value>Euterpe redémarrera automatiquement lorsque la mise à jour sera prête.</value>
+  </data>
+  <data name="UpdateDialog_State_Downloading" xml:space="preserve">
+    <value>Téléchargement de la mise à jour…</value>
+  </data>
+  <data name="UpdateDialog_TargetVersion" xml:space="preserve">
+    <value>Version cible</value>
+  </data>
+  <data name="UpdateDialog_Title" xml:space="preserve">
+    <value>Mise à jour d'Euterpe</value>
   </data>
   <data name="Wizard_Description_Welcome" xml:space="preserve">
     <value>Choisissez votre rôle et vos tâches pour commencer</value>

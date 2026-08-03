@@ -43,6 +43,9 @@
   <data name="MessageBox_Button_Yes" xml:space="preserve">
     <value>Da</value>
   </data>
+  <data name="MessageBox_Content_Chart_BulkDelete_Confirm" xml:space="preserve">
+    <value>Izbrisati {0} odabranih chartova?</value>
+  </data>
   <data name="MessageBox_Content_ChooseSteamExec" xml:space="preserve">
     <value>Odaberi izvršnu datoteku Steama</value>
   </data>
@@ -158,6 +161,12 @@
   </data>
   <data name="Notification_Content_Audio_Play_Failed" xml:space="preserve">
     <value>Reprodukcija zvuka nije uspjela</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Partial" xml:space="preserve">
+    <value>Izbrisano chartova: {0}, neuspjelo: {1}</value>
+  </data>
+  <data name="Notification_Content_Chart_BulkDelete_Success" xml:space="preserve">
+    <value>Izbrisano chartova: {0}</value>
   </data>
   <data name="Notification_Content_Chart_Download_Failed" xml:space="preserve">
     <value>Preuzimanje charta {0} nije uspjelo</value>
@@ -308,6 +317,9 @@
   </data>
   <data name="Notification_Content_Server_Error" xml:space="preserve">
     <value>Poslužitelj je privremeno nedostupan. Pokušajte ponovno za trenutak.</value>
+  </data>
+  <data name="Notification_Content_Share_Copy_Success" xml:space="preserve">
+    <value>Kod za dijeljenje kopiran</value>
   </data>
   <data name="Title_Error" xml:space="preserve">
     <value>Greška</value>
