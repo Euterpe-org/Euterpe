@@ -3,7 +3,7 @@ using Avalonia.Platform.Storage;
 namespace Euterpe.Core;
 
 [SupportedOSPlatform(nameof(OSPlatform.Windows))]
-internal sealed class WindowsLauncher : IPlatformLauncher
+internal sealed partial class WindowsLauncher : IPlatformLauncher
 {
     public async Task OpenFileAsync(string filePath)
     {
@@ -23,17 +23,16 @@ internal sealed class WindowsLauncher : IPlatformLauncher
         Logger.LogInformation("Open uri: {Uri}", uri);
     }
 
-    public Task RevealFileAsync(string filePath)
+    public async Task RevealFileAsync(string filePath)
     {
-        Process.Start(
-            new ProcessStartInfo("explorer.exe", $"/select, {filePath}")
-            {
-                UseShellExecute = false,
-                CreateNoWindow = true
-            }
-        );
-        Logger.LogInformation("Reveal file: {FilePath}", filePath);
-        return Task.CompletedTask;
+        if (TryRevealFile(filePath))
+        {
+            Logger.LogInformation("Reveal file: {FilePath}", filePath);
+            return;
+        }
+
+        var folderPath = Path.GetDirectoryName(filePath)!;
+        await OpenFolderAsync(folderPath).ConfigureAwait(false);
     }
 
     #region Injections

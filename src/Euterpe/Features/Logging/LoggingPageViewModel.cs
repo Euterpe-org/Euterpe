@@ -7,8 +7,8 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
     [
         new DropDownButtonItem(DropDownButton_Open,
         [
-            new DropDownMenuItem(Folder_AppLogs, RevealFileCommand, LogFilePath),
-            new DropDownMenuItem(Folder_GameLogs, OpenFolderCommand, GameConfig.MelonLoaderFolder)
+            new DropDownMenuItem(File_AppLogs, RevealFileCommand, LogFilePath),
+            new DropDownMenuItem(File_GameLogs, OpenGameLogCommand)
         ])
     ];
 
@@ -17,6 +17,23 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
         await base.OnInitializeAsync().ConfigureAwait(false);
 
         Logger.LogInformation("{ViewModel} Initialized", nameof(LoggingPageViewModel));
+    }
+
+    [RelayCommand]
+    private async Task OpenGameLogAsync()
+    {
+        var logPath = GameConfig.LatestLogPath;
+        if (File.Exists(logPath))
+        {
+            await Launcher.RevealFileAsync(logPath).ConfigureAwait(false);
+            return;
+        }
+
+        var folderPath = Directory.Exists(GameConfig.MelonLoaderFolder)
+            ? GameConfig.MelonLoaderFolder
+            : GameConfig.Folder;
+
+        await Launcher.OpenFolderAsync(folderPath).ConfigureAwait(false);
     }
 
     #region Injections
