@@ -328,10 +328,10 @@
   <data name="EpkEditor_Section_Maps" xml:space="preserve">
     <value>Карты</value>
   </data>
-  <data name="Folder_AppLogs" xml:space="preserve">
+  <data name="File_AppLogs" xml:space="preserve">
     <value>Логи приложения</value>
   </data>
-  <data name="Folder_GameLogs" xml:space="preserve">
+  <data name="File_GameLogs" xml:space="preserve">
     <value>Логи игры</value>
   </data>
   <data name="Folder_Mods" xml:space="preserve">
