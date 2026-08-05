@@ -466,10 +466,9 @@
                                                             ClipToBounds="True"
                                                             Height="30"
                                                             Width="30">
-                                                            <Image
+                                                            <e:DifficultyStar
+                                                                Difficulty="{Binding Difficulty}"
                                                                 Height="30"
-                                                                Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
-                                                                Stretch="Uniform"
                                                                 Width="30" />
                                                             <Border
                                                                 Background="#99000000"
