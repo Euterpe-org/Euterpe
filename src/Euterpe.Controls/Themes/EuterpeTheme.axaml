@@ -28,7 +28,7 @@
     <StyleInclude
         Source="/Themes/Controls/CoverImage.axaml" />
     <StyleInclude
-        Source="/Themes/Controls/Difficulty.axaml" />
+        Source="/Themes/Controls/DifficultyStar.axaml" />
     <StyleInclude
         Source="/Themes/Controls/LabeledSection.axaml" />
     <StyleInclude
