@@ -1,0 +1,99 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="https://github.com/Euterpe-org/Euterpe">
+
+    <Styles.Resources>
+
+        <!--  Rounded five-point star, point up, normalised to a 100x100 box  -->
+        <StreamGeometry
+            x:Key="DifficultyStarGeometry">M 43.26,3.67 A 8.02,8.02 0 0 1 56.74,3.67 L 69.27,23.09 A 5.49,5.49 0 0 0 72.28,25.36 L 94.31,32.12 A 8.02,8.02 0 0 1 98.42,44.54 L 84.06,64.07 A 5.49,5.49 0 0 0 83,67.49 L 83.71,91.74 A 8.02,8.02 0 0 1 72.85,99.48 L 51.95,91.56 A 5.49,5.49 0 0 0 48.05,91.56 L 27.15,99.48 A 8.02,8.02 0 0 1 16.29,91.74 L 17,67.49 A 5.49,5.49 0 0 0 15.94,64.07 L 1.58,44.54 A 8.02,8.02 0 0 1 5.69,32.12 L 27.72,25.36 A 5.49,5.49 0 0 0 30.73,23.09 Z</StreamGeometry>
+
+        <!--  Both stops share one offset, making the gradient the artwork's hard 60-degree split  -->
+        <!--  Easy/Hard/Master are the game's own star colours, 1:1. Hidden has no vanilla star: it is the mod's
+              HiddenPalette.Bright, darkened by the ratio its Recolour derives from the Master art it re-tints.  -->
+        <LinearGradientBrush x:Key="DifficultyStarEasyBrush" StartPoint="25%,6.7%" EndPoint="75%,93.3%">
+            <GradientStop Offset="0.5" Color="#6DFD64" />
+            <GradientStop Offset="0.5" Color="#1CB161" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DifficultyStarHardBrush" StartPoint="25%,6.7%" EndPoint="75%,93.3%">
+            <GradientStop Offset="0.5" Color="#00FFFF" />
+            <GradientStop Offset="0.5" Color="#6CA6DC" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DifficultyStarMasterBrush" StartPoint="25%,6.7%" EndPoint="75%,93.3%">
+            <GradientStop Offset="0.5" Color="#FF5BEF" />
+            <GradientStop Offset="0.5" Color="#C435EA" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DifficultyStarHiddenBrush" StartPoint="25%,6.7%" EndPoint="75%,93.3%">
+            <GradientStop Offset="0.5" Color="#A854FF" />
+            <GradientStop Offset="0.5" Color="#7D3EBD" />
+        </LinearGradientBrush>
+
+        <!--  Reached only by a difficulty outside the enum, so an unknown value stays visible instead of vanishing  -->
+        <LinearGradientBrush x:Key="DifficultyStarUnknownBrush" StartPoint="25%,6.7%" EndPoint="75%,93.3%">
+            <GradientStop Offset="0.5" Color="#D4D4D4" />
+            <GradientStop Offset="0.5" Color="#A9A9A9" />
+        </LinearGradientBrush>
+
+    </Styles.Resources>
+
+    <Design.PreviewWith>
+        <Border
+            Padding="20">
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="10">
+                <e:DifficultyStar
+                    Difficulty="Easy"
+                    Height="48"
+                    Width="48" />
+                <e:DifficultyStar
+                    Difficulty="Hard"
+                    Height="48"
+                    Width="48" />
+                <e:DifficultyStar
+                    Difficulty="Master"
+                    Height="48"
+                    Width="48" />
+                <e:DifficultyStar
+                    Difficulty="Hidden"
+                    Height="48"
+                    Width="48" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Style
+        Selector="e|DifficultyStar">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Path
+                    Data="{StaticResource DifficultyStarGeometry}"
+                    Stretch="Uniform" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style
+        Selector="e|DifficultyStar /template/ Path">
+        <Setter Property="Fill" Value="{StaticResource DifficultyStarUnknownBrush}" />
+    </Style>
+    <Style
+        Selector="e|DifficultyStar:easy /template/ Path">
+        <Setter Property="Fill" Value="{StaticResource DifficultyStarEasyBrush}" />
+    </Style>
+    <Style
+        Selector="e|DifficultyStar:hard /template/ Path">
+        <Setter Property="Fill" Value="{StaticResource DifficultyStarHardBrush}" />
+    </Style>
+    <Style
+        Selector="e|DifficultyStar:master /template/ Path">
+        <Setter Property="Fill" Value="{StaticResource DifficultyStarMasterBrush}" />
+    </Style>
+    <Style
+        Selector="e|DifficultyStar:hidden /template/ Path">
+        <Setter Property="Fill" Value="{StaticResource DifficultyStarHiddenBrush}" />
+    </Style>
+
+</Styles>

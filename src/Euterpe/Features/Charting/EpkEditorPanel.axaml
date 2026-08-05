@@ -1,7 +1,6 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="using:Euterpe.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:e="https://github.com/Euterpe-org/Euterpe"
     xmlns:loc="https://github.com/Euterpe-org/Euterpe/Localization"
@@ -453,10 +452,10 @@
                                             x:DataType="vm:DifficultyEditViewModel">
                                             <Grid
                                                 ColumnDefinitions="36,Auto,64,*">
-                                                <Image
+                                                <e:DifficultyStar
                                                     Grid.Column="0"
+                                                    Difficulty="{Binding Difficulty}"
                                                     Height="28"
-                                                    Source="{Binding Difficulty, Converter={x:Static converters:FuncValueConverters.DifficultyIconConverter}}"
                                                     VerticalAlignment="Center"
                                                     Width="28" />
                                                 <TextBlock
