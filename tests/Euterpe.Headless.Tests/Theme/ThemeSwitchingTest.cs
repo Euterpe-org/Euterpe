@@ -8,16 +8,18 @@ namespace Euterpe.Headless.Tests.Theme;
 public sealed class ThemeSwitchingTest : HeadlessTest
 {
     [Test]
-    public Task FindResource_Dark_ResolvesBackgroundImage() => RunOnUI(async () =>
+    public Task FindResource_DarkVsLight_HomeBackgroundIsOneBitmapDressedPerTheme() => RunOnUI(async () =>
     {
         var window = NewWindow();
         try
         {
-            var resource = window.FindResource(ThemeVariant.Dark, "BackgroundImage");
+            var bitmap = window.FindResource(ThemeVariant.Dark, "BackgroundImage");
 
             using var _ = Assert.Multiple();
-            await Assert.That(resource).IsNotNull();
-            await Assert.That(resource).IsTypeOf<Bitmap>();
+            await Assert.That(bitmap).IsTypeOf<Bitmap>();
+            await Assert.That(window.FindResource(ThemeVariant.Light, "BackgroundImage")).IsSameReferenceAs(bitmap);
+            await Assert.That(window.FindResource(ThemeVariant.Dark, "HomeBackgroundOpacity"))
+                .IsNotEqualTo(window.FindResource(ThemeVariant.Light, "HomeBackgroundOpacity"));
         }
         finally
         {
@@ -26,16 +28,17 @@ public sealed class ThemeSwitchingTest : HeadlessTest
     });
 
     [Test]
-    public Task FindResource_Light_ResolvesBackgroundImage() => RunOnUI(async () =>
+    public Task FindResource_HomeBackgroundMask_FadesOutAtBothEnds() => RunOnUI(async () =>
     {
         var window = NewWindow();
         try
         {
-            var resource = window.FindResource(ThemeVariant.Light, "BackgroundImage");
+            var mask = (LinearGradientBrush)window.FindResource(ThemeVariant.Dark, "HomeBackgroundMask")!;
 
             using var _ = Assert.Multiple();
-            await Assert.That(resource).IsNotNull();
-            await Assert.That(resource).IsTypeOf<Bitmap>();
+            await Assert.That(mask.GradientStops[0].Color.A).IsLessThan<byte>(32);
+            await Assert.That(mask.GradientStops[^1].Color.A).IsLessThan<byte>(32);
+            await Assert.That(mask.GradientStops.Select(stop => stop.Color.A).Max()).IsEqualTo<byte>(255);
         }
         finally
         {
@@ -44,15 +47,17 @@ public sealed class ThemeSwitchingTest : HeadlessTest
     });
 
     [Test]
-    public Task FindResource_DarkVsLight_BackgroundImagesDiffer() => RunOnUI(async () =>
+    public Task FindResource_DarkVsLight_TitleEdgePaintsOnLightOnly() => RunOnUI(async () =>
     {
         var window = NewWindow();
         try
         {
-            var darkBg = window.FindResource(ThemeVariant.Dark, "BackgroundImage");
-            var lightBg = window.FindResource(ThemeVariant.Light, "BackgroundImage");
+            var dark = (DropShadowEffect)window.FindResource(ThemeVariant.Dark, "HomeTitleEffect")!;
+            var light = (DropShadowEffect)window.FindResource(ThemeVariant.Light, "HomeTitleEffect")!;
 
-            await Assert.That(darkBg).IsNotSameReferenceAs(lightBg);
+            using var _ = Assert.Multiple();
+            await Assert.That(dark.Color.A).IsEqualTo<byte>(0);
+            await Assert.That(light.Color.A).IsEqualTo<byte>(255);
         }
         finally
         {
