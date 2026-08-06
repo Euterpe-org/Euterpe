@@ -140,11 +140,13 @@
                 DockPanel.Dock="Bottom"
                 Margin="8,12,8,12"
                 VerticalAlignment="Bottom">
-                <Image
-                    Height="20"
+                <TextBlock
+                    FontSize="17"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource SemiColorText1}"
                     HorizontalAlignment="Center"
-                    Margin="0,0,0,2"
-                    Source="{DynamicResource AppTitleImage}" />
+                    Margin="0,0,0,3"
+                    Text="{x:Static constants:BuildInfo.AppName}" />
                 <Label
                     Classes="Blue"
                     Content="{x:Static constants:BuildInfo.DisplayVersion}"
