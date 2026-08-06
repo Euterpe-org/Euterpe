@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Versi Game yang Didukung</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>Duplikat</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>File mod duplikat terdeteksi: {0}. Hapus semua file ini kecuali satu.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Tidak Kompatibel</value>
   </data>

@@ -475,6 +475,9 @@
   <data name="ModState_Duplicated" xml:space="preserve">
     <value>Duplicated</value>
   </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>Duplicate mod files detected: {0}. Delete all but one of these files.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Incompatible</value>
   </data>

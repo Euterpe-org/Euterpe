@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Támogatott játékverzió</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>Duplikált</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>Duplikált modfájlok észlelve: {0}. Egy kivételével törölje ezeket a fájlokat.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Nem kompatibilis</value>
   </data>

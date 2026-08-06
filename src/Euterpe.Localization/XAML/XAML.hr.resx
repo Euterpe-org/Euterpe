@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Podržana verzija igre</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>Dupliciran</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>Otkrivene su duplicirane datoteke moda: {0}. Izbrišite sve te datoteke osim jedne.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Nekompatibilan</value>
   </data>

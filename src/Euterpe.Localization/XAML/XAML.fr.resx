@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Version du jeu compatible</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>En double</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>Des fichiers de mod en double ont été détectés : {0}. Supprimez tous ces fichiers sauf un.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Incompatible</value>
   </data>

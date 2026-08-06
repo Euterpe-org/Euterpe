@@ -32,26 +32,29 @@ public sealed partial class ModDto : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsInstallable))]
     [NotifyPropertyChangedFor(nameof(IsReinstallable))]
-    [NotifyPropertyChangedFor(nameof(IncompatibleReasonDisplay))]
+    [NotifyPropertyChangedFor(nameof(ReasonDisplay))]
     public partial ModState State { get; set; }
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IncompatibleReasonDisplay))]
+    [NotifyPropertyChangedFor(nameof(ReasonDisplay))]
     public partial ModIncompatibleReason IncompatibleReason { get; set; }
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IncompatibleReasonDisplay))]
+    [NotifyPropertyChangedFor(nameof(ReasonDisplay))]
     public partial string[] ConflictingModNames { get; set; } = [];
 
-    public string? IncompatibleReasonDisplay => State is not ModState.Incompatible
-        ? null
-        : IncompatibleReason switch
+    public string? ReasonDisplay => State switch
+    {
+        ModState.Duplicated => string.Format(XAML.ModState_Duplicated_Reason, string.Join(", ", DuplicatedModPaths)),
+        ModState.Incompatible => IncompatibleReason switch
         {
             ModIncompatibleReason.MelonLoader => string.Format(XAML.ModIncompatibleReason_MelonLoader, MelonVersion),
             ModIncompatibleReason.GameVersion => string.Format(XAML.ModIncompatibleReason_GameVersion, GameVersion),
             ModIncompatibleReason.ConflictingMod => string.Format(XAML.ModIncompatibleReason_ConflictingMod, string.Join(", ", ConflictingModNames)),
             _ => null
-        };
+        },
+        _ => null
+    };
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLocal))]
@@ -80,7 +83,9 @@ public sealed partial class ModDto : ObservableObject
     [ObservableProperty]
     public partial bool IsValidConfigFile { get; set; }
 
-    public string[] DuplicatedModPaths { get; set; } = [];
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ReasonDisplay))]
+    public partial string[] DuplicatedModPaths { get; set; } = [];
 
     // GitHub Repo
     public string RepoPageUrl => GitHubBaseUrl + Repository;

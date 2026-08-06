@@ -44,9 +44,16 @@
             <Setter Property="Margin" Value="0,0,0,16" />
         </Style>
         <Style
-            Selector="^.IncompatibleReason">
-            <Setter Property="Foreground" Value="{DynamicResource SemiColorDanger}" />
+            Selector="^.StateReason">
             <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style
+            Selector="^.StateReason.Danger">
+            <Setter Property="Foreground" Value="{DynamicResource SemiColorDanger}" />
+        </Style>
+        <Style
+            Selector="^.StateReason.Warning">
+            <Setter Property="Foreground" Value="{DynamicResource SemiColorWarning}" />
         </Style>
     </Style>
 

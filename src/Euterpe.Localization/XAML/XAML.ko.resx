@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>지원 게임 버전</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>중복</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>중복된 모드 파일이 감지되었습니다: {0}. 하나만 남기고 나머지 파일을 삭제하세요.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>호환 불가</value>
   </data>

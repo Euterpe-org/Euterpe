@@ -175,7 +175,7 @@
                                                     Classes.Purple="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Newer}, Mode=OneWay}"
                                                     Classes.Red="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Incompatible}, Mode=OneWay}"
                                                     Classes.Yellow="{Binding State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Modified}, Mode=OneWay}"
-                                                    ToolTip.Tip="{Binding IncompatibleReasonDisplay, Mode=OneWay}">
+                                                    ToolTip.Tip="{Binding ReasonDisplay, Mode=OneWay}">
                                                     <Label.IsVisible>
                                                         <MultiBinding
                                                             Converter="{x:Static BoolConverters.And}">
@@ -448,14 +448,16 @@
                                 IsVisible="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.NotEqual}, ConverterParameter={x:Static mods:ModState.Normal}, Mode=OneWay}" />
                         </StackPanel>
 
-                        <!--  Incompatible Reason  -->
+                        <!--  Mod State Reason  -->
                         <TextBlock
                             Grid.Row="2"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
-                            Classes="IncompatibleReason"
-                            IsVisible="{Binding SelectedMod.IncompatibleReasonDisplay, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
-                            Text="{Binding SelectedMod.IncompatibleReasonDisplay, Mode=OneWay}" />
+                            Classes="StateReason"
+                            Classes.Danger="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Incompatible}, Mode=OneWay}"
+                            Classes.Warning="{Binding SelectedMod.State, Converter={x:Static ObjectConverters.Equal}, ConverterParameter={x:Static mods:ModState.Duplicated}, Mode=OneWay}"
+                            IsVisible="{Binding SelectedMod.ReasonDisplay, Converter={x:Static StringConverters.IsNotNullOrEmpty}, Mode=OneWay}"
+                            Text="{Binding SelectedMod.ReasonDisplay, Mode=OneWay}" />
 
                         <!--  Description  -->
                         <TextBlock
