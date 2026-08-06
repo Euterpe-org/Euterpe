@@ -22,4 +22,8 @@
         <ProjectReference Include="..\..\src\Euterpe.Core\Euterpe.Core.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <None Update="Core\Audio\Codecs\Fixtures\Tone.ogg" CopyToOutputDirectory="PreserveNewest" TargetPath="Fixtures\Tone.ogg"/>
+    </ItemGroup>
+
 </Project>

@@ -11,12 +11,12 @@
         <PackageReference Include="Microsoft.Extensions.Http.Resilience"/>
         <PackageReference Include="NLog"/>
         <PackageReference Include="NLog.Extensions.Logging"/>
+        <PackageReference Include="NVorbis"/>
         <PackageReference Include="R3"/>
         <PackageReference Include="Refit"/>
         <PackageReference Include="Refit.HttpClientFactory"/>
         <PackageReference Include="Semver"/>
         <PackageReference Include="SoundFlow"/>
-        <PackageReference Include="SoundFlow.Codecs.FFMpeg"/>
         <PackageReference Include="System.Security.Cryptography.ProtectedData"/>
         <PackageReference Include="Tmds.DBus.Generator"/>
         <PackageReference Include="Tmds.DBus.Protocol"/>

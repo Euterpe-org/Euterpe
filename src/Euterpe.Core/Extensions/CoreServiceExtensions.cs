@@ -1,3 +1,4 @@
+using Euterpe.Core.Audio.Codecs;
 using Euterpe.Core.Http.Handlers;
 using Euterpe.Core.Http.Listeners;
 using Euterpe.Core.Http.Resilience;
@@ -5,7 +6,6 @@ using NLog.Extensions.Logging;
 using Refit;
 using SoundFlow.Abstracts;
 using SoundFlow.Backends.MiniAudio;
-using SoundFlow.Codecs.FFMpeg;
 using Velopack.Sources;
 
 namespace Euterpe.Core.Extensions;
@@ -96,7 +96,7 @@ public static partial class CoreServiceExtensions
             builder.Register<AudioEngine>(_ =>
             {
                 var engine = new MiniAudioEngine();
-                engine.RegisterCodecFactory(new FFmpegCodecFactory());
+                engine.RegisterCodecFactory(new VorbisCodecFactory());
                 return engine;
             }).SingleInstance();
 
