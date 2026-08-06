@@ -25,6 +25,11 @@
             Source="{DynamicResource BackgroundImage}"
             Stretch="UniformToFill" />
 
+        <!--  Theme wash over the background, heaviest behind the title  -->
+        <Border
+            Background="{DynamicResource HomeScrimBrush}"
+            IsHitTestVisible="False" />
+
         <!--  Title Image  -->
         <Button
             Classes="TitleButton"
@@ -33,6 +38,7 @@
             Margin="60,70"
             VerticalAlignment="Top">
             <Image
+                Effect="{DynamicResource HomeTitleEffect}"
                 Height="140"
                 Source="{DynamicResource TitleImage}" />
         </Button>

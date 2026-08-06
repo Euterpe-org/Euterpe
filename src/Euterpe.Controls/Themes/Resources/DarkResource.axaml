@@ -7,14 +7,21 @@
         x:Key="AppTitleImage">
         avares://Euterpe/Assets/Title-Dark.webp
     </Bitmap>
-    <Bitmap
-        x:Key="BackgroundImage">
-        avares://Euterpe/Assets/Background-Dark.webp
-    </Bitmap>
-    <Bitmap
-        x:Key="TitleImage">
-        avares://Euterpe/Assets/MuseDash_Title_Dark.webp
-    </Bitmap>
+
+    <!--  Home Page  -->
+    <!--  Sits over the shared background and stands in for what used to be a second, pre-darkened copy of it  -->
+    <LinearGradientBrush x:Key="HomeScrimBrush" StartPoint="0%,0%" EndPoint="100%,0%">
+        <GradientStop Offset="0" Color="#CC16181C" />
+        <GradientStop Offset="1" Color="#7316181C" />
+    </LinearGradientBrush>
+    <!--  The title is a neon logo drawn for dark ground and already clears 9.9:1 on this scrim, so its edge is
+          switched off rather than removed: the light theme needs one, and both themes read the same key.  -->
+    <DropShadowEffect
+        x:Key="HomeTitleEffect"
+        BlurRadius="0"
+        Color="Transparent"
+        OffsetX="0"
+        OffsetY="0" />
 
     <!--  General Colors  -->
     <Color

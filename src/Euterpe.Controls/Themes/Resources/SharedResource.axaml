@@ -1,3 +1,15 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Theme-neutral bitmaps: the home page dresses these per theme with HomeScrimBrush and HomeTitleEffect  -->
+    <Bitmap
+        x:Key="BackgroundImage">
+        avares://Euterpe/Assets/Background.webp
+    </Bitmap>
+    <Bitmap
+        x:Key="TitleImage">
+        avares://Euterpe/Assets/MuseDash_Title.webp
+    </Bitmap>
+
+</ResourceDictionary>

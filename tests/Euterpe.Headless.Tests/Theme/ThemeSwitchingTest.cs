@@ -44,7 +44,7 @@ public sealed class ThemeSwitchingTest : HeadlessTest
     });
 
     [Test]
-    public Task FindResource_DarkVsLight_BackgroundImagesDiffer() => RunOnUI(async () =>
+    public Task FindResource_DarkVsLight_BackgroundImageIsShared() => RunOnUI(async () =>
     {
         var window = NewWindow();
         try
@@ -52,7 +52,48 @@ public sealed class ThemeSwitchingTest : HeadlessTest
             var darkBg = window.FindResource(ThemeVariant.Dark, "BackgroundImage");
             var lightBg = window.FindResource(ThemeVariant.Light, "BackgroundImage");
 
-            await Assert.That(darkBg).IsNotSameReferenceAs(lightBg);
+            await Assert.That(darkBg).IsSameReferenceAs(lightBg);
+        }
+        finally
+        {
+            window.Close();
+        }
+    });
+
+    [Test]
+    public Task FindResource_DarkVsLight_HomeScrimBrushesDiffer() => RunOnUI(async () =>
+    {
+        var window = NewWindow();
+        try
+        {
+            var darkScrim = window.FindResource(ThemeVariant.Dark, "HomeScrimBrush");
+            var lightScrim = window.FindResource(ThemeVariant.Light, "HomeScrimBrush");
+
+            using var _ = Assert.Multiple();
+            await Assert.That(darkScrim).IsTypeOf<LinearGradientBrush>();
+            await Assert.That(lightScrim).IsTypeOf<LinearGradientBrush>();
+            await Assert.That(darkScrim).IsNotSameReferenceAs(lightScrim);
+        }
+        finally
+        {
+            window.Close();
+        }
+    });
+
+    [Test]
+    public Task FindResource_DarkVsLight_TitleEdgePaintsOnLightOnly() => RunOnUI(async () =>
+    {
+        var window = NewWindow();
+        try
+        {
+            var dark = window.FindResource(ThemeVariant.Dark, "HomeTitleEffect") as DropShadowEffect;
+            var light = window.FindResource(ThemeVariant.Light, "HomeTitleEffect") as DropShadowEffect;
+
+            using var _ = Assert.Multiple();
+            await Assert.That(dark).IsNotNull();
+            await Assert.That(light).IsNotNull();
+            await Assert.That(dark!.Color.A).IsEqualTo<byte>(0);
+            await Assert.That(light!.Color.A).IsEqualTo<byte>(255);
         }
         finally
         {

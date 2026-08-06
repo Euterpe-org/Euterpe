@@ -7,14 +7,20 @@
         x:Key="AppTitleImage">
         avares://Euterpe/Assets/Title-Light.webp
     </Bitmap>
-    <Bitmap
-        x:Key="BackgroundImage">
-        avares://Euterpe/Assets/Background-Light.webp
-    </Bitmap>
-    <Bitmap
-        x:Key="TitleImage">
-        avares://Euterpe/Assets/MuseDash_Title_Light.webp
-    </Bitmap>
+
+    <!--  Home Page  -->
+    <!--  Sits over the shared background and stands in for what used to be a second, pre-lightened copy of it  -->
+    <LinearGradientBrush x:Key="HomeScrimBrush" StartPoint="0%,0%" EndPoint="100%,0%">
+        <GradientStop Offset="0" Color="#D9F8FAFB" />
+        <GradientStop Offset="1" Color="#8CF8FAFB" />
+    </LinearGradientBrush>
+    <!--  The title's cyan half only reaches 1.75:1 on this ground, so each glyph is given its own dark edge  -->
+    <DropShadowEffect
+        x:Key="HomeTitleEffect"
+        BlurRadius="2"
+        Color="Black"
+        OffsetX="0"
+        OffsetY="0" />
 
     <!--  General Colors  -->
     <Color
