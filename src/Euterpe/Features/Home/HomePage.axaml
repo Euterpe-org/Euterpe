@@ -22,6 +22,8 @@
     <Panel>
         <!--  Background Image  -->
         <Image
+            Opacity="{DynamicResource HomeBackgroundOpacity}"
+            OpacityMask="{DynamicResource HomeBackgroundMask}"
             Source="{DynamicResource BackgroundImage}"
             Stretch="UniformToFill" />
 
@@ -29,8 +31,10 @@
         <Button
             Classes="TitleButton"
             Click="TitleButton_Click"
+            Effect="{DynamicResource HomeTitleEffect}"
             HorizontalAlignment="Left"
-            Margin="60,70"
+            Margin="44,54"
+            Padding="16"
             VerticalAlignment="Top">
             <Image
                 Height="140"

@@ -7,14 +7,18 @@
         x:Key="AppTitleImage">
         avares://Euterpe/Assets/Title-Light.webp
     </Bitmap>
-    <Bitmap
-        x:Key="BackgroundImage">
-        avares://Euterpe/Assets/Background-Light.webp
-    </Bitmap>
-    <Bitmap
-        x:Key="TitleImage">
-        avares://Euterpe/Assets/MuseDash_Title_Light.webp
-    </Bitmap>
+
+    <!--  Home Page  -->
+    <x:Double
+        x:Key="HomeBackgroundOpacity">
+        0.65
+    </x:Double>
+    <DropShadowEffect
+        x:Key="HomeTitleEffect"
+        Color="#1A365D"
+        BlurRadius="7"
+        OffsetX="0"
+        OffsetY="3" />
 
     <!--  General Colors  -->
     <Color
