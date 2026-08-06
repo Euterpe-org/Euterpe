@@ -7,6 +7,10 @@
         Selector="Label">
         <Style
             Selector="^.Orange">
+            <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Duplicated}}" />
+        </Style>
+        <Style
+            Selector="^.Yellow">
             <Setter Property="Content" Value="{Localize {x:Static loc:XAMLLiteral.ModState_Modified}}" />
         </Style>
         <Style
