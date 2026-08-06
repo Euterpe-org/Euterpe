@@ -181,11 +181,9 @@
                 </Border>
 
                 <!--  Contributors  -->
-                <u:LoadingContainer
-                    IsLoading="{Binding !AllContributorsLoaded, Mode=OneWay}"
-                    LoadingMessage="{Localize {x:Static loc:XAMLLiteral.LoadingMessage}}"
-                    VerticalAlignment="Stretch"
-                    VerticalContentAlignment="Top">
+                <Panel>
+                    <e:ContributorSkeleton
+                        IsVisible="{Binding !AllContributorsLoaded, Mode=OneWay}" />
                     <ItemsControl
                         ItemsSource="{Binding ContributorGroups, Mode=OneWay}">
 
@@ -226,7 +224,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </u:LoadingContainer>
+                </Panel>
             </StackPanel>
         </DockPanel>
     </ScrollViewer>
