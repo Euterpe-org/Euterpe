@@ -2,12 +2,6 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Bitmaps  -->
-    <Bitmap
-        x:Key="AppTitleImage">
-        avares://Euterpe/Assets/Title-Light.webp
-    </Bitmap>
-
     <!--  Home Page  -->
     <x:Double
         x:Key="HomeBackgroundOpacity">
