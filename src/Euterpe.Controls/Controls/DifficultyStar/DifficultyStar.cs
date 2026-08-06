@@ -7,22 +7,19 @@ public sealed class DifficultyStar : TemplatedControl
     public static readonly StyledProperty<ChartDifficulty> DifficultyProperty =
         AvaloniaProperty.Register<DifficultyStar, ChartDifficulty>(nameof(Difficulty), ChartDifficulty.Easy);
 
-    public DifficultyStar() => UpdatePseudoClasses(Difficulty);
-
     public ChartDifficulty Difficulty
     {
         get => GetValue(DifficultyProperty);
         set => SetValue(DifficultyProperty, value);
     }
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    static DifficultyStar()
     {
-        base.OnPropertyChanged(change);
-        if (change.Property == DifficultyProperty)
-        {
-            UpdatePseudoClasses(change.GetNewValue<ChartDifficulty>());
-        }
+        DifficultyProperty.Changed.AddClassHandler<DifficultyStar>(static (star, change) =>
+            star.UpdatePseudoClasses(change.GetNewValue<ChartDifficulty>()));
     }
+
+    public DifficultyStar() => UpdatePseudoClasses(Difficulty);
 
     private void UpdatePseudoClasses(ChartDifficulty difficulty)
     {
