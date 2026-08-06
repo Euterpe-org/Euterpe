@@ -105,7 +105,6 @@ public static partial class CoreServiceExtensions
             builder.RegisterType<AppSettingService>().As<IAppSettingService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<ArchiveService>().As<IArchiveService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AudioPlayerService>().As<IAudioPlayerService>().PropertiesAutowired().SingleInstance();
-            builder.RegisterType<AudioConverterService>().As<IAudioConverterService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<AuthService>().As<IAuthService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<CrashLogUploadService>().As<ICrashLogUploadService>().PropertiesAutowired().SingleInstance();
             builder.RegisterType<DialogService>().As<IDialogService>().PropertiesAutowired().SingleInstance();
