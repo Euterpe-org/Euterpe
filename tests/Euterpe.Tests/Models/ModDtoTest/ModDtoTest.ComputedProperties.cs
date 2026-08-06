@@ -1,4 +1,5 @@
 using Euterpe.Contracts.Mods;
+using Euterpe.Localization;
 
 namespace Euterpe.Tests.Models;
 
@@ -65,6 +66,41 @@ public sealed partial class ModDtoTest
         var mod = Create(localFnWithoutExt: isLocal ? "MyMod" : null);
         mod.State = state;
         await Assert.That(mod.IsReinstallable).IsEqualTo(expected);
+    }
+
+    [Test]
+    public async Task ReasonDisplay_Duplicated_ListsDuplicateFiles()
+    {
+        var mod = Create();
+        mod.DuplicatedModPaths = ["MyMod.dll", "MyMod.disabled"];
+        mod.State = ModState.Duplicated;
+
+        await Assert.That(mod.ReasonDisplay).IsEqualTo(string.Format(
+            XAML.ModState_Duplicated_Reason,
+            "MyMod.dll, MyMod.disabled"));
+    }
+
+    [Test]
+    public async Task ReasonDisplay_Incompatible_PreservesIncompatibleReason()
+    {
+        var mod = Create();
+        mod.GameVersion = "5.0.0";
+        mod.IncompatibleReason = ModIncompatibleReason.GameVersion;
+        mod.State = ModState.Incompatible;
+
+        await Assert.That(mod.ReasonDisplay).IsEqualTo(string.Format(XAML.ModIncompatibleReason_GameVersion, "5.0.0"));
+    }
+
+    [Test]
+    public async Task DuplicatedModPaths_ChangeRaisesPropertyChangedForReasonDisplay()
+    {
+        var mod = Create();
+        var changedProperties = new List<string?>();
+        mod.PropertyChanged += (_, args) => changedProperties.Add(args.PropertyName);
+
+        mod.DuplicatedModPaths = ["MyMod.dll", "MyMod.disabled"];
+
+        await Assert.That(changedProperties).Contains(nameof(ModDto.ReasonDisplay));
     }
 
     [Test]

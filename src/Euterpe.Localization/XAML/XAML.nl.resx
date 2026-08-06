@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Ondersteunde spelversie</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>Dubbel</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>Dubbele modbestanden gedetecteerd: {0}. Verwijder al deze bestanden op één na.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Incompatibel</value>
   </data>

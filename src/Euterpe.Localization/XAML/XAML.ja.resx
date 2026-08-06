@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>対応ゲームバージョン</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>重複</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>重複する Mod ファイルが検出されました：{0}。1 つだけ残し、ほかのファイルを削除してください。</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>非互換</value>
   </data>

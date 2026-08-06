@@ -472,6 +472,12 @@
   <data name="ModInfo_SupportedGameVersion" xml:space="preserve">
     <value>Поддерживаемая версия игры</value>
   </data>
+  <data name="ModState_Duplicated" xml:space="preserve">
+    <value>Дубликат</value>
+  </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>Обнаружены дубликаты файлов мода: {0}. Удалите все эти файлы, кроме одного.</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>Несовместим</value>
   </data>

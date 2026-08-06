@@ -475,6 +475,9 @@
   <data name="ModState_Duplicated" xml:space="preserve">
     <value>重複</value>
   </data>
+  <data name="ModState_Duplicated_Reason" xml:space="preserve">
+    <value>偵測到重複的 Mod 檔案：{0}。請刪除多餘檔案，只保留其中一個。</value>
+  </data>
   <data name="ModState_Incompatible" xml:space="preserve">
     <value>不相容</value>
   </data>
