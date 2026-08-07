@@ -33,13 +33,11 @@ internal sealed class VorbisDecoder : ISoundDecoder
         }
 
         var samplesRead = _reader.ReadSamples(samples);
-        if (samplesRead is not 0)
+        if (samplesRead is 0)
         {
-            return samplesRead;
+            _endOfStreamReached = true;
+            EndOfStreamReached?.Invoke(this, EventArgs.Empty);
         }
-
-        _endOfStreamReached = true;
-        EndOfStreamReached?.Invoke(this, EventArgs.Empty);
 
         return samplesRead;
     }
