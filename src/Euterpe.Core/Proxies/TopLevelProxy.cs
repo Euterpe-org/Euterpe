@@ -19,5 +19,25 @@ public sealed class TopLevelProxy
 
     public IStorageProvider StorageProvider => Current.StorageProvider;
     public ILauncher Launcher => Current.Launcher;
-    public IClipboard? Clipboard => Current.Clipboard;
+    public IClipboard Clipboard => Current.Clipboard ?? throw new PlatformNotSupportedException("Clipboard is unavailable.");
+
+    #region Injections
+
+    public required ILogger<TopLevelProxy> Logger { get; init; }
+
+    #endregion Injections
+
+
+    public async Task<string?> TryGetClipboardTextAsync()
+    {
+        try
+        {
+            return await Clipboard.TryGetTextAsync().ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to read the clipboard");
+            return null;
+        }
+    }
 }

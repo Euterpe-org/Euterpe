@@ -36,7 +36,7 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
         try
         {
             var copyText = $"{EnvironmentInfo}{Environment.NewLine}{CrashTime}{Environment.NewLine}{Environment.NewLine}{ExceptionDetails}";
-            await TopLevel.Clipboard!.SetTextAsync(copyText).ConfigureAwait(true);
+            await TopLevel.Clipboard.SetTextAsync(copyText).ConfigureAwait(true);
             await MessageBoxService.SuccessAsync(MessageBox_Content_CrashDialog_CopySuccess).ConfigureAwait(true);
         }
         catch (Exception ex)

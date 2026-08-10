@@ -205,11 +205,6 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         var dialog = new ShareImportDialogService
         {
             DialogService = dialogService,
-            GameSwitcher = new GameSwitcher
-            {
-                Config = new Config(),
-                Logger = NullLogger<GameSwitcher>.Instance
-            },
             ShareImportDialogViewModel = viewModel
         };
         var service = NewService(shareImportDialogService: dialog);
@@ -285,12 +280,11 @@ public sealed class SystemActivationServiceTest : HeadlessTest
             DialogService = IDialogService.Mock(),
             MessageBoxService = IMessageBoxService.Mock(),
             GameShareService = IGameShareService.Mock(),
-            GameSwitcher = new GameSwitcher { Config = new Config(), Logger = NullLogger<GameSwitcher>.Instance },
             Logger = NullLogger<ChartManagePanelViewModel>.Instance,
             ProgressDialogViewModel = new ProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() },
             NotificationService = INotificationService.Mock(),
             ShareImportDialogService = null!,
-            TopLevel = new TopLevelProxy()
+            TopLevel = new TopLevelProxy { Logger = NullLogger<TopLevelProxy>.Instance }
         };
         var service = NewService(logger: logger, chartManageService: charts, chartViewModel: viewModel);
 

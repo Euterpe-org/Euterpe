@@ -7,34 +7,23 @@ namespace Euterpe.Tests.App.ViewModels;
 public sealed class ChartManageItemViewModelTest
 {
     [Test]
-    [Arguments(ChartSource.Online, 13, true)]
-    [Arguments(ChartSource.Online, null, false)]
-    [Arguments(ChartSource.Offline, 13, false)]
-    public async Task CanShare_SourceAndCid_RequiresOnlineChart(ChartSource source, int? cid, bool expected)
-    {
-        var item = new ChartManageItemViewModel(CreateChart(source, cid));
-
-        await Assert.That(item.CanShare).IsEqualTo(expected);
-    }
-
-    [Test]
     public async Task IsSelected_Default_IsFalse()
     {
-        var item = new ChartManageItemViewModel(CreateChart(ChartSource.Online, 13));
+        var item = new ChartManageItemViewModel(CreateChart());
 
         await Assert.That(item.IsSelected).IsFalse();
     }
 
-    private static ChartDto CreateChart(ChartSource source, int? cid) =>
+    private static ChartDto CreateChart() =>
         new()
         {
             FolderPath = "/charts/chart",
             FolderName = "chart",
-            Source = source,
+            Source = ChartSource.Online,
             Manifest = new Manifest
             {
                 Schema = Manifest.CurrentSchema,
-                Cid = cid,
+                Cid = 13,
                 Meta = new ManifestMeta
                 {
                     Name = "Chart",
