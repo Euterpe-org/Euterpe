@@ -193,12 +193,14 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         var dialogService = IDialogService.Mock();
         dialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel>(
             Any<ShareImportDialogViewModel>(), Any<OverlayDialogOptions?>(), Any<string?>(), Any<CancellationToken?>());
+        var shareService = IGameShareService.Mock();
         var viewModel = new ShareImportDialogViewModel
         {
             Launcher = IPlatformLauncher.Mock(),
-            GameShareService = IGameShareService.Mock(),
+            GameShareService = shareService,
             Config = new Config(),
-            Logger = NullLogger<ShareImportDialogViewModel>.Instance
+            Logger = NullLogger<ShareImportDialogViewModel>.Instance,
+            TopLevel = null!
         };
         var dialog = new ShareImportDialogService
         {
@@ -218,7 +220,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         service.NavigationService.Ready.Set();
         await activation;
 
-        await Assert.That(viewModel.ShareText).IsEqualTo("encoded-package");
+        shareService.TryParseShareLink("encoded-package").WasCalled(Times.Once);
     }
 
     [Test]

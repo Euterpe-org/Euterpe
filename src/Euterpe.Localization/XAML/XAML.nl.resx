@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>Ongeldige deelcode</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>Plak hier een deelcode</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>{0} charts</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>Charts: {0} toegevoegd · {1} aanwezig · {2} mislukt.</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>Import starten</value>

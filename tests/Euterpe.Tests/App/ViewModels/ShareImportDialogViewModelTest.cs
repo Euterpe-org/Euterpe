@@ -13,7 +13,8 @@ public sealed partial class ShareImportDialogViewModelTest
             Launcher = IPlatformLauncher.Mock(),
             GameShareService = shareService,
             Config = new Config(),
-            Logger = NullLogger<ShareImportDialogViewModel>.Instance
+            Logger = NullLogger<ShareImportDialogViewModel>.Instance,
+            TopLevel = null!
         };
 
     private static GameSharePackage CreatePackage(GameId gameId) =>
