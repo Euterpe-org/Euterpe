@@ -32,6 +32,30 @@
             Selector="Button.Link:pointerover TextBlock">
             <Setter Property="TextDecorations" Value="Underline" />
         </Style>
+
+        <!--  Difficulty toggles: nothing but the star, so the chrome and the checked highlight both go  -->
+        <Style
+            Selector="ToggleButton.DifficultyFilter">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style
+            Selector="ToggleButton.DifficultyFilter /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style
+            Selector="ToggleButton.DifficultyFilter:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource SemiGrey1}" />
+        </Style>
+        <Style
+            Selector="ToggleButton.DifficultyFilter e|DifficultyStar">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="30" />
+        </Style>
+        <Style
+            Selector="ToggleButton.DifficultyFilter:not(:checked) e|DifficultyStar">
+            <Setter Property="Opacity" Value="0.3" />
+        </Style>
     </UserControl.Styles>
 
     <Grid
@@ -190,18 +214,38 @@
                                 <TextBlock
                                     FontWeight="SemiBold"
                                     Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_Filter_Difficulty}}" />
-                                <CheckBox
-                                    Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Easy}}"
-                                    IsChecked="{Binding Filter.ShowEasy}" />
-                                <CheckBox
-                                    Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hard}}"
-                                    IsChecked="{Binding Filter.ShowHard}" />
-                                <CheckBox
-                                    Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Master}}"
-                                    IsChecked="{Binding Filter.ShowMaster}" />
-                                <CheckBox
-                                    Content="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hidden}}"
-                                    IsChecked="{Binding Filter.ShowHidden}" />
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    Spacing="2">
+                                    <ToggleButton
+                                        Classes="DifficultyFilter"
+                                        IsChecked="{Binding Filter.ShowEasy}"
+                                        ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Easy}}">
+                                        <e:DifficultyStar
+                                            Difficulty="Easy" />
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        Classes="DifficultyFilter"
+                                        IsChecked="{Binding Filter.ShowHard}"
+                                        ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hard}}">
+                                        <e:DifficultyStar
+                                            Difficulty="Hard" />
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        Classes="DifficultyFilter"
+                                        IsChecked="{Binding Filter.ShowMaster}"
+                                        ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Master}}">
+                                        <e:DifficultyStar
+                                            Difficulty="Master" />
+                                    </ToggleButton>
+                                    <ToggleButton
+                                        Classes="DifficultyFilter"
+                                        IsChecked="{Binding Filter.ShowHidden}"
+                                        ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartDifficulty_Hidden}}">
+                                        <e:DifficultyStar
+                                            Difficulty="Hidden" />
+                                    </ToggleButton>
+                                </StackPanel>
                             </StackPanel>
 
                             <StackPanel
