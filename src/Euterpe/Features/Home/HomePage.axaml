@@ -45,7 +45,6 @@
         <StackPanel
             HorizontalAlignment="Right"
             Margin="0,0,130,80"
-            Spacing="1"
             VerticalAlignment="Bottom">
             <!--  Easter Egg: Madeline  -->
             <Border
