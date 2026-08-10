@@ -176,7 +176,7 @@
                         <StackPanel
                             Margin="0,0,12,0"
                             Spacing="14">
-                            <!--  CTA to the web chart library  -->
+                            <!--  CTA to the web chart library; trimmed from the shared card metrics to fit the rail  -->
                             <Button
                                 Classes="Transparent Card"
                                 Command="{Binding OpenUrlCommand}"
@@ -190,10 +190,12 @@
                                     </Style>
                                 </Button.Styles>
                                 <Border
-                                    Classes="Hover">
+                                    Classes="Hover"
+                                    Padding="12">
                                     <StackPanel>
                                         <TextBlock
                                             Classes="CardTitle"
+                                            FontSize="20"
                                             Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_GetCharts_Title}}">
                                             <TextBlock.Foreground>
                                                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
@@ -204,6 +206,7 @@
                                         </TextBlock>
                                         <TextBlock
                                             Classes="CardDesc"
+                                            Margin="0,3,0,0"
                                             Text="{Localize {x:Static loc:XAMLLiteral.ChartManage_GetCharts_Description}}" />
                                     </StackPanel>
                                 </Border>
