@@ -19,11 +19,17 @@
   <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
     <value>EPK 파일 선택</value>
   </data>
+  <data name="FileDialog_Title_ChooseMdmFiles" xml:space="preserve">
+    <value>MDM 파일 선택</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Steam 실행 파일 선택</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
     <value>모든 파일</value>
+  </data>
+  <data name="FilePickerFileType_MdmFiles" xml:space="preserve">
+    <value>MDM 파일</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>캐시 폴더 선택</value>

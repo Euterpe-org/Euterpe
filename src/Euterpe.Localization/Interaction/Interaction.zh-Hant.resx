@@ -19,11 +19,17 @@
   <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
     <value>選擇 EPK 檔案</value>
   </data>
+  <data name="FileDialog_Title_ChooseMdmFiles" xml:space="preserve">
+    <value>選擇 MDM 檔案</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>選擇 Steam 執行檔</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
     <value>所有檔案</value>
+  </data>
+  <data name="FilePickerFileType_MdmFiles" xml:space="preserve">
+    <value>MDM 檔案</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>選擇快取資料夾</value>

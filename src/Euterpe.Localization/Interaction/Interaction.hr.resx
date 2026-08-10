@@ -19,11 +19,17 @@
   <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
     <value>Odaberi EPK datoteku</value>
   </data>
+  <data name="FileDialog_Title_ChooseMdmFiles" xml:space="preserve">
+    <value>Odaberi MDM datoteke</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Odaberi izvršnu datoteku Steama</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
     <value>Sve datoteke</value>
+  </data>
+  <data name="FilePickerFileType_MdmFiles" xml:space="preserve">
+    <value>MDM datoteke</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>Odaberi mapu predmemorije</value>

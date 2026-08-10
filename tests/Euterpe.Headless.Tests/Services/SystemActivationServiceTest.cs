@@ -1,11 +1,9 @@
 using System.Runtime.CompilerServices;
 using Autofac;
 using Euterpe.Abstractions;
-using Euterpe.Core.Proxies;
 using Euterpe.Features.Charting;
 using Euterpe.Features.Share;
 using Euterpe.Models;
-using Euterpe.Models.Playback;
 using Euterpe.Models.Progress;
 using Euterpe.Services;
 using Microsoft.Extensions.Logging;
@@ -24,7 +22,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
         MockLogger<SystemActivationService>? logger = null,
         IModManageService? modManageService = null,
         IChartManageService? chartManageService = null,
-        ChartManagePanelViewModel? chartViewModel = null,
+        ProgressDialogService? progressDialogService = null,
         ShareImportDialogService? shareImportDialogService = null)
     {
         var builder = new ContainerBuilder();
@@ -38,9 +36,9 @@ public sealed class SystemActivationServiceTest : HeadlessTest
             builder.RegisterInstance(chartManageService).As<IChartManageService>();
         }
 
-        if (chartViewModel is not null)
+        if (progressDialogService is not null)
         {
-            builder.RegisterInstance(chartViewModel).AsSelf();
+            builder.RegisterInstance(progressDialogService).AsSelf();
         }
 
         if (shareImportDialogService is not null)
@@ -55,6 +53,7 @@ public sealed class SystemActivationServiceTest : HeadlessTest
             {
                 Logger = NullLogger<NavigationService>.Instance
             },
+            NotificationService = INotificationService.Mock(),
             Logger = logger ?? Mock.Logger<SystemActivationService>(),
             AssociationSetup = setup ?? ISystemAssociationSetup.Mock(),
             GameScope = new BehaviorSubject<ILifetimeScope>(container)
@@ -271,22 +270,12 @@ public sealed class SystemActivationServiceTest : HeadlessTest
     {
         var logger = Mock.Logger<SystemActivationService>();
         var charts = IChartManageService.Mock();
-        var viewModel = new ChartManagePanelViewModel
+        var progressDialogService = new ProgressDialogService
         {
-            Launcher = IPlatformLauncher.Mock(),
-            Playback = new PlaybackState(),
-            AudioPlayerService = IAudioPlayerService.Mock(),
-            ChartManageService = charts,
             DialogService = IDialogService.Mock(),
-            MessageBoxService = IMessageBoxService.Mock(),
-            GameShareService = IGameShareService.Mock(),
-            Logger = NullLogger<ChartManagePanelViewModel>.Instance,
-            ProgressDialogViewModel = new ProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() },
-            NotificationService = INotificationService.Mock(),
-            ShareImportDialogService = null!,
-            TopLevel = new TopLevelProxy { Logger = NullLogger<TopLevelProxy>.Instance }
+            ProgressDialogViewModel = new ProgressDialogViewModel { Launcher = IPlatformLauncher.Mock() }
         };
-        var service = NewService(logger: logger, chartManageService: charts, chartViewModel: viewModel);
+        var service = NewService(logger: logger, chartManageService: charts, progressDialogService: progressDialogService);
 
         await InvokeChartAction(service, "convert");
 

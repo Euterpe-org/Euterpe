@@ -1,24 +1,31 @@
 using Avalonia.Platform.Storage;
-using Euterpe.Models.Progress;
+using Euterpe.Models.Charts.CustomAlbums;
 
 namespace Euterpe.Features.Charting;
 
 public sealed partial class ChartManagePanelViewModel
 {
     [RelayCommand]
-    public Task MigrateCustomAlbumsAsync() =>
-        RunWithProgressDialogAsync(ChartManage_Migrating, ChartManage_MigratingHint, false, async progress =>
-        {
-            var migratedCount = await ChartManageService.MigrateCustomAlbumsAsync(progress).ConfigureAwait(true);
-            if (migratedCount is 0)
-            {
-                NotificationService.NoticeLight(Notification_Content_Migration_None);
-            }
-        });
+    private async Task MigrateCustomAlbumsAsync()
+    {
+        var filePaths = await FileSystemPickerService.GetMultipleFilePathsAsync(FileDialog_Title_ChooseMdmFiles,
+            [new FilePickerFileType(FilePickerFileType_MdmFiles) { Patterns = [$"*{CustomAlbumFiles.PackageExtension}"] }]).ConfigureAwait(true);
 
-    public Task DownloadChartAsync(string cid) =>
-        RunWithProgressDialogAsync(ChartManage_Downloading, ChartManage_DownloadingHint, true, progress =>
-            ChartManageService.DownloadChartAsync(cid, progress));
+        if (filePaths is [])
+        {
+            return;
+        }
+
+        var processedCount = await ProgressDialogService.ExecuteAsync(
+            XAML.ChartManage_Migrating,
+            XAML.ChartManage_MigratingHint,
+            false,
+            progress => ChartManageService.MigrateCustomAlbumFilesAsync(filePaths, progress)).ConfigureAwait(true);
+        if (processedCount is 0)
+        {
+            NotificationService.NoticeLight(Notification_Content_Migration_None);
+        }
+    }
 
     [RelayCommand]
     private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)
@@ -37,32 +44,4 @@ public sealed partial class ChartManagePanelViewModel
 
     [RelayCommand]
     private Task ImportShareAsync() => ShareImportDialogService.ShowAsync();
-
-    private async Task RunWithProgressDialogAsync(string title, string hint, bool indeterminate, Func<IProgress<BatchProgress>, Task> work)
-    {
-        ProgressDialogViewModel.Reset();
-        ProgressDialogViewModel.IsIndeterminate = indeterminate;
-        ProgressDialogViewModel.Hint = hint;
-
-        var options = new OverlayDialogOptions
-        {
-            Title = title,
-            CanDragMove = false,
-            CanResize = false,
-            IsCloseButtonVisible = false
-        };
-
-        var dialog = DialogService.ShowOverlayAsync<ProgressDialog, ProgressDialogViewModel>(
-            ProgressDialogViewModel, options, MainWindowViewModel.DialogHostId);
-        try
-        {
-            var progress = new Progress<BatchProgress>(ProgressDialogViewModel.Report);
-            await work(progress).ConfigureAwait(true);
-        }
-        finally
-        {
-            ProgressDialogViewModel.Close();
-            await dialog.ConfigureAwait(true);
-        }
-    }
 }

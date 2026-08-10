@@ -43,7 +43,8 @@ public sealed partial class ChartManageServiceTest
     private static ChartManageService CreateService(
         IChartLocalService localService,
         IGameDownloadManager? gameDownloadManager = null,
-        IFileSystemService? fileSystemService = null) =>
+        IFileSystemService? fileSystemService = null,
+        IMigrationService? migrationService = null) =>
         new()
         {
             GameConfig = new MuseDashConfig(),
@@ -53,7 +54,7 @@ public sealed partial class ChartManageServiceTest
             GameDownloadManager = gameDownloadManager ?? IGameDownloadManager.Mock(),
             Logger = Mock.Logger<ChartManageService>(),
             NotificationService = INotificationService.Mock(),
-            MigrationService = IMigrationService.Mock()
+            MigrationService = migrationService ?? IMigrationService.Mock()
         };
 
     private static ChartDto CreateChart(string name, ChartSource source = ChartSource.Offline, string folderPath = ChartFolder) =>

@@ -19,11 +19,17 @@
   <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
     <value>Выберите файл EPK</value>
   </data>
+  <data name="FileDialog_Title_ChooseMdmFiles" xml:space="preserve">
+    <value>Выберите файлы MDM</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Выберите исполняемый файл Steam</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
     <value>Все файлы</value>
+  </data>
+  <data name="FilePickerFileType_MdmFiles" xml:space="preserve">
+    <value>Файлы MDM</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>Выберите папку кэша</value>
