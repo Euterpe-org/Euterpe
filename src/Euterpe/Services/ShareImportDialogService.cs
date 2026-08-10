@@ -4,7 +4,7 @@ public sealed class ShareImportDialogService
 {
     public async Task ShowAsync(string? shareText = null)
     {
-        ShareImportDialogViewModel.Prepare(shareText);
+        await ShareImportDialogViewModel.PrepareAsync(shareText).ConfigureAwait(true);
 
         var options = new OverlayDialogOptions
         {

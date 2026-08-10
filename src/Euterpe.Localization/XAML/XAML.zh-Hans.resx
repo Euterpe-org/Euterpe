@@ -733,29 +733,38 @@
   <data name="Share_Import_Canceled" xml:space="preserve">
     <value>导入已取消</value>
   </data>
+  <data name="Share_Import_Empty" xml:space="preserve">
+    <value>复制分享码后再试一次</value>
+  </data>
   <data name="Share_Import_Failed" xml:space="preserve">
     <value>导入失败</value>
   </data>
   <data name="Share_Import_Header" xml:space="preserve">
-    <value>导入分享码</value>
+    <value>导入分享的谱面</value>
   </data>
   <data name="Share_Import_Invalid" xml:space="preserve">
-    <value>分享码无效</value>
-  </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>在此粘贴分享码</value>
+    <value>剪贴板里的内容不是分享码</value>
   </data>
   <data name="Share_Import_Preview" xml:space="preserve">
-    <value>{0} 张谱面</value>
+    <value>{0} 张谱面待导入</value>
   </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>谱面：{0} 下载 · {1} 已有 · {2} 失败</value>
+  <data name="Share_Import_Refresh" xml:space="preserve">
+    <value>重新读取剪贴板</value>
+  </data>
+  <data name="Share_Import_Result_Added" xml:space="preserve">
+    <value>已导入 {0} 张</value>
+  </data>
+  <data name="Share_Import_Result_Failed" xml:space="preserve">
+    <value>{0} 张失败</value>
+  </data>
+  <data name="Share_Import_Result_Present" xml:space="preserve">
+    <value>{0} 张已在库中</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>开始导入</value>
   </data>
   <data name="Share_Import_WrongGame" xml:space="preserve">
-    <value>此分享码用于 {0}，请先切换到该游戏</value>
+    <value>这些谱面属于 {0}，请先切换到该游戏</value>
   </data>
   <data name="Share_Title" xml:space="preserve">
     <value>分享</value>

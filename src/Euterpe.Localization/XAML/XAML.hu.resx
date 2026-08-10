@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>Érvénytelen megosztási kód</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>Illessz be ide egy megosztási kódot</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>{0} chart</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>Chartok: {0} hozzáadva · {1} már meglévő · {2} sikertelen.</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>Importálás indítása</value>

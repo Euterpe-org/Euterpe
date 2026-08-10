@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>잘못된 공유 코드입니다</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>여기에 공유 코드를 붙여넣으세요</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>채보 {0}개</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>채보: {0}개 추가 · {1}개 이미 있음 · {2}개 실패</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>가져오기 시작</value>

@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>Nevažeći kod za dijeljenje</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>Ovdje zalijepite kod za dijeljenje</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>{0} chartova</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>Chartovi: {0} dodano · {1} već postoji · {2} neuspjelo.</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>Započni uvoz</value>

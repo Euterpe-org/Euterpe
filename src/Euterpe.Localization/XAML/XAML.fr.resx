@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>Code de partage non valide</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>Collez un code de partage ici</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>{0} charts</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>Charts : {0} ajoutés · {1} déjà présents · {2} échecs.</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>Démarrer l'importation</value>

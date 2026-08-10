@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>無効な共有コードです</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>ここに共有コードを貼り付けてください</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>譜面 {0} 件</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>譜面：追加 {0} 件 · 登録済み {1} 件 · 失敗 {2} 件</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>インポートを開始</value>
