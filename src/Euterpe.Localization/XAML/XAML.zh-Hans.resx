@@ -376,6 +376,15 @@
   <data name="LoadingMessage" xml:space="preserve">
     <value>加载中...</value>
   </data>
+  <data name="MelonLoaderLog_Analyze" xml:space="preserve">
+    <value>分析</value>
+  </data>
+  <data name="MelonLoaderLog_Empty" xml:space="preserve">
+    <value>暂无 MelonLoader 日志。</value>
+  </data>
+  <data name="MelonLoaderLog_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
   <data name="MelonLoader_Description" xml:space="preserve">
     <value>需要安装 MelonLoader 才能使用模组</value>
   </data>
