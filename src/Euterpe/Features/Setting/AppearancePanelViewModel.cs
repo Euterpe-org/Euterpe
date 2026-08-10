@@ -10,12 +10,13 @@ public sealed partial class AppearancePanelViewModel : ViewModelBase
 
     public Language[] AvailableLanguages => LocalizationService.AvailableLanguages;
 
-    protected override Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
+        await base.OnInitializeAsync().ConfigureAwait(false);
+
         CurrentLanguage = LocalizationService.GetCurrentLanguage();
 
         Logger.LogInformation("{ViewModel} Initialized", nameof(AppearancePanelViewModel));
-        return base.OnInitializeAsync();
     }
 
     [RelayCommand(CanExecute = nameof(CanExecuteApplyLanguage))]

@@ -4,9 +4,17 @@ namespace Euterpe.Features.Setting;
 [AppSingleton]
 public sealed class AdvancedPanelViewModel : ViewModelBase
 {
+    protected override async Task OnInitializeAsync()
+    {
+        await base.OnInitializeAsync().ConfigureAwait(false);
+
+        Logger.LogInformation("{ViewModel} Initialized", nameof(AdvancedPanelViewModel));
+    }
+
     #region Injections
 
     public required Config Config { get; init; }
+    public required ILogger<AdvancedPanelViewModel> Logger { get; init; }
 
     #endregion Injections
 }

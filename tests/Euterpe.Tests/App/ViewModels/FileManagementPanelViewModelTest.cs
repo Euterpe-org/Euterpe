@@ -46,6 +46,7 @@ public sealed class FileManagementPanelViewModelTest
         AppLocalService = appLocal ?? IAppLocalService.Mock(),
         GameLocalService = gameLocal ?? IGameLocalService.Mock(),
         Config = config ?? NewConfig(),
-        GameConfig = gameConfig ?? new MuseDashConfig()
+        GameConfig = gameConfig ?? new MuseDashConfig(),
+        Logger = Mock.Logger<FileManagementPanelViewModel>()
     };
 }

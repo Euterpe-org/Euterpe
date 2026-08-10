@@ -10,10 +10,11 @@ public sealed partial class DownloadPanelViewModel : ViewModelBase
             new EnumOption<UpdateChannel>(channel, $"{nameof(UpdateChannel)}_{channel.ToStringFast()}"))
     ];
 
-    protected override Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
+        await base.OnInitializeAsync().ConfigureAwait(false);
+
         Logger.LogInformation("{ViewModel} Initialized", nameof(DownloadPanelViewModel));
-        return base.OnInitializeAsync();
     }
 
     #region Injections

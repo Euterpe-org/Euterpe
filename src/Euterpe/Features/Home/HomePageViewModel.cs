@@ -14,6 +14,7 @@ public sealed partial class HomePageViewModel : ViewModelBase
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
+
         await NavigationService.Ready.WaitAsync().ConfigureAwait(true);
 
         await EnsureSetupAsync().ConfigureAwait(true);

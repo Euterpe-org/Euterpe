@@ -44,6 +44,7 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     protected override async Task OnInitializeAsync()
     {
         await base.OnInitializeAsync().ConfigureAwait(true);
+
         await ChartManageService.InitializeChartsAsync().ConfigureAwait(true);
 
         ChartManageService.Connect()
