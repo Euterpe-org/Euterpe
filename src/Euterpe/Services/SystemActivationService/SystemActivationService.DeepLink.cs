@@ -5,8 +5,8 @@ namespace Euterpe.Services;
 public sealed partial class SystemActivationService
 {
     private IChartManageService ChartManageService => GameScope.Value.Resolve<IChartManageService>();
-    private ChartManagePanelViewModel ChartManagePanelViewModel => GameScope.Value.Resolve<ChartManagePanelViewModel>();
     private IModManageService ModManageService => GameScope.Value.Resolve<IModManageService>();
+    private ProgressDialogService ProgressDialogService => GameScope.Value.Resolve<ProgressDialogService>();
     private ShareImportDialogService ShareImportDialogService => GameScope.Value.Resolve<ShareImportDialogService>();
 
     private void HandleDeepLink(Uri uri)

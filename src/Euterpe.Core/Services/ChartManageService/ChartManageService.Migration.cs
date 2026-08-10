@@ -14,6 +14,27 @@ internal sealed partial class ChartManageService
         }
 
         var sources = ChartLocalService.GetCustomAlbumSources();
+        var processed = await MigrateSourcesAsync(sources, progress, cancellationToken).ConfigureAwait(false);
+
+        if (!Directory.EnumerateFileSystemEntries(GameConfig.CustomAlbumsChartsFolder).Any())
+        {
+            FileSystemService.TryDeleteDirectory(GameConfig.CustomAlbumsChartsFolder, DeleteOption.IgnoreIfNotFound);
+        }
+
+        return processed;
+    }
+
+    public Task<int> MigrateCustomAlbumFilesAsync(
+        IReadOnlyList<string> filePaths,
+        IProgress<BatchProgress>? progress = null,
+        CancellationToken cancellationToken = default) =>
+        MigrateSourcesAsync(filePaths.Select(static path => new CustomAlbumSource(path, false)).ToArray(), progress, cancellationToken);
+
+    private async Task<int> MigrateSourcesAsync(
+        CustomAlbumSource[] sources,
+        IProgress<BatchProgress>? progress,
+        CancellationToken cancellationToken)
+    {
         var outcomes = new ConcurrentBag<MigrationOutcome>();
         var completed = 0;
 
@@ -31,11 +52,6 @@ internal sealed partial class ChartManageService
         var unsupported = outcomes.Count(outcome => outcome is MigrationOutcome.Unsupported);
         var failed = outcomes.Count(outcome => outcome is MigrationOutcome.Failed);
         Logger.LogInformation("CustomAlbums migration complete: {Migrated} migrated, {Unsupported} unsupported, {Failed} failed", migrated, unsupported, failed);
-
-        if (!Directory.EnumerateFileSystemEntries(GameConfig.CustomAlbumsChartsFolder).Any())
-        {
-            FileSystemService.TryDeleteDirectory(GameConfig.CustomAlbumsChartsFolder, DeleteOption.IgnoreIfNotFound);
-        }
 
         var notMigrated = failed + unsupported;
         if (notMigrated > 0)

@@ -19,11 +19,17 @@
   <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
     <value>Choisir un fichier EPK</value>
   </data>
+  <data name="FileDialog_Title_ChooseMdmFiles" xml:space="preserve">
+    <value>Choisir des fichiers MDM</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Choisir l'exécutable Steam</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
     <value>Tous les fichiers</value>
+  </data>
+  <data name="FilePickerFileType_MdmFiles" xml:space="preserve">
+    <value>Fichiers MDM</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>Choisir le dossier de cache</value>

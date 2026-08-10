@@ -19,11 +19,17 @@
   <data name="FileDialog_Title_ChooseEpkFile" xml:space="preserve">
     <value>EPK fájl kiválasztása</value>
   </data>
+  <data name="FileDialog_Title_ChooseMdmFiles" xml:space="preserve">
+    <value>MDM fájlok kiválasztása</value>
+  </data>
   <data name="FileDialog_Title_ChooseSteamExec" xml:space="preserve">
     <value>Steam futtatható fájl kiválasztása</value>
   </data>
   <data name="FilePickerFileType_AllFiles" xml:space="preserve">
     <value>Minden fájl</value>
+  </data>
+  <data name="FilePickerFileType_MdmFiles" xml:space="preserve">
+    <value>MDM fájlok</value>
   </data>
   <data name="FolderDialog_Title_ChooseCacheFolder" xml:space="preserve">
     <value>Gyorsítótár mappa kiválasztása</value>

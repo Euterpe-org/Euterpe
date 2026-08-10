@@ -30,7 +30,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
         return folders is not [] ? folders[0].TryGetLocalPath() : null;
     }
 
-    public async Task<IReadOnlyList<IStorageFolder>?> GetMultipleFoldersAsync(string dialogTitle)
+    public async Task<IReadOnlyList<IStorageFolder>> GetMultipleFoldersAsync(string dialogTitle)
     {
         var folders = await TopLevel.StorageProvider.OpenFolderPickerAsync(
             new FolderPickerOpenOptions
@@ -39,10 +39,10 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle
             }).ConfigureAwait(true);
 
-        return folders is not [] ? folders : null;
+        return folders;
     }
 
-    public async Task<IEnumerable<string?>?> GetMultipleFolderPathsAsync(string dialogTitle)
+    public async Task<IReadOnlyList<string>> GetMultipleFolderPathsAsync(string dialogTitle)
     {
         var folders = await TopLevel.StorageProvider.OpenFolderPickerAsync(
             new FolderPickerOpenOptions
@@ -51,7 +51,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle
             }).ConfigureAwait(true);
 
-        return folders is not [] ? folders.GetLocalPaths() : null;
+        return folders.GetLocalPaths().OfType<string>().ToArray();
     }
 
     public async Task<IStorageFile?> GetSingleFileAsync(string dialogTitle)
@@ -78,37 +78,29 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
         return files is not [] ? files[0].TryGetLocalPath() : null;
     }
 
-    public async Task<IReadOnlyList<IStorageFile>?> GetMultipleFilesAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? extraFileTypes = null)
+    public async Task<IReadOnlyList<IStorageFile>> GetMultipleFilesAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? fileTypes = null)
     {
         var files = await TopLevel.StorageProvider.OpenFilePickerAsync(
             new FilePickerOpenOptions
             {
                 AllowMultiple = true,
                 Title = dialogTitle,
-                FileTypeFilter =
-                [
-                    .. extraFileTypes ?? [],
-                    new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }
-                ]
+                FileTypeFilter = fileTypes ?? [new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }]
             }).ConfigureAwait(true);
 
-        return files is not [] ? files : null;
+        return files;
     }
 
-    public async Task<IEnumerable<string?>?> GetMultipleFilePathsAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? extraFileTypes = null)
+    public async Task<IReadOnlyList<string>> GetMultipleFilePathsAsync(string dialogTitle, IReadOnlyList<FilePickerFileType>? fileTypes = null)
     {
         var files = await TopLevel.StorageProvider.OpenFilePickerAsync(
             new FilePickerOpenOptions
             {
                 AllowMultiple = true,
                 Title = dialogTitle,
-                FileTypeFilter =
-                [
-                    .. extraFileTypes ?? [],
-                    new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }
-                ]
+                FileTypeFilter = fileTypes ?? [new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }]
             }).ConfigureAwait(true);
 
-        return files is not [] ? files.GetLocalPaths() : null;
+        return files.GetLocalPaths().OfType<string>().ToArray();
     }
 }

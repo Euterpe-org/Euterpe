@@ -117,12 +117,12 @@ public sealed partial class ChartManagePanelViewModel : ViewModelBase
     public required PlaybackState Playback { get; init; }
     public required IAudioPlayerService AudioPlayerService { get; init; }
     public required IChartManageService ChartManageService { get; init; }
-    public required IDialogService DialogService { get; init; }
+    public required IFileSystemPickerService FileSystemPickerService { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
     public required IGameShareService GameShareService { get; init; }
     public required ILogger<ChartManagePanelViewModel> Logger { get; init; }
     public required INotificationService NotificationService { get; init; }
-    public required ProgressDialogViewModel ProgressDialogViewModel { get; init; }
+    public required ProgressDialogService ProgressDialogService { get; init; }
     public required ShareImportDialogService ShareImportDialogService { get; init; }
     public required TopLevelProxy TopLevel { get; init; }
 
