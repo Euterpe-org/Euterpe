@@ -21,7 +21,7 @@ public sealed partial class ShareImportDialogViewModelTest
 
         using var _ = Assert.Multiple();
         shareService.ImportAsync(package, Any<IProgress<BatchProgress>?>(), Any<CancellationToken>()).WasCalled(Times.Once);
-        await Assert.That(viewModel.IsImporting).IsFalse();
+        await Assert.That(viewModel.ImportCommand.IsRunning).IsFalse();
         await Assert.That(viewModel.IsStatusWarning).IsFalse();
         await Assert.That(viewModel.CanImport).IsFalse();
         await Assert.That(viewModel.StatusMessage)
@@ -86,7 +86,7 @@ public sealed partial class ShareImportDialogViewModelTest
         await importTask;
 
         using var _ = Assert.Multiple();
-        await Assert.That(viewModel.IsImporting).IsFalse();
+        await Assert.That(viewModel.ImportCommand.IsRunning).IsFalse();
         await Assert.That(viewModel.IsStatusWarning).IsTrue();
         await Assert.That(viewModel.StatusMessage).IsEqualTo(XAML.Share_Import_Canceled);
     }

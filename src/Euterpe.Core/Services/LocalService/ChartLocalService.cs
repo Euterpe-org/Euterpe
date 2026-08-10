@@ -40,6 +40,11 @@ internal sealed class ChartLocalService : IChartLocalService
         try
         {
             var manifest = await MessagePackSerialization.DeserializeManifestFromFileAsync(manifestPath).ConfigureAwait(false);
+            if (source is ChartSource.Online && manifest.Cid is null)
+            {
+                Logger.LogWarning("Online chart at {ChartFolder} has no CID, skipping", chartFolder);
+                return null;
+            }
 
             return new ChartDto
             {
