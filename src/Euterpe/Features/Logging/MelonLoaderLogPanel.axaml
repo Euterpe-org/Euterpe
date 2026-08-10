@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="using:Euterpe.Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Euterpe.Features.Logging"
     x:Class="Euterpe.Features.Logging.MelonLoaderLogPanel"
@@ -14,10 +15,79 @@
         <vm:MelonLoaderLogPanelViewModel />
     </Design.DataContext>
 
-    <TextBlock
-        HorizontalAlignment="Center"
-        TextAlignment="Center"
-        VerticalAlignment="Center">
-        MelonLoader Log Panel still work in progress...
-    </TextBlock>
+    <UserControl.Styles>
+        <StyleInclude
+            Source="avares://Euterpe.Controls/Themes/ControlStyles/Panels/AppLogPanelStyles.axaml" />
+    </UserControl.Styles>
+
+    <Grid
+        RowDefinitions="Auto,*">
+        <StackPanel
+            HorizontalAlignment="Right"
+            Margin="0,0,10,8"
+            Orientation="Horizontal"
+            Spacing="4">
+            <Button
+                Classes="Transparent"
+                Command="{Binding AnalyzeLogCommand}"
+                IsEnabled="False"
+                Padding="8,4">
+                <StackPanel
+                    Orientation="Horizontal"
+                    Spacing="6">
+                    <PathIcon
+                        Data="{StaticResource SemiIconSearch}"
+                        Height="14"
+                        Width="14" />
+                    <TextBlock
+                        Text="{Localize {x:Static loc:XAMLLiteral.MelonLoaderLog_Analyze}}" />
+                </StackPanel>
+            </Button>
+            <Button
+                Classes="Transparent"
+                Command="{Binding RefreshLogCommand}"
+                Padding="8,4">
+                <StackPanel
+                    Orientation="Horizontal"
+                    Spacing="6">
+                    <PathIcon
+                        Data="{StaticResource SemiIconRefresh}"
+                        Height="14"
+                        Width="14" />
+                    <TextBlock
+                        Text="{Localize {x:Static loc:XAMLLiteral.MelonLoaderLog_Refresh}}" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <Border
+            Grid.Row="1"
+            Classes="LogContainer">
+            <Grid>
+                <ListBox
+                    Classes="LogList"
+                    IsVisible="{Binding HasLogLines}"
+                    ItemsSource="{Binding LogLines}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                    SelectionMode="Multiple">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="x:String">
+                            <TextBlock
+                                Classes="LogMessage"
+                                Text="{Binding .}"
+                                TextWrapping="NoWrap" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    IsVisible="{Binding !HasLogLines}"
+                    Text="{Localize {x:Static loc:XAMLLiteral.MelonLoaderLog_Empty}}"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

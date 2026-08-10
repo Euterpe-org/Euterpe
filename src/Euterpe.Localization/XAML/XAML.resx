@@ -376,6 +376,15 @@
   <data name="LoadingMessage" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="MelonLoaderLog_Analyze" xml:space="preserve">
+    <value>Analyze</value>
+  </data>
+  <data name="MelonLoaderLog_Empty" xml:space="preserve">
+    <value>No MelonLoader log is available.</value>
+  </data>
+  <data name="MelonLoaderLog_Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
   <data name="MelonLoader_Description" xml:space="preserve">
     <value>MelonLoader installation is required to play with mods</value>
   </data>
