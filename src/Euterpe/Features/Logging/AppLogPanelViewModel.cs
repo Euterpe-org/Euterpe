@@ -8,7 +8,17 @@ public sealed class AppLogPanelViewModel : ViewModelBase
 {
     public INotifyCollectionChangedSynchronizedViewList<LogMessage> LogMessagesView => LiveLogService.LogMessagesView;
 
-    public required ILogger<AppLogPanelViewModel> Logger { get; init; }
+    protected override async Task OnInitializeAsync()
+    {
+        await base.OnInitializeAsync().ConfigureAwait(false);
 
+        Logger.LogInformation("{ViewModel} Initialized", nameof(AppLogPanelViewModel));
+    }
+
+    #region Injections
+
+    public required ILogger<AppLogPanelViewModel> Logger { get; init; }
     public required LiveLogService LiveLogService { get; init; }
+
+    #endregion Injections
 }

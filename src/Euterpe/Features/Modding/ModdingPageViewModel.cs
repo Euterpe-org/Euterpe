@@ -13,10 +13,11 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
         ])
     ];
 
-    protected override Task OnInitializeAsync()
+    protected override async Task OnInitializeAsync()
     {
+        await base.OnInitializeAsync().ConfigureAwait(false);
+
         Logger.LogInformation("{ViewModel} Initialized", nameof(ModdingPageViewModel));
-        return base.OnInitializeAsync();
     }
 
     #region Injections

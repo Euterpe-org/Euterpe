@@ -41,6 +41,7 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 #endif
 
         Ready.Set();
+        Logger.LogInformation("{ViewModel} Initialized", nameof(MainSplashWindowViewModel));
         Close();
     }
 
