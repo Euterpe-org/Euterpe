@@ -742,14 +742,8 @@
   <data name="Share_Import_Invalid" xml:space="preserve">
     <value>Kode berbagi tidak valid</value>
   </data>
-  <data name="Share_Import_Placeholder" xml:space="preserve">
-    <value>Tempel kode berbagi di sini</value>
-  </data>
   <data name="Share_Import_Preview" xml:space="preserve">
     <value>{0} chart</value>
-  </data>
-  <data name="Share_Import_Result" xml:space="preserve">
-    <value>Chart: {0} ditambahkan · {1} sudah ada · {2} gagal.</value>
   </data>
   <data name="Share_Import_Start" xml:space="preserve">
     <value>Mulai impor</value>
