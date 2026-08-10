@@ -300,6 +300,7 @@
                                 Content="{Localize {x:Static loc:XAMLLiteral.Share_Title}}"
                                 HorizontalAlignment="Stretch"
                                 IsEnabled="{Binding CanShareSelection}"
+                                IsVisible="{Binding Filter.IsOnlineSource}"
                                 ToolTip.Tip="{Localize {x:Static loc:XAMLLiteral.ChartManage_ShareHint}}" />
                             <Button
                                 Classes="Danger"

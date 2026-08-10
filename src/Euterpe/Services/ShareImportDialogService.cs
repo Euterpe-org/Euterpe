@@ -14,34 +14,14 @@ public sealed class ShareImportDialogService
             IsCloseButtonVisible = true
         };
 
-        var canSwitch = GameSwitcher.CanSwitch;
-        GameSwitcher.CanSwitch = false;
-        try
-        {
-            await DialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel>(
-                ShareImportDialogViewModel, options, MainWindowViewModel.DialogHostId).ConfigureAwait(true);
-        }
-        finally
-        {
-            try
-            {
-                ShareImportDialogViewModel.CancelImport();
-                if (ShareImportDialogViewModel.ImportCommand.ExecutionTask is { } importTask)
-                {
-                    await importTask.ConfigureAwait(true);
-                }
-            }
-            finally
-            {
-                GameSwitcher.CanSwitch = canSwitch;
-            }
-        }
+        await DialogService.ShowOverlayAsync<ShareImportDialog, ShareImportDialogViewModel>(
+            ShareImportDialogViewModel, options, MainWindowViewModel.DialogHostId).ConfigureAwait(true);
+        ShareImportDialogViewModel.CancelImport();
     }
 
     #region Injections
 
     public required IDialogService DialogService { get; init; }
-    public required GameSwitcher GameSwitcher { get; init; }
     public required ShareImportDialogViewModel ShareImportDialogViewModel { get; init; }
 
     #endregion Injections

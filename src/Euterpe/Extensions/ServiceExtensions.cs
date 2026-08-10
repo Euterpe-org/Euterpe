@@ -22,7 +22,7 @@ public static partial class ServiceExtensions
             builder.RegisterType<LiveLogService>().PropertiesAutowired().SingleInstance().AutoActivate();
 
             // TopLevel
-            builder.RegisterType<TopLevelProxy>().SingleInstance();
+            builder.RegisterType<TopLevelProxy>().PropertiesAutowired().SingleInstance();
         }
 
         public void RegisterPerGameAppServices()

@@ -1,4 +1,3 @@
-using Avalonia.Input.Platform;
 using Euterpe.Core.Proxies;
 using Euterpe.Models.Progress;
 using Irihi.Avalonia.Shared.Contracts;
@@ -11,16 +10,13 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
     private GameSharePackage? _pendingPackage;
 
     [ObservableProperty]
-    public partial string? StatusMessage { get; private set; }
+    public partial string StatusMessage { get; private set; } = string.Empty;
 
     [ObservableProperty]
     public partial bool IsStatusWarning { get; private set; }
 
     [ObservableProperty]
     public partial bool CanImport { get; private set; }
-
-    [ObservableProperty]
-    public partial bool IsImporting { get; private set; }
 
     [ObservableProperty]
     public partial double Progress { get; private set; }
@@ -34,12 +30,32 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
 
     public async Task PrepareAsync(string? shareText = null)
     {
-        CancelImport();
-        Inspect(shareText ?? await ReadClipboardAsync().ConfigureAwait(true));
+        shareText ??= await TopLevel.TryGetClipboardTextAsync().ConfigureAwait(true) ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(shareText))
+        {
+            SetStatus(XAML.Share_Import_Empty, true);
+            return;
+        }
+
+        if (GameShareService.TryParseShareLink(shareText) is not { } package)
+        {
+            SetStatus(XAML.Share_Import_Invalid, true);
+            return;
+        }
+
+        if (package.GameId != Config.ActiveGame)
+        {
+            var gameName = Config.Games.FirstOrDefault(game => game.Id == package.GameId)?.DisplayName ?? package.GameId.ToString();
+            SetStatus(string.Format(CultureInfo.CurrentCulture, XAML.Share_Import_WrongGame, gameName), true);
+            return;
+        }
+
+        SetStatus(string.Format(CultureInfo.CurrentCulture, XAML.Share_Import_Preview, package.ChartIds.Length), false,
+            package);
     }
 
     [RelayCommand]
-    private async Task RefreshAsync() => Inspect(await ReadClipboardAsync().ConfigureAwait(true));
+    private Task RefreshAsync() => PrepareAsync();
 
     [RelayCommand]
     private async Task ImportAsync(CancellationToken cancellationToken)
@@ -49,7 +65,6 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
             return;
         }
 
-        IsImporting = true;
         Progress = 0;
         ProgressLabel = string.Empty;
         try
@@ -60,68 +75,28 @@ public sealed partial class ShareImportDialogViewModel : ViewModelBase, IDialogC
                 ProgressLabel = report.CountDisplay;
             });
             var result = await GameShareService.ImportAsync(package, progress, cancellationToken).ConfigureAwait(true);
-            SetStatus(null, FormatResult(result), result.Any(static item => item.Outcome is BulkItemOutcome.Failed));
+            SetStatus(FormatResult(result), result.Any(static item => item.Outcome is BulkItemOutcome.Failed));
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            SetStatus(null, XAML.Share_Import_Canceled, warning: true);
+            SetStatus(XAML.Share_Import_Canceled, true);
         }
         catch (Exception ex)
         {
             Logger.LogError(ex, "Failed to import game share package");
-            SetStatus(null, XAML.Share_Import_Failed, warning: true);
-        }
-        finally
-        {
-            IsImporting = false;
+            SetStatus(XAML.Share_Import_Failed, true);
         }
     }
 
     [RelayCommand]
     public void CancelImport() => ImportCommand.Cancel();
 
-    private async Task<string> ReadClipboardAsync()
-    {
-        try
-        {
-            return await TopLevel.Clipboard!.TryGetTextAsync().ConfigureAwait(true) ?? string.Empty;
-        }
-        catch (Exception ex)
-        {
-            Logger.LogError(ex, "Failed to read the clipboard");
-            return string.Empty;
-        }
-    }
-
-    private void SetStatus(GameSharePackage? package, string message, bool warning)
+    private void SetStatus(string message, bool warning, GameSharePackage? package = null)
     {
         _pendingPackage = package;
         CanImport = package is not null;
         IsStatusWarning = warning;
         StatusMessage = message;
-    }
-
-    private void Inspect(string shareText)
-    {
-        var package = GameShareService.TryParseShareLink(shareText);
-
-        if (string.IsNullOrWhiteSpace(shareText))
-        {
-            SetStatus(null, XAML.Share_Import_Empty, warning: true);
-        }
-        else if (package is null)
-        {
-            SetStatus(null, XAML.Share_Import_Invalid, warning: true);
-        }
-        else if (package.GameId != Config.ActiveGame)
-        {
-            var gameName = Config.Games.FirstOrDefault(game => game.Id == package.GameId)?.DisplayName ?? package.GameId.ToString();
-            SetStatus(null, string.Format(CultureInfo.CurrentCulture, XAML.Share_Import_WrongGame, gameName), warning: true);
-        }
-        else
-        {
-            SetStatus(package, string.Format(CultureInfo.CurrentCulture, XAML.Share_Import_Preview, package.ChartIds.Length), warning: false);
-        }
     }
 
     private static string FormatResult(IReadOnlyList<BulkItemResult> result)

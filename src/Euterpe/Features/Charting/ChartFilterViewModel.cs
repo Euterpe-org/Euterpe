@@ -9,8 +9,12 @@ public sealed partial class ChartFilterViewModel : ObservableObject
 
     private readonly Subject<string?> _propertyChanged = new();
 
-    [ObservableProperty] public partial ChartSource Source { get; set; } = ChartSource.Online;
-    [ObservableProperty] public partial string? SearchText { get; set; }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsOnlineSource))]
+    public partial ChartSource Source { get; set; } = ChartSource.Online;
+
+    [ObservableProperty]
+    public partial string? SearchText { get; set; }
 
     [ObservableProperty] public partial bool ShowEasy { get; set; } = true;
     [ObservableProperty] public partial bool ShowHard { get; set; } = true;
@@ -27,6 +31,7 @@ public sealed partial class ChartFilterViewModel : ObservableObject
     [ObservableProperty] public partial bool HasVideoOnly { get; set; }
 
     public Observable<Unit> Changed { get; }
+    public bool IsOnlineSource => Source is ChartSource.Online;
 
     public ChartFilterViewModel() =>
         Changed = new[]
