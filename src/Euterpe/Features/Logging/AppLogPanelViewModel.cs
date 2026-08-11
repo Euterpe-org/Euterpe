@@ -17,8 +17,8 @@ public sealed class AppLogPanelViewModel : ViewModelBase
 
     #region Injections
 
-    public required ILogger<AppLogPanelViewModel> Logger { get; init; }
     public required LiveLogService LiveLogService { get; init; }
+    public required ILogger<AppLogPanelViewModel> Logger { get; init; }
 
     #endregion Injections
 }

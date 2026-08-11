@@ -22,8 +22,8 @@ public sealed partial class ModdingPageViewModel : NavViewModelBase
 
     #region Injections
 
-    public required ILogger<ModdingPageViewModel> Logger { get; init; }
     public required GameConfig GameConfig { get; init; }
+    public required ILogger<ModdingPageViewModel> Logger { get; init; }
 
     #endregion Injections
 }

@@ -54,9 +54,9 @@ public sealed partial class CrashWindowViewModel : ViewModelBase, IDialog<bool>
 
     #region Injections
 
+    public required TopLevelProxy TopLevel { get; init; }
     public required ILogger<CrashWindowViewModel> Logger { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
-    public required TopLevelProxy TopLevel { get; init; }
 
     #endregion Injections
 }
