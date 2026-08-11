@@ -49,9 +49,9 @@ public sealed class LocalizationService
             return language;
         }
 
-        Logger.LogError("No matching language found for {CultureName}, falling back to English", currentCulture.Name);
-        Config.LanguageCode = "en";
-        return "en";
+        Logger.LogError("No matching language found for {CultureName}, falling back to {Language}", currentCulture.Name, AvailableLanguages[0].Name);
+        Config.LanguageCode = AvailableLanguages[0].Name;
+        return AvailableLanguages[0];
     }
 
     public void SetLanguage(string language)
