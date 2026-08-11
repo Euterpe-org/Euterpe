@@ -103,8 +103,8 @@ public sealed class MainSplashWindowViewModel : ViewModelBase, IDialogContext
 
     public required UpdateDialogService UpdateDialogService { get; init; }
     public required IAuthService AuthService { get; init; }
-    public required IMessageBoxService MessageBoxService { get; init; }
     public required ILogger<MainSplashWindowViewModel> Logger { get; init; }
+    public required IMessageBoxService MessageBoxService { get; init; }
     public required IUpdateService UpdateService { get; init; }
 
     #endregion Injections

@@ -21,8 +21,8 @@ public sealed partial class ChartingPageViewModel : NavViewModelBase
 
     #region Injections
 
-    public required ILogger<ChartingPageViewModel> Logger { get; init; }
     public required GameConfig GameConfig { get; init; }
+    public required ILogger<ChartingPageViewModel> Logger { get; init; }
 
     #endregion Injections
 }

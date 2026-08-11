@@ -73,15 +73,15 @@ public sealed partial class HomePageViewModel : ViewModelBase
     public required GameConfig GameConfig { get; init; }
     public required NavigationService NavigationService { get; init; }
     public required SetupDialogService SetupDialogService { get; init; }
-    public required IEuterpeAccountClient AccountClient { get; init; }
     public required IChartManageService ChartManageService { get; init; }
     public required IDependencyAcquireService DependencyAcquireService { get; init; }
+    public required IEuterpeAccountClient AccountClient { get; init; }
     public required IGameLaunchService GameLaunchService { get; init; }
-    public required IGameSettingService GameSettingService { get; init; }
     public required IGameLocalService GameLocalService { get; init; }
+    public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
+    public required IGameSettingService GameSettingService { get; init; }
     public required ILogger<HomePageViewModel> Logger { get; init; }
     public required IMessageBoxService MessageBoxService { get; init; }
-    public required IGameRuntimeInstaller RuntimeInstaller { get; init; }
 
     #endregion Injections
 }

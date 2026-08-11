@@ -75,8 +75,8 @@ public sealed partial class CharterToolkitPanelViewModel : ViewModelBase
 
     #region Injections
 
-    public required IChartManageService ChartManageService { get; init; }
     public required EpkEditorPanelViewModel Editor { get; init; }
+    public required IChartManageService ChartManageService { get; init; }
     public required IFileSystemPickerService FileSystemPickerService { get; init; }
     public required ILogger<CharterToolkitPanelViewModel> Logger { get; init; }
     public required IMessagePackSerializationService MessagePackSerialization { get; init; }

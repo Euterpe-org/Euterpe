@@ -38,8 +38,8 @@ public sealed partial class LoggingPageViewModel : NavViewModelBase
 
     #region Injections
 
-    public required ILogger<LoggingPageViewModel> Logger { get; init; }
     public required GameConfig GameConfig { get; init; }
+    public required ILogger<LoggingPageViewModel> Logger { get; init; }
 
     #endregion Injections
 }

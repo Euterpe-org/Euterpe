@@ -39,11 +39,11 @@ public sealed partial class SystemActivationService
 
     #region Injections
 
+    public required BehaviorSubject<ILifetimeScope> GameScope { get; init; }
     public required NavigationService NavigationService { get; init; }
     public required INotificationService NotificationService { get; init; }
     public required ILogger<SystemActivationService> Logger { get; init; }
     public required ISystemAssociationSetup AssociationSetup { get; init; }
-    public required BehaviorSubject<ILifetimeScope> GameScope { get; init; }
 
     #endregion Injections
 }
