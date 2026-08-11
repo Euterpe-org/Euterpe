@@ -4,11 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Euterpe.Markup;
 
-public sealed class GifSourceExtension : MarkupExtension
+[UsedImplicitly]
+public sealed class GifSourceExtension(string uri) : MarkupExtension
 {
-    public string? Uri { get; set; }
-
-    public GifSourceExtension(string uri) => Uri = uri;
+    public string? Uri { get; } = uri;
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
