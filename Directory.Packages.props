@@ -26,12 +26,12 @@
         <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="2.2.0"/>
         <PackageVersion Include="JetBrains.Annotations" Version="2026.2.0"/>
         <PackageVersion Include="Nerdbank.MessagePack" Version="1.2.36"/>
-        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.8.2"/>
+        <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.9.6"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.6.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.6.0"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10"/>
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.10"/>
-        <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.8.0"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11"/>
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.11"/>
+        <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.9.0"/>
         <PackageVersion Include="NetArchTest.eNhancedEdition" Version="1.4.5"/>
         <PackageVersion Include="NetEscapades.EnumGenerators" Version="1.0.0-beta21"/>
         <PackageVersion Include="NLog" Version="6.1.4"/>
@@ -49,7 +49,7 @@
         <PackageVersion Include="Semi.Avalonia" Version="12.1.0.1"/>
         <PackageVersion Include="Semver" Version="3.0.0"/>
         <PackageVersion Include="SoundFlow" Version="1.4.1"/>
-        <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.10"/>
+        <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.11"/>
         <PackageVersion Include="Tmds.DBus.Generator" Version="0.94.2"/>
         <PackageVersion Include="Tmds.DBus.Protocol" Version="0.94.2"/>
         <PackageVersion Include="TUnit" Version="1.63.0"/>
