@@ -51,7 +51,7 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 Title = dialogTitle
             }).ConfigureAwait(true);
 
-        return folders.GetLocalPaths().OfType<string>().ToArray();
+        return folders.GetLocalPaths().ToArray();
     }
 
     public async Task<IStorageFile?> GetSingleFileAsync(string dialogTitle)
@@ -101,6 +101,6 @@ internal sealed class FileSystemPickerService : IFileSystemPickerService
                 FileTypeFilter = fileTypes ?? [new FilePickerFileType(FilePickerFileType_AllFiles) { Patterns = ["*.*"] }]
             }).ConfigureAwait(true);
 
-        return files.GetLocalPaths().OfType<string>().ToArray();
+        return files.GetLocalPaths().ToArray();
     }
 }

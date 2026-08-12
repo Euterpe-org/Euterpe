@@ -83,7 +83,7 @@ public sealed partial class ModManagePanelViewModel : ViewModelBase
     [RelayCommand]
     private async Task ImportModsAsync(IReadOnlyList<IStorageItem> files)
     {
-        var paths = files.GetLocalPaths().OfType<string>().ToArray();
+        var paths = files.GetLocalPaths().ToArray();
         if (paths is [])
         {
             return;

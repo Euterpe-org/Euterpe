@@ -30,7 +30,7 @@ public sealed partial class ChartManagePanelViewModel
     [RelayCommand]
     private async Task ImportChartsAsync(IReadOnlyList<IStorageItem> files)
     {
-        var paths = files.GetLocalPaths().OfType<string>().ToArray();
+        var paths = files.GetLocalPaths().ToArray();
         if (paths is [])
         {
             return;
