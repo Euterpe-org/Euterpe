@@ -548,7 +548,7 @@
     <value>Gerenciamento de arquivos</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Pesquisar charts  (Nome, Autor, Charter)</value>
+    <value>Pesquisar charts  (Nome, Autor, Charter, Etiqueta)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Pesquisar mods  (Nome, Autor)</value>

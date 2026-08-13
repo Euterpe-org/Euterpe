@@ -548,7 +548,7 @@
     <value>ファイル管理</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>譜面を検索  （曲名、アーティスト、譜面作者）</value>
+    <value>譜面を検索  （曲名、アーティスト、譜面作者、タグ）</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Modを検索  （名前、作者）</value>

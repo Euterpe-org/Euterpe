@@ -74,10 +74,17 @@ public sealed partial class ChartFilterViewModel : ObservableObject
         }
 
         var meta = chart.Manifest.Meta;
-        return meta.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-               || (meta.NameRomanized?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ?? false)
-               || meta.Author.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-               || meta.Maps.Values.Any(m => m.Charters.Any(c => c.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+
+        return ContainsSearchText(meta.Name)
+               || ContainsSearchText(meta.NameRomanized)
+               || ContainsSearchText(meta.Author)
+               || meta.SearchKeywords?.Any(ContainsSearchText) is true
+               || meta.Maps.Values.Any(map => map.Charters.Any(ContainsSearchText));
+
+        bool ContainsSearchText(string? value)
+        {
+            return value?.Contains(SearchText, StringComparison.OrdinalIgnoreCase) is true;
+        }
     }
 
     private bool MatchesDifficulty(ChartDto chart)

@@ -548,7 +548,7 @@
     <value>Fájlkezelés</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Zenék keresése  (Név, Előadó, Készítő)</value>
+    <value>Zenék keresése  (Név, Előadó, Készítő, Címke)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Modok keresése  (Név, Szerző)</value>

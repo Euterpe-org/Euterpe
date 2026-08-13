@@ -548,7 +548,7 @@
     <value>Bestandsbeheer</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Charts zoeken  (Naam, Auteur, Charter)</value>
+    <value>Charts zoeken  (Naam, Auteur, Charter, Tag)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Mods zoeken  (Naam, Auteur)</value>

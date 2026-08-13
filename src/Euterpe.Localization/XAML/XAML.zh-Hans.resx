@@ -557,7 +557,7 @@
     <value>文件管理</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>搜索谱面  （名称，曲师，谱师）</value>
+    <value>搜索谱面  （名称，曲师，谱师，标签）</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>搜索模组  （名字，作者）</value>

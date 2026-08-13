@@ -548,7 +548,7 @@
     <value>Управление файлами</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Поиск чартов  (Название, Артист, Чартер)</value>
+    <value>Поиск чартов  (Название, Артист, Чартер, Тег)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Поиск модов  (Название, Автор)</value>

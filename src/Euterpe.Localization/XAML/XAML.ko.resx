@@ -548,7 +548,7 @@
     <value>파일 관리</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>채보 검색  (곡명, 아티스트, 채보 제작자)</value>
+    <value>채보 검색  (곡명, 아티스트, 채보 제작자, 태그)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>모드 검색  (이름, 작성자)</value>

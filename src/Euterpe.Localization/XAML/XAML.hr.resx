@@ -548,7 +548,7 @@
     <value>Upravljanje datotekama</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Pretraži chartove  (Naziv, Izvođač, Kreator)</value>
+    <value>Pretraži chartove  (Naziv, Izvođač, Kreator, Oznaka)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Pretraži modove  (Naziv, Autor)</value>

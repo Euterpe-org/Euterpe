@@ -557,7 +557,7 @@
     <value>File Management</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Search Charts  (Name, Author, Charter)</value>
+    <value>Search Charts  (Name, Author, Charter, Tag)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Search Mods  (Name, Author)</value>

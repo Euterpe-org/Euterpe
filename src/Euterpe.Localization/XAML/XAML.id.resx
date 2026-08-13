@@ -548,7 +548,7 @@
     <value>Manajemen File</value>
   </data>
   <data name="SearchBarPlaceholder_Chart" xml:space="preserve">
-    <value>Cari Chart  (Nama, Penulis, Charter)</value>
+    <value>Cari Chart  (Nama, Penulis, Charter, Tag)</value>
   </data>
   <data name="SearchBarPlaceholder_Mod" xml:space="preserve">
     <value>Cari Mod  (Nama, Penulis)</value>
