@@ -27,7 +27,9 @@ internal sealed class GameShareService : IGameShareService
         try
         {
             var package = MessagePackSerialization.DeserializeGameSharePackage(code.FromBase64Url());
-            return package.SchemaVersion == Manifest.CurrentSchema ? package : null;
+            return package is { SchemaVersion: Manifest.CurrentSchema, ChartIds.Length: <= GameSharePackage.MaximumChartCount }
+                ? package
+                : null;
         }
         catch (Exception)
         {

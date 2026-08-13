@@ -25,6 +25,19 @@ public sealed partial class GameShareServiceTest
         await Assert.That(ParseSerializedPackage(package)).IsNull();
     }
 
+    [Test]
+    public async Task TryParseShareLink_MoreThanMaximumCharts_ReturnsNull()
+    {
+        var package = new GameSharePackage
+        {
+            SchemaVersion = Manifest.CurrentSchema,
+            GameId = GameId.MuseDash,
+            ChartIds = [.. Enumerable.Range(1, GameSharePackage.MaximumChartCount + 1)]
+        };
+
+        await Assert.That(ParseSerializedPackage(package)).IsNull();
+    }
+
     private static GameSharePackage? ParseSerializedPackage(GameSharePackage package)
     {
         var serialization = new MessagePackSerializationService();
