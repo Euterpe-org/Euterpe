@@ -49,6 +49,13 @@
     },
     {
       "matchPackageNames": [
+        "NLog",
+        "NLog.Extensions.Logging"
+      ],
+      "groupName": "NLog"
+    },
+    {
+      "matchPackageNames": [
         "R3",
         "R3Extensions.Avalonia"
       ],
