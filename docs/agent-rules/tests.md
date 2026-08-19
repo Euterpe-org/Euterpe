@@ -15,7 +15,7 @@ All C# rules apply to test code too; the rules below are test-specific.
 - One `sealed class <Type>Test` per type under test, annotated `[TestSubject(typeof(T))]` and a `[Category]`.
 - A large test class becomes `partial`, split per tested method into `<Type>Test.<Method>.cs` in a folder named after the type (mirrors the `Name.Topic.cs` source convention).
 - Mocks via TUnit.Mocks: `IFoo.Mock()` for interfaces, `Mock.Logger<T>()` for loggers, TUnit.Mocks.Http for HTTP. Build the subject with a `Create<Service>()` helper whose optional parameters default to mocks.
-- Layer invariants (visibility, sealed, namespaces) are enforced by `Architecture/ArchitectureTests.cs` (NetArchTest) — extend it when adding a project or layer rule.
+- Layer invariants (visibility, sealed, namespaces) are enforced by `Euterpe.CodeAnalysis/Analyzers/ArchitectureAnalyzer.cs` — extend it when adding a project or layer rule.
 
 ## Running
 

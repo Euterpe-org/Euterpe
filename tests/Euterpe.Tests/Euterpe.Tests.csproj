@@ -8,7 +8,6 @@
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="NetArchTest.eNhancedEdition"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="TUnit.Mocks"/>
         <PackageReference Include="TUnit.Mocks.Http"/>
