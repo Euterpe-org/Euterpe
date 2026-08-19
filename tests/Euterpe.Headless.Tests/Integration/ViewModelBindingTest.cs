@@ -13,7 +13,8 @@ public sealed partial class ViewModelBindingTest : HeadlessTest
     {
         var vm = new CounterViewModel();
         var button = new Button { Content = "go", Width = 100, Height = 40 };
-        button.Bind(Button.CommandProperty, new Binding(nameof(CounterViewModel.IncrementCommand)));
+        button.Bind(Button.CommandProperty,
+            CompiledBinding.Create((CounterViewModel viewModel) => viewModel.IncrementCommand));
 
         var window = new Window { DataContext = vm, Content = button, Width = 200, Height = 100 };
         window.Show();
@@ -33,7 +34,8 @@ public sealed partial class ViewModelBindingTest : HeadlessTest
     {
         var vm = new CounterViewModel { Title = "initial" };
         var textBlock = new TextBlock();
-        textBlock.Bind(TextBlock.TextProperty, new Binding(nameof(CounterViewModel.Title)));
+        textBlock.Bind(TextBlock.TextProperty,
+            CompiledBinding.Create((CounterViewModel viewModel) => viewModel.Title));
 
         var window = new Window { DataContext = vm, Content = textBlock, Width = 200, Height = 100 };
         window.Show();
@@ -53,7 +55,9 @@ public sealed partial class ViewModelBindingTest : HeadlessTest
         var vm = new CounterViewModel();
         var textBox = new TextBox { Width = 200, Height = 30 };
         textBox.Bind(TextBox.TextProperty,
-            new Binding(nameof(CounterViewModel.Title)) { Mode = BindingMode.TwoWay });
+            CompiledBinding.Create(
+                (CounterViewModel viewModel) => viewModel.Title,
+                mode: BindingMode.TwoWay));
 
         var window = new Window { DataContext = vm, Content = textBox, Width = 300, Height = 100 };
         window.Show();

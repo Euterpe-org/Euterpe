@@ -2,9 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <IsTestProject>true</IsTestProject>
-        <IsAotCompatible>false</IsAotCompatible>
-        <IsPublishable>false</IsPublishable>
+        <PublishAot>true</PublishAot>
     </PropertyGroup>
 
     <ItemGroup>

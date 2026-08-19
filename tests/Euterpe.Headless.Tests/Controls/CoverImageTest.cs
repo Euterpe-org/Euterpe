@@ -265,7 +265,8 @@ public sealed class CoverImageTest : HeadlessTest
                 ItemTemplate = new FuncDataTemplate<CoverData>((_, _) =>
                 {
                     var cover = new CoverImage { DecodeWidth = 64, Stretch = Stretch.UniformToFill };
-                    cover.Bind(CoverImage.SourceProperty, new Binding(nameof(CoverData.CoverPath)));
+                    cover.Bind(CoverImage.SourceProperty,
+                        CompiledBinding.Create((CoverData data) => data.CoverPath));
                     return cover;
                 })
             };
