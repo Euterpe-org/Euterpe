@@ -5,7 +5,7 @@
     "allowPrerelease": true
   },
   "msbuild-sdks": {
-    "StuDev.AotAnywhere": "1.0.4"
+    "StuDev.AotAnywhere": "1.0.5"
   },
   "test": {
     "runner": "Microsoft.Testing.Platform"
