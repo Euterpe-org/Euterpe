@@ -2,7 +2,7 @@ using Euterpe.Releaser;
 
 using static Euterpe.Releaser.ReleaserConfiguration;
 
-namespace Euterpe.Tests.Releaser;
+namespace Euterpe.Releaser.Tests;
 
 [Category("ReleaserTests")]
 [TestSubject(typeof(ReleaseRuntime))]

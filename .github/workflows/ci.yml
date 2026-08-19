@@ -54,6 +54,9 @@ jobs:
       - name: Test headless
         run: dotnet test --project tests/Euterpe.Headless.Tests/Euterpe.Headless.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
 
+      - name: Test releaser
+        run: dotnet test --project tests/Euterpe.Releaser.Tests/Euterpe.Releaser.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+
       - name: Upload to Codecov
         if: always()
         uses: codecov/codecov-action@v7

@@ -11,16 +11,10 @@
         <PackageReference Include="TUnit"/>
         <PackageReference Include="TUnit.Mocks"/>
         <PackageReference Include="TUnit.Mocks.Http"/>
-        <PackageReference Include="TUnit.Mocks.Logging"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Euterpe\Euterpe.csproj"/>
-        <ProjectReference Include="..\..\src\Euterpe.Core\Euterpe.Core.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Update="Core\Audio\Codecs\Fixtures\Tone.ogg" CopyToOutputDirectory="PreserveNewest" TargetPath="Fixtures\Tone.ogg"/>
+        <ProjectReference Include="..\..\build\Euterpe.Releaser\Euterpe.Releaser.csproj"/>
     </ItemGroup>
 
 </Project>

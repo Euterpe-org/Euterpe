@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 
 [assembly: SuppressMessage("Usage", "MA0004:Use Task.ConfigureAwait")]
-[assembly: InternalsVisibleTo("Euterpe.Releaser.Tests")]
+[assembly: SuppressMessage("Design", "MA0137:Use 'Async' suffix when a method returns an awaitable type")]

@@ -5,6 +5,7 @@ All C# rules apply to test code too; the rules below are test-specific.
 ## Placement
 
 - Plain unit test → `tests/Euterpe.Tests`, at the mirrored path of the type under test (`App/` = `src/Euterpe`, plus `Core/`, `Models/`, `Shared/`, `Contracts/`).
+- Release automation test → `tests/Euterpe.Releaser.Tests`.
 - Anything needing live Avalonia UI (control, view, binding, input, theme) → `tests/Euterpe.Headless.Tests`; inherit `HeadlessTest` and touch UI only inside `RunOnUI`.
 - Source generator or analyzer test → `tests/Euterpe.CodeAnalysis.Tests`; generator outputs are snapshot-verified with Verify (`snapshots/`).
 

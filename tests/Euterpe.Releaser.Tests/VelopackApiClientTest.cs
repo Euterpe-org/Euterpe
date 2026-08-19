@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Semver;
 using TUnit.Mocks.Http;
 
-namespace Euterpe.Tests.Releaser;
+namespace Euterpe.Releaser.Tests;
 
 [Category("ReleaserTests")]
 [TestSubject(typeof(VelopackApiClient))]

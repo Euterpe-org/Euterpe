@@ -1,7 +1,7 @@
 using Euterpe.Releaser;
 using Semver;
 
-namespace Euterpe.Tests.Releaser;
+namespace Euterpe.Releaser.Tests;
 
 [Category("ReleaserTests")]
 [TestSubject(typeof(ReleasePlanner))]
