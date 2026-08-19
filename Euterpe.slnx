@@ -16,10 +16,10 @@
     </Folder>
     <Folder Name="/src/">
         <Project Path="src/Euterpe.Abstractions/Euterpe.Abstractions.csproj"/>
+        <Project Path="src/Euterpe.CodeAnalysis/Euterpe.CodeAnalysis.csproj"/>
         <Project Path="src/Euterpe.Contracts/Euterpe.Contracts.csproj"/>
         <Project Path="src/Euterpe.Controls/Euterpe.Controls.csproj"/>
         <Project Path="src/Euterpe.Core/Euterpe.Core.csproj"/>
-        <Project Path="src/Euterpe.Generators/Euterpe.Generators.csproj"/>
         <Project Path="src/Euterpe.Localization/Euterpe.Localization.csproj"/>
         <Project Path="src/Euterpe.Models/Euterpe.Models.csproj"/>
         <Project Path="src/Euterpe.Shared/Euterpe.Shared.csproj"/>
@@ -27,7 +27,7 @@
         <Project Path="src/Euterpe/Euterpe.csproj"/>
     </Folder>
     <Folder Name="/tests/">
-        <Project Path="tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj"/>
+        <Project Path="tests/Euterpe.CodeAnalysis.Tests/Euterpe.CodeAnalysis.Tests.csproj"/>
         <Project Path="tests/Euterpe.Headless.Tests/Euterpe.Headless.Tests.csproj"/>
         <Project Path="tests/Euterpe.Tests/Euterpe.Tests.csproj"/>
     </Folder>

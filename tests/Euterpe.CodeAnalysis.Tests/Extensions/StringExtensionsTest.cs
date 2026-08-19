@@ -1,6 +1,6 @@
-using Euterpe.Generators.Extensions;
+using Euterpe.CodeAnalysis.Extensions;
 
-namespace Euterpe.Generators.Tests.Extensions;
+namespace Euterpe.CodeAnalysis.Tests.Extensions;
 
 [TestSubject(typeof(StringExtensions))]
 [Category("StringExtensionsTests")]

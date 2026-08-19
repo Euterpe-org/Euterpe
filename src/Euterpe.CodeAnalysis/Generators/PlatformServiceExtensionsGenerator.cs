@@ -1,6 +1,6 @@
 using System.Collections.Frozen;
 
-namespace Euterpe.Generators;
+namespace Euterpe.CodeAnalysis;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class PlatformServiceExtensionsGenerator : IIncrementalGenerator

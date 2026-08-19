@@ -1,4 +1,4 @@
-namespace Euterpe.Generators;
+namespace Euterpe.CodeAnalysis;
 
 internal static class BuildInfo
 {

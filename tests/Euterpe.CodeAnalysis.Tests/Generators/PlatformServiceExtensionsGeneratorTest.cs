@@ -1,4 +1,4 @@
-namespace Euterpe.Generators.Tests.Generators;
+namespace Euterpe.CodeAnalysis.Tests.Generators;
 
 [TestSubject(typeof(PlatformServiceExtensionsGenerator))]
 [Category("PlatformServiceExtensionsGeneratorTests")]

@@ -1,4 +1,4 @@
-namespace Euterpe.Generators;
+namespace Euterpe.CodeAnalysis;
 
 public sealed partial class RouteGenerator
 {

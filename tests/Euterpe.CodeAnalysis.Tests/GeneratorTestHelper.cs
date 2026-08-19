@@ -1,4 +1,4 @@
-namespace Euterpe.Generators.Tests;
+namespace Euterpe.CodeAnalysis.Tests;
 
 internal static class GeneratorTestHelper
 {

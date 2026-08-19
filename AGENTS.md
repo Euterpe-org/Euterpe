@@ -7,14 +7,14 @@ Avalonia desktop app. Projects under `src/`:
 - `Euterpe.Contracts` — wire contracts: any request/response DTO serialized to or from an external API belongs here.
 - `Euterpe.Controls` — reusable Avalonia controls and the app theme. `Themes/EuterpeTheme.axaml` is generated at build time — edit the per-control/per-style files, never the generated file.
 - `Euterpe.Core` — service implementations under `Services/`.
-- `Euterpe.Generators` — Roslyn incremental source generators, driven by the marker attributes in `Euterpe.Shared`.
+- `Euterpe.CodeAnalysis` — Roslyn incremental source generators and analyzers; generators are driven by the marker attributes in `Euterpe.Shared`.
 - `Euterpe.Localization` — localized `.resx` string tables: `XAML` for view text, `Interaction` for code-side messages.
 - `Euterpe.Models` — app-internal models, DTOs, enums and records (types that cross the network go in `Euterpe.Contracts` instead).
 - `Euterpe.Shared` — dependency-free utilities referenced across projects: attributes, collections, extensions, threading helpers, constants.
 - `Euterpe.Tasks` — custom MSBuild build tasks (e.g. generating `EuterpeTheme.axaml`).
 Tests under `tests/` (TUnit):
 
-- `Euterpe.Generators.Tests` — source generator tests, snapshot-verified with Verify (`snapshots/`).
+- `Euterpe.CodeAnalysis.Tests` — source generator and analyzer tests; generator outputs are snapshot-verified with Verify (`snapshots/`).
 - `Euterpe.Headless.Tests` — anything that needs running Avalonia UI (controls, views, bindings, input, theming) on Avalonia.Headless.
 - `Euterpe.Tests` — plain unit tests; folders mirror the source projects (`App/` = `src/Euterpe`, plus `Core/`, `Models/`, `Shared/`, `Contracts/`).
 

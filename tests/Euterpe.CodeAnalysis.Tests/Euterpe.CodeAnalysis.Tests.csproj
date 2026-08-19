@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Euterpe.Generators\Euterpe.Generators.csproj"/>
+        <ProjectReference Include="..\..\src\Euterpe.CodeAnalysis\Euterpe.CodeAnalysis.csproj"/>
     </ItemGroup>
 
 </Project>

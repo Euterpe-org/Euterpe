@@ -1,4 +1,4 @@
-namespace Euterpe.Generators.Extensions;
+namespace Euterpe.CodeAnalysis.Extensions;
 
 public static class IncrementalValueProviderExtensions
 {

@@ -1,4 +1,4 @@
-namespace Euterpe.Generators;
+namespace Euterpe.CodeAnalysis;
 
 internal sealed class CodeBuilder
 {

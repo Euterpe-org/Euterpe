@@ -48,8 +48,8 @@ jobs:
       - name: Test core
         run: dotnet test --project tests/Euterpe.Tests/Euterpe.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
 
-      - name: Test generators
-        run: dotnet test --project tests/Euterpe.Generators.Tests/Euterpe.Generators.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
+      - name: Test code analysis
+        run: dotnet test --project tests/Euterpe.CodeAnalysis.Tests/Euterpe.CodeAnalysis.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura
 
       - name: Test headless
         run: dotnet test --project tests/Euterpe.Headless.Tests/Euterpe.Headless.Tests.csproj -c Release --no-build --report-trx --results-directory ./TestResults -- --coverage --coverage-output-format cobertura

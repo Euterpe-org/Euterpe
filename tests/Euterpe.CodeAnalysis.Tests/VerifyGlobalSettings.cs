@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace Euterpe.Generators.Tests;
+namespace Euterpe.CodeAnalysis.Tests;
 
 public static class VerifyGlobalSettings
 {
