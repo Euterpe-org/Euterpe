@@ -1,7 +1,35 @@
+using System.Text.Json.Nodes;
+
 namespace Euterpe.Tests.Core;
 
 public sealed partial class JsonSerializationServiceTest
 {
+    private const string SerializedConfigJson = """
+                                                {
+                                                    "SteamFolder": "C:\\Program Files (x86)\\SteamLibrary",
+                                                    "SteamExecPath": "C:\\Program Files (x86)\\SteamLibrary\\steam.exe",
+                                                    "CacheFolder": "Cache",
+                                                    "ActiveGame": "MuseDash",
+                                                    "MuseDash": {
+                                                        "Folder": "C:\\Program Files (x86)\\SteamLibrary\\steamapps\\common\\Muse Dash",
+                                                        "GameMode": "Vanilla",
+                                                        "SetupCompleted": false
+                                                    },
+                                                    "MuseDash2": {
+                                                        "Folder": "",
+                                                        "GameMode": "Modded",
+                                                        "SetupCompleted": false
+                                                    },
+                                                    "LanguageCode": "zh-Hans",
+                                                    "Theme": "Dark",
+                                                    "ShowConsole": true,
+                                                    "ShowStartScreen": true,
+                                                    "AlwaysShowScrollBar": true,
+                                                    "UpdateChannel": "Stable",
+                                                    "IgnoreException": false
+                                                }
+                                                """;
+
     private static Config CreateTestConfig() => new()
     {
         SteamFolder = @"C:\Program Files (x86)\SteamLibrary",
@@ -28,16 +56,23 @@ public sealed partial class JsonSerializationServiceTest
     {
         var stream = new MemoryStream();
         _jsonSerializationService.SerializeConfig(stream, CreateTestConfig());
-        stream.Position = 0;
-        return VerifyJson(stream);
+        return AssertSerializedConfig(stream);
     }
 
     [Test]
     public async Task SerializeConfigAsync_ShouldReturnValidJson()
     {
         var stream = new MemoryStream();
-        await _jsonSerializationService.SerializeConfigAsync(stream, CreateTestConfig());
+        await _jsonSerializationService.SerializeConfigAsync(stream, CreateTestConfig()).ConfigureAwait(false);
+        await AssertSerializedConfig(stream).ConfigureAwait(false);
+    }
+
+    private static async Task AssertSerializedConfig(Stream stream)
+    {
         stream.Position = 0;
-        await VerifyJson(stream);
+        var actual = await JsonNode.ParseAsync(stream).ConfigureAwait(false);
+        var expected = JsonNode.Parse(SerializedConfigJson);
+
+        await Assert.That(JsonNode.DeepEquals(actual, expected)).IsTrue();
     }
 }

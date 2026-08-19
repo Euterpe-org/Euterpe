@@ -13,7 +13,6 @@
         <PackageReference Include="TUnit.Mocks"/>
         <PackageReference Include="TUnit.Mocks.Http"/>
         <PackageReference Include="TUnit.Mocks.Logging"/>
-        <PackageReference Include="Verify.TUnit"/>
     </ItemGroup>
 
     <ItemGroup>
