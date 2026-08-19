@@ -1,17 +1,22 @@
-using System.Collections.Immutable;
-
 namespace Euterpe.CodeAnalysis.Tests;
 
 internal static class AnalyzerTestHelper
 {
-    public static async Task<ImmutableArray<Diagnostic>> RunAsync<TAnalyzer>(string assemblyName, string source)
+    public static async Task<ImmutableArray<Diagnostic>> RunAsync<TAnalyzer>(string assemblyName, params string[] sources)
         where TAnalyzer : DiagnosticAnalyzer, new()
     {
         var compilation = CSharpCompilation.Create(
             assemblyName,
-            [CSharpSyntaxTree.ParseText(source)],
+            sources.Select(static source => CSharpSyntaxTree.ParseText(source)),
             Net100.References.All,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        var compilationErrors = compilation.GetDiagnostics()
+            .Where(static diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+            .ToArray();
+        if (compilationErrors.Length > 0)
+        {
+            throw new InvalidOperationException(string.Join(Environment.NewLine, compilationErrors.AsEnumerable()));
+        }
 
         return await compilation
             .WithAnalyzers([new TAnalyzer()])

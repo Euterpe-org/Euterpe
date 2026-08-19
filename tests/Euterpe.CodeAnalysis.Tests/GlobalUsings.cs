@@ -1,3 +1,4 @@
+global using System.Collections.Immutable;
 global using Basic.Reference.Assemblies;
 global using Euterpe.CodeAnalysis;
 global using JetBrains.Annotations;
