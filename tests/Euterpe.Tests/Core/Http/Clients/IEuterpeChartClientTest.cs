@@ -33,8 +33,10 @@ public sealed class IEuterpeChartClientTest
 
         var delta = response.Charts["AbCdEf123"];
         using var assertions = Assert.Multiple();
-        await Assert.That(delta.Changed).IsEquivalentTo(["map1.bms"]);
-        await Assert.That(delta.Deleted).IsEquivalentTo(["video.mp4"]);
+        await Assert.That(delta.Changed)
+            .IsEquivalentTo(["map1.bms"], StringComparer.Ordinal, CollectionOrdering.Matching);
+        await Assert.That(delta.Deleted)
+            .IsEquivalentTo(["video.mp4"], StringComparer.Ordinal, CollectionOrdering.Matching);
         await Assert.That(http.Requests[0].Body).Contains("\"AbCdEf123\"");
         await Assert.That(http.Requests[0].Body).Contains("\"version\":3");
     }

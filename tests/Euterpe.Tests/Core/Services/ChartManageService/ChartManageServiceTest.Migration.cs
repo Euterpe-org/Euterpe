@@ -21,7 +21,7 @@ public sealed partial class ChartManageServiceTest
         [
             new CustomAlbumSource("/imports/one.mdm", false),
             new CustomAlbumSource("/imports/two.MDM", false)
-        ]);
+        ], EqualityComparer<CustomAlbumSource>.Default);
         fileSystem.TryDeleteFile("/imports/one.mdm").WasCalled(Times.Once);
         fileSystem.TryDeleteFile("/imports/two.MDM").WasCalled(Times.Once);
     }

@@ -39,6 +39,6 @@ public sealed class SetupStepRegistrationTest
             "UninstallConflictsStep"
         ];
 
-        await Assert.That(implTypes).IsEquivalentTo(expected);
+        await Assert.That(implTypes).IsEquivalentTo(expected, StringComparer.Ordinal, CollectionOrdering.Matching);
     }
 }

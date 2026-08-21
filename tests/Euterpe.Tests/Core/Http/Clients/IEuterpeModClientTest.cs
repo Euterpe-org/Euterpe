@@ -26,6 +26,7 @@ public sealed class IEuterpeModClientTest
         await Assert.That(mod.MelonVersion).IsEqualTo("0.6.1");
         await Assert.That(mod.SHA256).IsEqualTo("abc123");
         await Assert.That(mod.DownloadCount).IsEqualTo(42);
-        await Assert.That(mod.ModDependencies).IsEquivalentTo(["Lib"]);
+        await Assert.That(mod.ModDependencies)
+            .IsEquivalentTo(["Lib"], StringComparer.Ordinal, CollectionOrdering.Matching);
     }
 }

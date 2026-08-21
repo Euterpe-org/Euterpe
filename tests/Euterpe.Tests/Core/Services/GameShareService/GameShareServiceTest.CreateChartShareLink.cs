@@ -12,6 +12,7 @@ public sealed partial class GameShareServiceTest
         using var _ = Assert.Multiple();
         await Assert.That(parsed).IsNotNull();
         await Assert.That(parsed!.GameId).IsEqualTo(GameId.MuseDash);
-        await Assert.That(parsed.ChartIds).IsEquivalentTo(new[] { 13, 20 });
+        await Assert.That(parsed.ChartIds)
+            .IsEquivalentTo([13, 20], EqualityComparer<int>.Default, CollectionOrdering.Matching);
     }
 }

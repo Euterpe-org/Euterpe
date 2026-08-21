@@ -21,6 +21,7 @@ public sealed class MessagePackSerializationServiceTest
 
         await Assert.That(restored.SchemaVersion).IsEqualTo(Manifest.CurrentSchema);
         await Assert.That(restored.GameId).IsEqualTo(GameId.MuseDash2);
-        await Assert.That(restored.ChartIds).IsEquivalentTo(package.ChartIds);
+        await Assert.That(restored.ChartIds)
+            .IsEquivalentTo(package.ChartIds, EqualityComparer<int>.Default, CollectionOrdering.Matching);
     }
 }

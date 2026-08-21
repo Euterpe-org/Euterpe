@@ -33,7 +33,8 @@ public sealed class ArchiveServiceTest
             await using var zip = ZipFile.OpenRead(zipPath);
             using var _ = Assert.Multiple();
             await Assert.That(File.Exists(zipPath)).IsTrue();
-            await Assert.That(zip.Entries.Select(e => e.Name).Order(StringComparer.Ordinal)).IsEquivalentTo(["a.txt", "b.txt"]);
+            await Assert.That(zip.Entries.Select(e => e.Name).Order(StringComparer.Ordinal))
+                .IsEquivalentTo(["a.txt", "b.txt"], StringComparer.Ordinal, CollectionOrdering.Matching);
         }
         finally
         {

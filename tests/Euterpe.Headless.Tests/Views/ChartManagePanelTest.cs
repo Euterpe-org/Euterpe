@@ -1,6 +1,7 @@
 using Avalonia.Controls.Primitives;
 using Euterpe.Features.Charting;
 using Euterpe.Models.Charts;
+using TUnit.Assertions.Enums;
 
 namespace Euterpe.Headless.Tests.Views;
 
@@ -14,7 +15,10 @@ public sealed class ChartManagePanelTest : HeadlessTest
         var difficulties = DifficultyToggles(Show())
             .Select(static toggle => toggle.GetVisualDescendants().OfType<DifficultyStar>().Single().Difficulty);
 
-        await Assert.That(difficulties).IsEquivalentTo(ChartDifficultyExtensions.GetValues());
+        await Assert.That(difficulties).IsEquivalentTo(
+            ChartDifficultyExtensions.GetValues(),
+            EqualityComparer<ChartDifficulty>.Default,
+            CollectionOrdering.Matching);
     });
 
     [Test]

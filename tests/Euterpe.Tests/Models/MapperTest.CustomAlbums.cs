@@ -35,7 +35,7 @@ public sealed partial class MapperTest
         await Assert.That(meta.HideMode).IsEqualTo(string.Empty);
         await Assert.That(meta.HideRatingOverride).IsEqualTo(string.Empty);
         await Assert.That(meta.HideMessage).IsEqualTo(string.Empty);
-        await Assert.That(meta.SearchKeywords).IsEquivalentTo(Array.Empty<string>());
+        await Assert.That(meta.SearchKeywords).IsEmpty();
         await Assert.That(meta.BackgroundVideoOpacity).IsNull();
     }
 
@@ -76,9 +76,11 @@ public sealed partial class MapperTest
         await Assert.That(meta.Maps.Count).IsEqualTo(2);
         await Assert.That(meta.Maps.ContainsKey("map2")).IsFalse();
         await Assert.That(meta.Maps["map1"].Rating).IsEqualTo("2");
-        await Assert.That(meta.Maps["map1"].Charters).IsEquivalentTo(["Alice"]);
+        await Assert.That(meta.Maps["map1"].Charters)
+            .IsEquivalentTo(["Alice"], StringComparer.Ordinal, CollectionOrdering.Matching);
         await Assert.That(meta.Maps["map3"].Rating).IsEqualTo("8");
-        await Assert.That(meta.Maps["map3"].Charters).IsEquivalentTo(["General"]);
+        await Assert.That(meta.Maps["map3"].Charters)
+            .IsEquivalentTo(["General"], StringComparer.Ordinal, CollectionOrdering.Matching);
     }
 
     [Test]
