@@ -28,7 +28,7 @@ internal sealed class TokenQueryHandler(IServiceProvider services) : DelegatingH
         response.Dispose();
 
         token = await authService.RenewAccessTokenAsync(token).ConfigureAwait(false);
-        request.RequestUri = AppendToken(request.RequestUri!, token);
+        request.RequestUri = AppendToken(request.RequestUri, token);
         return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
 

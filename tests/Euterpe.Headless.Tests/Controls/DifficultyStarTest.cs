@@ -48,5 +48,5 @@ public sealed class DifficultyStarTest : HeadlessTest
 
     [Test]
     public Task Difficulty_OutsideTheEnum_KeepsTheFallbackFill() => RunOnUI(async () =>
-        await Assert.That(FillOf(ShowStar((ChartDifficulty)0))).IsNotNull());
+        await Assert.That(FillOf(ShowStar(0))).IsNotNull());
 }

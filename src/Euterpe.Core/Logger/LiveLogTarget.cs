@@ -10,7 +10,7 @@ public sealed class LiveLogTarget : Target
 
     protected override void Write(LogEventInfo logEvent)
     {
-        var category = logEvent.LoggerName ?? string.Empty;
+        var category = logEvent.LoggerName;
         if (category is "Euterpe.Services.NavigationService")
         {
             return;

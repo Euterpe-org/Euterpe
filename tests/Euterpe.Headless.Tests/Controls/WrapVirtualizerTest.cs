@@ -85,7 +85,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
     {
         var (wrap, _) = CreateHost(6, 100, 350, 400);
 
-        var borders = wrap.GetVisualDescendants().OfType<Border>().Count(b => b.Width == 100 && b.Height == 40);
+        var borders = wrap.GetVisualDescendants().OfType<Border>().Count(b => b is { Width: 100, Height: 40 });
         await Assert.That(borders).IsGreaterThan(0);
     });
 
@@ -119,7 +119,7 @@ public sealed class WrapVirtualizerTest : HeadlessTest
 
         var cards = wrap.GetVisualDescendants()
             .OfType<Border>()
-            .Where(b => b.Width == 100 && b.Height == 40)
+            .Where(b => b is { Width: 100, Height: 40 })
             .Take(2)
             .ToList();
         var first = cards[0].TranslatePoint(default, wrap) ?? default;
