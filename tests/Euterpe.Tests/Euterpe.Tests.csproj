@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\NativeAot.props"/>
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <PublishAot>true</PublishAot>
     </PropertyGroup>
 
     <ItemGroup>

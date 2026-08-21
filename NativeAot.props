@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <PublishAot>true</PublishAot>
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>full</TrimMode>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    </PropertyGroup>
+</Project>

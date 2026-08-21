@@ -5,6 +5,7 @@
         <File Path="Directory.Build.props"/>
         <File Path="Directory.Packages.props"/>
         <File Path="global.json"/>
+        <File Path="NativeAot.props"/>
         <File Path="Publish.props"/>
         <File Path="README.md"/>
         <File Path="Release.props"/>

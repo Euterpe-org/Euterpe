@@ -1,15 +1,12 @@
 <Project>
+    <Import Project="NativeAot.props"/>
+
     <PropertyGroup>
         <DefineConstants Condition="'$(IsPublishing)' == 'true'">$(DefineConstants);PUBLISH</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup>
-        <PublishAot>true</PublishAot>
-        <PublishTrimmed>true</PublishTrimmed>
-        <TrimMode>full</TrimMode>
-        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
         <DebuggerSupport>false</DebuggerSupport>
-        <TrimmerSingleWarn>false</TrimmerSingleWarn>
     </PropertyGroup>
 
     <Target Name="Exclude Package Pdbs" AfterTargets="ComputeFilesToPublish">
