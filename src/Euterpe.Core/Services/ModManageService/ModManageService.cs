@@ -151,31 +151,6 @@ internal sealed partial class ModManageService : IModManageService, IDisposable
         return outdatedMods.Length;
     }
 
-    public async Task<IReadOnlyList<BulkItemResult>> InstallModsAsync(IReadOnlyList<ModInstallRequest> requests,
-        IProgress<BatchProgress>? progress = null, CancellationToken cancellationToken = default)
-    {
-        var results = new List<BulkItemResult>(requests.Count);
-        var completed = 0;
-        var changed = false;
-
-        foreach (var request in requests)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var outcome = await InstallModForBulkAsync(request).ConfigureAwait(false);
-            results.Add(new BulkItemResult(request.Name, outcome));
-            changed |= outcome is BulkItemOutcome.Added || outcome is BulkItemOutcome.AlreadyPresent;
-            progress?.Report(new BatchProgress(++completed, requests.Count));
-        }
-
-        if (changed)
-        {
-            await RefreshModStatesAsync().ConfigureAwait(false);
-        }
-
-        return results;
-    }
-
     #region Injections
 
     public required GameConfig GameConfig { get; init; }

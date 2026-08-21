@@ -24,12 +24,6 @@ public interface IModManageService
 
     // Bulk operations
     Task<int> UpdateAllModsAsync();
-
-    Task<IReadOnlyList<BulkItemResult>> InstallModsAsync(
-        IReadOnlyList<ModInstallRequest> requests,
-        IProgress<BatchProgress>? progress = null,
-        CancellationToken cancellationToken = default);
-
     Task ImportModsAsync(IReadOnlyList<string> filePaths);
 
     // Local file reconciliation
