@@ -60,7 +60,7 @@
         <PackageVersion Include="Velopack" Version="1.2.0"/>
         <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0"/>
         <PackageVersion Include="Verify.TUnit" Version="31.28.0"/>
-        <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.6"/>
+        <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.7"/>
         <PackageVersion Include="XenoAtom.Logging" Version="1.2.0"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.138"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="4.16.1"/>
