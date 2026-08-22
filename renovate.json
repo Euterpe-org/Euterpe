@@ -78,6 +78,13 @@
     },
     {
       "matchPackageNames": [
+        "Tmds.DBus.Protocol",
+        "Tmds.DBus.Generator"
+      ],
+      "groupName": "Tmds.DBus"
+    },
+    {
+      "matchPackageNames": [
         "TUnit",
         "TUnit.Mocks",
         "TUnit.Mocks.Http",
