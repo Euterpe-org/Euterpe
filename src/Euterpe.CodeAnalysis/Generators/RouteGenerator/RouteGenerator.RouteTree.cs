@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using System.Runtime.InteropServices;
 
 namespace Euterpe.CodeAnalysis;
 
@@ -48,18 +49,9 @@ public sealed partial class RouteGenerator
                 var lastSlash = path.LastIndexOf('/');
                 var parentPath = lastSlash > 0 ? path[..lastSlash] : "/";
 
-                if (!childrenBuilder.TryGetValue(parentPath, out var children))
-                {
-                    children = [];
-                    childrenBuilder[parentPath] = children;
-                }
-
-                children.Add(route);
-
-                // After Source Generator can use .NET 10
-                /*ref var children = ref CollectionsMarshal.GetValueRefOrAddDefault(childrenBuilder, parentPath, out _);
+                ref var children = ref CollectionsMarshal.GetValueRefOrAddDefault(childrenBuilder, parentPath, out _);
                 children ??= [];
-                children.Add(data);*/
+                children.Add(route);
             }
 
             var frozenChildren = new Dictionary<string, ImmutableArray<RouteData>>(childrenBuilder.Count);
