@@ -7,7 +7,7 @@ namespace Euterpe.CodeAnalysis.Tests.Analyzers;
 public sealed class ArchitectureAnalyzerTest
 {
     [Test]
-    public async Task Abstractions_NonPublicClass_ReportsDiagnostic()
+    public async Task AnalyzeNamedType_AbstractionsNonPublicClass_ReportsDiagnostic()
     {
         var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
             "Euterpe.Abstractions",
@@ -18,7 +18,18 @@ public sealed class ArchitectureAnalyzerTest
     }
 
     [Test]
-    public async Task Core_PublicUnsealedClass_ReportsDiagnostic()
+    public async Task AnalyzeNamedType_AbstractionsSubnamespaceNonPublicClass_ReportsDiagnostic()
+    {
+        var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
+            "Euterpe.Abstractions",
+            "namespace Euterpe.Abstractions.Specialized; internal sealed class Service;").ConfigureAwait(false);
+
+        await Assert.That(diagnostics.Select(static diagnostic => diagnostic.Id))
+            .IsEquivalentTo([ArchitectureAnalyzer.AbstractionsTypeRuleId]);
+    }
+
+    [Test]
+    public async Task AnalyzeNamedType_CorePublicUnsealedClass_ReportsDiagnostic()
     {
         var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
             "Euterpe.Core",
@@ -29,7 +40,7 @@ public sealed class ArchitectureAnalyzerTest
     }
 
     [Test]
-    public async Task Shared_InternalClass_ReportsDiagnostic()
+    public async Task AnalyzeNamedType_SharedInternalClass_ReportsDiagnostic()
     {
         var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
             "Euterpe.Shared",
@@ -40,7 +51,7 @@ public sealed class ArchitectureAnalyzerTest
     }
 
     [Test]
-    public async Task Models_InternalClass_ReportsDiagnostic()
+    public async Task AnalyzeNamedType_ModelsInternalClass_ReportsDiagnostic()
     {
         var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
             "Euterpe.Models",
@@ -51,7 +62,39 @@ public sealed class ArchitectureAnalyzerTest
     }
 
     [Test]
-    public async Task ValidTypes_NoDiagnostics()
+    public async Task AnalyzeNamedType_SharedSubnamespaceInternalClass_ReportsDiagnostic()
+    {
+        var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
+            "Euterpe.Shared",
+            "namespace Euterpe.Shared.Collections; internal sealed class Collection;").ConfigureAwait(false);
+
+        await Assert.That(diagnostics.Select(static diagnostic => diagnostic.Id))
+            .IsEquivalentTo([ArchitectureAnalyzer.SharedTypeRuleId]);
+    }
+
+    [Test]
+    public async Task AnalyzeNamedType_ModelsSubnamespaceInternalClass_ReportsDiagnostic()
+    {
+        var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
+            "Euterpe.Models",
+            "namespace Euterpe.Models.Charts; internal sealed class Chart;").ConfigureAwait(false);
+
+        await Assert.That(diagnostics.Select(static diagnostic => diagnostic.Id))
+            .IsEquivalentTo([ArchitectureAnalyzer.ModelsTypeRuleId]);
+    }
+
+    [Test]
+    public async Task AnalyzeNamedType_CoreSubnamespaceClass_NoDiagnostics()
+    {
+        var diagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
+            "Euterpe.Core",
+            "namespace Euterpe.Core.Http; public class Handler;").ConfigureAwait(false);
+
+        await Assert.That(diagnostics).IsEmpty();
+    }
+
+    [Test]
+    public async Task AnalyzeNamedType_ValidTypes_NoDiagnostics()
     {
         var abstractionsDiagnostics = await AnalyzerTestHelper.RunAsync<ArchitectureAnalyzer>(
             "Euterpe.Abstractions",

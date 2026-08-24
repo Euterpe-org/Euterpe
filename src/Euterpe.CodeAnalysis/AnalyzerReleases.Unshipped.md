@@ -8,4 +8,3 @@ EUT0001 | Architecture | Error | Abstractions types must be public interfaces
 EUT0002 | Architecture | Error | Core services must be internal and sealed
 EUT0003 | Architecture | Error | Shared classes must be public
 EUT0004 | Architecture | Error | Model classes must be public
-EUT0005 | Serialization | Error | Refit wire types must be registered in SnakeCaseJsonContext

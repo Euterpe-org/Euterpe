@@ -6,5 +6,6 @@ global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.CSharp.Syntax;
 global using Microsoft.CodeAnalysis.Diagnostics;
+global using static Euterpe.CodeAnalysis.AnalyzerConstants;
 global using static Euterpe.CodeAnalysis.BuildInfo;
 global using static Euterpe.CodeAnalysis.SourceGenerationTexts;
