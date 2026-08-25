@@ -19,12 +19,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Validate release tag
-        run: git grep -F "<Version>${GITHUB_REF_NAME}</Version>" -- Directory.Build.props
-
       - name: Create GitHub draft
         uses: softprops/action-gh-release@v3
         with:
@@ -54,6 +48,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: tree:0
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v6
@@ -96,6 +93,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: tree:0
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v6

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCopyright(Copyright)]
 [assembly: AssemblyCompany(Company)]
 [assembly: AssemblyDescription(Description)]
-[assembly: AssemblyFileVersion(AppVersion)]
+[assembly: AssemblyFileVersion(AppFileVersion)]
 [assembly: AssemblyInformationalVersion(AppVersion)]
 [assembly: AssemblyProduct(AppName)]
 [assembly: AssemblyTitle(AppName)]

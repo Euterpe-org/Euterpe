@@ -1,5 +1,9 @@
 <Project>
-    <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile;CoreCompile" Inputs="$(MSBuildAllProjects)" Outputs="$(IntermediateOutputPath)AssemblyInfo.cs">
+    <Target Name="GenerateBuildInfo"
+            BeforeTargets="BeforeCompile;CoreCompile"
+            DependsOnTargets="MinVer"
+            Inputs="$(MSBuildAllProjects)"
+            Outputs="$(IntermediateOutputPath)AssemblyInfo.cs">
         <ItemGroup>
             <_AvaloniaPackage Include="@(PackageVersion)"
                               Condition="'%(PackageVersion.Identity)' == 'Avalonia'"/>
@@ -16,6 +20,7 @@ public static partial class BuildInfo
     public const string Description = "A tool for Muse Dash modding"%3B
     public const string AppName = "Euterpe"%3B
     public const string AppVersion = "$(Version)"%3B
+    public const string AppFileVersion = "$(FileVersion)"%3B
     public const string DisplayVersion = $"v{AppVersion}"%3B
     public const string DotNetVersion = "$(TargetFrameworkVersion)"%3B
     public const string AvaloniaVersion = "$(_AvaloniaVersion)"%3B
