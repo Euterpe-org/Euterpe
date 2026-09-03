@@ -17,20 +17,10 @@ internal sealed partial class LinuxLauncher : IPlatformLauncher
         Logger.LogInformation("Open folder: {FolderPath}", folderPath);
     }
 
-    public Task OpenUriAsync(string uri)
+    public async Task OpenUriAsync(string uri)
     {
-        // Avalonia's Linux launcher corrupts uri query strings via broken shell escaping (AvaloniaUI/Avalonia#20230)
-        Process.Start(
-            new ProcessStartInfo("xdg-open")
-            {
-                ArgumentList = { uri },
-                UseShellExecute = false,
-                CreateNoWindow = true
-            }
-        );
-
+        await TopLevel.Launcher.LaunchUriAsync(new Uri(uri)).ConfigureAwait(false);
         Logger.LogInformation("Open uri: {Uri}", uri);
-        return Task.CompletedTask;
     }
 
     public async Task RevealFileAsync(string filePath)
