@@ -574,6 +574,9 @@
   <data name="Setting_Description_Language" xml:space="preserve">
     <value>UI Language</value>
   </data>
+  <data name="Setting_Description_MinimizeToTrayOnClose" xml:space="preserve">
+    <value>Keep Euterpe running in the system tray when the main window is closed</value>
+  </data>
   <data name="Setting_Description_MuseDashFolder" xml:space="preserve">
     <value>Muse Dash executable folder</value>
   </data>
@@ -600,6 +603,9 @@
   </data>
   <data name="Setting_Title_Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="Setting_Title_MinimizeToTrayOnClose" xml:space="preserve">
+    <value>Minimize to Tray on Close</value>
   </data>
   <data name="Setting_Title_MuseDashFolder" xml:space="preserve">
     <value>Muse Dash Folder</value>

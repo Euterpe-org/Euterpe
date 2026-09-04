@@ -26,6 +26,7 @@ public sealed partial class JsonSerializationServiceTest
                                           "Theme": "Light",
                                           "ShowConsole": false,
                                           "AlwaysShowScrollBar": false,
+                                          "MinimizeToTrayOnClose": true,
                                           "DownloadSource": "GitHub",
                                           "UpdateSource": "GitHubRSS",
                                           "GitHubToken": null,
@@ -75,6 +76,7 @@ public sealed partial class JsonSerializationServiceTest
         await Assert.That(actual.ShowConsole).IsFalse();
         await Assert.That(actual.ShowStartScreen).IsTrue();
         await Assert.That(actual.AlwaysShowScrollBar).IsFalse();
+        await Assert.That(actual.MinimizeToTrayOnClose).IsTrue();
         await Assert.That(actual.UpdateChannel).IsEqualTo(UpdateChannel.Beta);
         await Assert.That(actual.IgnoreException).IsTrue();
     }

@@ -25,6 +25,7 @@ public sealed partial class JsonSerializationServiceTest
                                                     "ShowConsole": true,
                                                     "ShowStartScreen": true,
                                                     "AlwaysShowScrollBar": true,
+                                                    "MinimizeToTrayOnClose": true,
                                                     "UpdateChannel": "Stable",
                                                     "IgnoreException": false
                                                 }
@@ -47,6 +48,7 @@ public sealed partial class JsonSerializationServiceTest
         Theme = "Dark",
         ShowConsole = true,
         AlwaysShowScrollBar = true,
+        MinimizeToTrayOnClose = true,
         UpdateChannel = UpdateChannel.Stable,
         IgnoreException = false
     };

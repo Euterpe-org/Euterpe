@@ -12,4 +12,17 @@ public sealed partial class MainWindow : UrsaWindow
 
         Notifier = new WindowNotificationManager(this);
     }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        if (e.CloseReason is WindowCloseReason.WindowClosing
+            && DataContext is MainWindowViewModel { Config.MinimizeToTrayOnClose: true })
+        {
+            e.Cancel = true;
+            Hide();
+            return;
+        }
+
+        base.OnClosing(e);
+    }
 }

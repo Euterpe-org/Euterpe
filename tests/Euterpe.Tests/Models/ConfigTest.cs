@@ -5,6 +5,10 @@ namespace Euterpe.Tests.Models;
 public sealed class ConfigTest
 {
     [Test]
+    public async Task MinimizeToTrayOnClose_Default_IsFalse() =>
+        await Assert.That(new Config().MinimizeToTrayOnClose).IsFalse();
+
+    [Test]
     public async Task DefaultUpdateChannel_IsStable() =>
         await Assert.That(new Config { MuseDash = new MuseDashConfig(), MuseDash2 = new MuseDash2Config() }.UpdateChannel).IsEqualTo(UpdateChannel.Stable);
 }

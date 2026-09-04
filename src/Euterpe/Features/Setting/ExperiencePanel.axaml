@@ -43,6 +43,14 @@
                 IsChecked="{Binding Config.AlwaysShowScrollBar, Mode=TwoWay}" />
         </e:LabeledSection>
 
+        <!--  Minimize To Tray On Close  -->
+        <e:LabeledSection
+            Description="{Localize {x:Static loc:XAMLLiteral.Setting_Description_MinimizeToTrayOnClose}}"
+            Title="{Localize {x:Static loc:XAMLLiteral.Setting_Title_MinimizeToTrayOnClose}}">
+            <ToggleSwitch
+                IsChecked="{Binding Config.MinimizeToTrayOnClose, Mode=TwoWay}" />
+        </e:LabeledSection>
+
     </StackPanel>
 
 </UserControl>

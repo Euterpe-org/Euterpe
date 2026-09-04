@@ -26,19 +26,24 @@ public static class DesktopUtils
     public static void ActivateMainWindow(bool force = false)
     {
         var mainWindow = GetCurrentMainWindow();
+
         if (mainWindow.WindowState is WindowState.Minimized)
         {
             mainWindow.WindowState = WindowState.Normal;
         }
 
-        // This forces window to show at front when using DeepLink
+        if (!mainWindow.IsVisible)
+        {
+            mainWindow.Show();
+        }
+
         if (force)
         {
             mainWindow.Topmost = true;
             mainWindow.Topmost = false;
         }
 
-        // window.Activate() must be called on UI thread, otherwise it won't work with tray icon
+        // Defer the final activation until the current native callback has returned.
         Dispatcher.UIThread.Post(mainWindow.Activate);
     }
 }

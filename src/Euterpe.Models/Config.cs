@@ -53,6 +53,9 @@ public sealed partial class Config : ObservableObject
     [ObservableProperty]
     public partial bool AlwaysShowScrollBar { get; set; } = true;
 
+    [ObservableProperty]
+    public partial bool MinimizeToTrayOnClose { get; set; }
+
     // Download Settings
     [ObservableProperty]
     public partial UpdateChannel UpdateChannel { get; set; } = UpdateChannel.Stable;
