@@ -36,8 +36,8 @@
     <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.12" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.10.0" />
     <PackageVersion Include="NetEscapades.EnumGenerators" Version="1.0.0-beta21" />
-    <PackageVersion Include="NLog" Version="6.2.0" />
-    <PackageVersion Include="NLog.Extensions.Logging" Version="6.2.0" />
+    <PackageVersion Include="NLog" Version="6.2.1" />
+    <PackageVersion Include="NLog.Extensions.Logging" Version="6.2.1" />
     <PackageVersion Include="NVorbis" Version="1.0.0-rc.2" />
     <PackageVersion Include="ObservableCollections" Version="3.3.4" />
     <PackageVersion Include="Polyfill" Version="11.3.0" />
