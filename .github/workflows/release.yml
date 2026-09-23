@@ -63,9 +63,6 @@ jobs:
       - name: Test
         run: dotnet test -c Release --no-build --report-trx
 
-      - name: Restore tools
-        run: dotnet tool restore
-
       - name: Stage release
         env:
           EUTERPE_API_KEY: ${{ secrets.EUTERPE_API_KEY }}
@@ -74,7 +71,7 @@ jobs:
           --project build/Euterpe.Releaser/Euterpe.Releaser.csproj
           -c Release
           --no-build
-          -- stage
+          -- --target=Stage
           --rid "${{ matrix.rid }}"
 
       - name: Upload installer to GitHub draft
@@ -109,7 +106,7 @@ jobs:
           dotnet run
           --project build/Euterpe.Releaser/Euterpe.Releaser.csproj
           -c Release
-          -- publish
+          -- --target=PublishRelease
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v3

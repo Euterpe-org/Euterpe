@@ -1,12 +1,11 @@
 global using System.Net.Http.Json;
 global using System.Net.Http.Headers;
-global using System.Text.Json;
 global using System.Text.Json.Serialization;
-global using CliWrap;
-global using ConsoleAppFramework;
+global using Cake.Common.Diagnostics;
+global using Cake.Common.IO;
+global using Cake.Core;
+global using Cake.Frosting;
 global using Euterpe.Contracts.Distribution;
 global using Microsoft.Extensions.DependencyInjection;
 global using Semver;
-global using XenoAtom.Logging;
-global using XenoAtom.Logging.Writers;
-global using static Euterpe.Releaser.ReleaserConfiguration;
+global using static Euterpe.Releaser.ReleaseContext;

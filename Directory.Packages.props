@@ -16,9 +16,9 @@
         <PackageVersion Include="Avalonia.Headless" Version="12.1.3"/>
         <PackageVersion Include="Autofac" Version="9.3.4"/>
         <PackageVersion Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3"/>
+        <PackageVersion Include="Cake.Frosting" Version="6.2.0"/>
         <PackageVersion Include="CliWrap" Version="3.10.5"/>
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
-        <PackageVersion Include="ConsoleAppFramework" Version="5.7.13"/>
         <PackageVersion Include="DotNext.Threading" Version="6.8.0"/>
         <PackageVersion Include="Downloader" Version="5.9.8"/>
         <PackageVersion Include="DynamicData" Version="9.4.33"/>
@@ -32,7 +32,6 @@
         <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.10.1"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.9.0"/>
         <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0"/>
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12"/>
         <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.12"/>
         <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.10.0"/>
         <PackageVersion Include="NetEscapades.EnumGenerators" Version="1.0.0-beta21"/>
@@ -61,7 +60,6 @@
         <PackageVersion Include="ValveKeyValue" Version="0.70.0.499"/>
         <PackageVersion Include="Velopack" Version="1.2.158"/>
         <PackageVersion Include="Xaml.Behaviors.Interactions.DragAndDrop" Version="12.0.7"/>
-        <PackageVersion Include="XenoAtom.Logging" Version="1.2.0"/>
         <GlobalPackageReference Include="Meziantou.Analyzer" Version="3.0.200"/>
         <GlobalPackageReference Include="MinVer" Version="8.0.0"/>
         <GlobalPackageReference Include="Roslynator.Analyzers" Version="5.0.0"/>

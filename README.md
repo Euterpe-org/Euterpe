@@ -82,9 +82,9 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE).
 | [Autofac](https://github.com/autofac/Autofac)                                            | [MIT](https://github.com/autofac/Autofac/blob/develop/LICENSE)                      |
 | [Avalonia](https://github.com/AvaloniaUI/Avalonia)                                       | [MIT](https://github.com/AvaloniaUI/Avalonia/blob/master/licence.md)                |
 | [Avalonia.Labs](https://github.com/AvaloniaUI/Avalonia.Labs)                             | [MIT](https://github.com/AvaloniaUI/Avalonia.Labs/blob/main/LICENSE)                |
+| [Cake](https://github.com/cake-build/cake)                                             | [MIT](https://github.com/cake-build/cake/blob/develop/LICENSE)                     |
 | [CliWrap](https://github.com/Tyrrrz/CliWrap)                                             | [MIT](https://github.com/Tyrrrz/CliWrap/blob/master/License.txt)                    |
 | [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)                      | [MIT](https://github.com/CommunityToolkit/dotnet/blob/main/License.md)              |
-| [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)                    | [MIT](https://github.com/Cysharp/ConsoleAppFramework/blob/master/LICENSE)           |
 | [dotNext](https://github.com/dotnet/dotNext)                                             | [MIT](https://github.com/dotnet/dotNext/blob/master/LICENSE)                        |
 | [Downloader](https://github.com/bezzad/Downloader)                                       | [MIT](https://github.com/bezzad/Downloader/blob/master/LICENSE)                     |
 | [DynamicData](https://github.com/reactiveui/DynamicData)                                 | [MIT](https://github.com/reactiveui/DynamicData/blob/main/LICENSE.md)               |
@@ -106,7 +106,6 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE).
 | [ValveKeyValue](https://github.com/ValveResourceFormat/ValveKeyValue)                    | [MIT](https://github.com/ValveResourceFormat/ValveKeyValue/blob/master/LICENSE)     |
 | [Velopack](https://github.com/velopack/velopack)                                         | [MIT](https://github.com/velopack/velopack/blob/develop/LICENSE)                    |
 | [Xaml.Behaviors](https://github.com/wieslawsoltes/Xaml.Behaviors)                        | [MIT](https://github.com/wieslawsoltes/Xaml.Behaviors/blob/master/LICENSE.TXT)      |
-| [XenoAtom.Logging](https://github.com/XenoAtom/XenoAtom.Logging)                         | [BSD-2-Clause](https://github.com/XenoAtom/XenoAtom.Logging/blob/main/license.txt)  |
 
 ### Fonts
 

@@ -33,8 +33,7 @@ public sealed class VelopackApiClientTest
                 "linux-x64-beta",
                 SemVersion.Parse("2.1.0-beta.2", SemVersionStyles.Strict),
                 "full",
-                assetPath,
-                CancellationToken.None);
+                assetPath);
 
             using var assertions = Assert.Multiple();
             await Assert.That(primary.Requests.Count).IsEqualTo(2);
@@ -57,9 +56,7 @@ public sealed class VelopackApiClientTest
         await using var provider = CreateProvider(primary);
         var client = provider.GetRequiredService<VelopackApiClient>();
 
-        var act = () => client.PublishAsync(
-            SemVersion.Parse("2.1.0-beta.2", SemVersionStyles.Strict),
-            CancellationToken.None);
+        var act = () => client.PublishAsync(SemVersion.Parse("2.1.0-beta.2", SemVersionStyles.Strict));
 
         await Assert.That(act).Throws<HttpRequestException>();
         await Assert.That(primary.Requests).HasSingleItem();

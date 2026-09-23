@@ -7,12 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CliWrap"/>
-        <PackageReference Include="ConsoleAppFramework"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+        <PackageReference Include="Cake.Frosting"/>
         <PackageReference Include="Microsoft.Extensions.Http.Resilience"/>
         <PackageReference Include="Semver"/>
-        <PackageReference Include="XenoAtom.Logging"/>
     </ItemGroup>
 
     <ItemGroup>

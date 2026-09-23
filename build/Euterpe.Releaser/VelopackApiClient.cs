@@ -1,24 +1,18 @@
 namespace Euterpe.Releaser;
 
-internal sealed class VelopackApiClient(HttpClient httpClient)
+public sealed class VelopackApiClient(HttpClient httpClient)
 {
-    public async Task<VelopackReleaseBase?> GetReleaseBaseAsync(string channel, CancellationToken cancellationToken)
+    public async Task<VelopackReleaseBase?> GetReleaseBaseAsync(string channel)
     {
         using var response = await httpClient.GetAsync(
             $"workspace/velopack/{channel}/base",
-            HttpCompletionOption.ResponseHeadersRead,
-            cancellationToken);
+            HttpCompletionOption.ResponseHeadersRead);
 
-        await EnsureSuccessAsync(response, cancellationToken);
-
-        using var content = await response.Content.ReadAsStreamAsync(cancellationToken);
-        return await JsonSerializer.DeserializeAsync(
-            content,
-            ReleaserJsonContext.Default.VelopackReleaseBase,
-            cancellationToken);
+        await EnsureSuccessAsync(response);
+        return await response.Content.ReadFromJsonAsync(ReleaserJsonContext.Default.VelopackReleaseBase);
     }
 
-    public async Task PublishAsync(SemVersion version, CancellationToken cancellationToken)
+    public async Task PublishAsync(SemVersion version)
     {
         using var request = new HttpRequestMessage(HttpMethod.Post, "workspace/velopack/publish");
 
@@ -26,20 +20,16 @@ internal sealed class VelopackApiClient(HttpClient httpClient)
             new VelopackPublishRequest(version.ToString()),
             ReleaserJsonContext.Default.VelopackPublishRequest);
 
-        using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-        await EnsureSuccessAsync(response, cancellationToken);
+        using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+        await EnsureSuccessAsync(response);
     }
 
-    public async Task DownloadReleaseBaseAsync(
-        string downloadPath,
-        string destinationPath,
-        CancellationToken cancellationToken)
+    public async Task DownloadReleaseBaseAsync(string downloadPath, string destinationPath)
     {
-        using var response = await httpClient.GetAsync(downloadPath, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-        await EnsureSuccessAsync(response, cancellationToken);
+        using var response = await httpClient.GetAsync(downloadPath, HttpCompletionOption.ResponseHeadersRead);
+        await EnsureSuccessAsync(response);
 
-        using var source = await response.Content.ReadAsStreamAsync(cancellationToken);
-        using var destination = new FileStream(
+        await using var destination = new FileStream(
             destinationPath,
             new FileStreamOptions
             {
@@ -49,15 +39,14 @@ internal sealed class VelopackApiClient(HttpClient httpClient)
                 Share = FileShare.None
             });
 
-        await source.CopyToAsync(destination, cancellationToken);
+        await response.Content.CopyToAsync(destination);
     }
 
     public async Task UploadAssetAsync(
         string channel,
         SemVersion version,
         string assetType,
-        string assetPath,
-        CancellationToken cancellationToken)
+        string assetPath)
     {
         var fileName = Path.GetFileName(assetPath);
         using var stream = new FileStream(
@@ -75,24 +64,19 @@ internal sealed class VelopackApiClient(HttpClient httpClient)
         request.Headers.Add("X-Asset-Type", assetType);
         request.Content = new StreamContent(stream);
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-        request.Content.Headers.ContentLength = stream.Length;
 
-        using var response = await httpClient.SendAsync(
-            request,
-            HttpCompletionOption.ResponseHeadersRead,
-            cancellationToken);
-
-        await EnsureSuccessAsync(response, cancellationToken);
+        using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+        await EnsureSuccessAsync(response);
     }
 
-    private static async Task EnsureSuccessAsync(HttpResponseMessage response, CancellationToken cancellationToken)
+    private static async Task EnsureSuccessAsync(HttpResponseMessage response)
     {
         if (response.IsSuccessStatusCode)
         {
             return;
         }
 
-        var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+        var responseBody = await response.Content.ReadAsStringAsync();
         throw new HttpRequestException(
             $"Velopack API returned {(int)response.StatusCode} ({response.ReasonPhrase}): {responseBody}", null, response.StatusCode);
     }

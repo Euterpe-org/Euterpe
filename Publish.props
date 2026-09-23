@@ -14,12 +14,4 @@
             <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" Condition="'%(Extension)' == '.pdb'"/>
         </ItemGroup>
     </Target>
-
-    <Target Name="Copy Builds" AfterTargets="Publish">
-        <ItemGroup>
-            <_PublishedFiles Include="$(PublishDir)*.*"/>
-        </ItemGroup>
-
-        <Copy SourceFiles="@(_PublishedFiles)" DestinationFolder="$(ArtifactsPath)output" SkipUnchangedFiles="true"/>
-    </Target>
 </Project>

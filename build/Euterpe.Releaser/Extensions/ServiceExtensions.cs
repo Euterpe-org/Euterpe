@@ -22,9 +22,6 @@ internal static class ServiceExtensions
                 })
                 .AddHttpMessageHandler<XRequestIdHandler>()
                 .AddStandardResilienceHandler(ConfigureVelopackApiResilience);
-
-            services.AddSingleton<ReleaseProcessRunner>();
-            services.AddSingleton<RidReleaseStager>();
         }
     }
 
