@@ -41,7 +41,8 @@ public static class DownloadUtils
                 return;
             }
 
-            logger.LogWarning("Attempt {Attempt}/{MaxRetries}: checksum mismatch for {DisplayName}, expected {ExpectedSha256}, got {ActualSha256}", attempt, maxRetries, displayName, expectedSha256, actualSha256);
+            logger.LogWarning("Attempt {Attempt}/{MaxRetries}: checksum mismatch for {DisplayName}, expected {ExpectedSha256}, got {ActualSha256}", attempt, maxRetries,
+                displayName, expectedSha256, actualSha256);
         }
 
         throw new IOException($"Failed to download a valid {displayName} after {maxRetries} attempts");

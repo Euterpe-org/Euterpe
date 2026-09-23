@@ -1,6 +1,7 @@
-using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
 using NLog;
 using NLog.Targets;
+using LogLevel = NLog.LogLevel;
+using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Euterpe.Core.Logger;
 
@@ -29,34 +30,34 @@ public sealed class LiveLogTarget : Target
             message));
     }
 
-    private static MicrosoftLogLevel ToMicrosoftLogLevel(NLog.LogLevel level)
+    private static MicrosoftLogLevel ToMicrosoftLogLevel(LogLevel level)
     {
-        if (level == NLog.LogLevel.Trace)
+        if (level == LogLevel.Trace)
         {
             return MicrosoftLogLevel.Trace;
         }
 
-        if (level == NLog.LogLevel.Debug)
+        if (level == LogLevel.Debug)
         {
             return MicrosoftLogLevel.Debug;
         }
 
-        if (level == NLog.LogLevel.Info)
+        if (level == LogLevel.Info)
         {
             return MicrosoftLogLevel.Information;
         }
 
-        if (level == NLog.LogLevel.Warn)
+        if (level == LogLevel.Warn)
         {
             return MicrosoftLogLevel.Warning;
         }
 
-        if (level == NLog.LogLevel.Error)
+        if (level == LogLevel.Error)
         {
             return MicrosoftLogLevel.Error;
         }
 
-        return level == NLog.LogLevel.Fatal ? MicrosoftLogLevel.Critical : MicrosoftLogLevel.None;
+        return level == LogLevel.Fatal ? MicrosoftLogLevel.Critical : MicrosoftLogLevel.None;
     }
 
     public event Action<LogMessage>? OnLogMessageReceived;

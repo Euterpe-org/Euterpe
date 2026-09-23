@@ -34,17 +34,6 @@ public sealed class DebouncedAsyncAction : IDisposable
             Timeout.InfiniteTimeSpan);
     }
 
-    public void Trigger()
-    {
-        lock (_gate)
-        {
-            if (!_disposed)
-            {
-                _debounceTimer.Change(_debounce, Timeout.InfiniteTimeSpan);
-            }
-        }
-    }
-
     public void Dispose()
     {
         lock (_gate)
@@ -58,6 +47,17 @@ public sealed class DebouncedAsyncAction : IDisposable
         }
 
         _debounceTimer.Dispose();
+    }
+
+    public void Trigger()
+    {
+        lock (_gate)
+        {
+            if (!_disposed)
+            {
+                _debounceTimer.Change(_debounce, Timeout.InfiniteTimeSpan);
+            }
+        }
     }
 
     private void OnDebounceElapsed()

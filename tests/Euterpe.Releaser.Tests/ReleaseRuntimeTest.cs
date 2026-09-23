@@ -1,5 +1,3 @@
-using Euterpe.Releaser;
-
 using static Euterpe.Releaser.ReleaserConfiguration;
 
 namespace Euterpe.Releaser.Tests;

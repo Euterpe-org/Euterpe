@@ -12,5 +12,4 @@ internal static class LoggingConstants
         "CRT",
         "NON"
     ];
-
 }

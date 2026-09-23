@@ -1,7 +1,6 @@
 using System.Net;
 using Euterpe.Core.Http.Clients;
 using Refit;
-using TUnit.Mocks.Http;
 
 namespace Euterpe.Tests.Core.Http.Clients;
 
@@ -13,7 +12,7 @@ public sealed class IEuterpeHealthClientTest
     public async Task CheckAsync_HealthEndpoint_ReturnsRawResponse()
     {
         using var http = Mock.HttpHandler();
-        http.OnGet("/health").Respond(HttpStatusCode.OK);
+        http.OnGet("/health").Respond();
         var api = RestService.ForGenerated<IEuterpeHealthClient>(
             http.ThrowOnUnmatched().CreateClient(EuterpeWeb.BaseUrl));
 

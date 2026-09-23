@@ -1,4 +1,3 @@
-using Euterpe.Contracts.Credits;
 using Euterpe.Core.Http.Clients;
 using Euterpe.Tests.TestSupport;
 

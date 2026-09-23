@@ -1,5 +1,3 @@
-using TUnit.Mocks.Logging;
-
 namespace Euterpe.Tests.Core;
 
 [Category("ChartLocalServiceTests")]

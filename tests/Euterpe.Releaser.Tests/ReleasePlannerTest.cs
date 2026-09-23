@@ -1,4 +1,3 @@
-using Euterpe.Releaser;
 using Semver;
 
 namespace Euterpe.Releaser.Tests;

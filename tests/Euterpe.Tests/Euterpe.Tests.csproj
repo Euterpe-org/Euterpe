@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="JetBrains.dotCover.Framework" />
+        <PackageReference Include="JetBrains.dotCover.Framework"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="TUnit.Mocks"/>
         <PackageReference Include="TUnit.Mocks.Http"/>

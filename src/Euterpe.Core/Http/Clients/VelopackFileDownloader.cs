@@ -4,6 +4,12 @@ namespace Euterpe.Core.Http.Clients;
 
 internal sealed class VelopackFileDownloader : HttpClientFileDownloader
 {
+    #region Injections
+
+    public required IHttpClientFactory HttpClientFactory { get; init; }
+
+    #endregion Injections
+
     protected override HttpClient CreateHttpClient(IDictionary<string, string>? headers, double timeout)
     {
         var client = HttpClientFactory.CreateClient(nameof(EuterpeApi.Distribution));
@@ -22,10 +28,4 @@ internal sealed class VelopackFileDownloader : HttpClientFileDownloader
 
         return client;
     }
-
-    #region Injections
-
-    public required IHttpClientFactory HttpClientFactory { get; init; }
-
-    #endregion Injections
 }

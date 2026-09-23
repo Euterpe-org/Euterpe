@@ -1,7 +1,7 @@
 using Euterpe.Core.Logger;
-using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
 using NLog;
 using NLog.Config;
+using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Euterpe.Tests.Core.Logger;
 
@@ -17,7 +17,7 @@ public sealed class LiveLogTargetTest
 
         var logFactory = new LogFactory();
         var configuration = new LoggingConfiguration(logFactory);
-        configuration.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, target);
+        configuration.AddRule(LogLevel.Trace, LogLevel.Fatal, target);
         logFactory.Configuration = configuration;
         log(logFactory.GetLogger(category));
         logFactory.Shutdown();

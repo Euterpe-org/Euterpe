@@ -1,9 +1,9 @@
 using System.Collections;
 using Euterpe.Core.Logger;
 using Euterpe.Services;
-using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
 using NLog;
 using NLog.Config;
+using MicrosoftLogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace Euterpe.Tests.App.Services;
 
@@ -28,7 +28,7 @@ public sealed class LiveLogServiceTest
         var service = new LiveLogService(target);
         var logFactory = new LogFactory();
         var configuration = new LoggingConfiguration(logFactory);
-        configuration.AddRule(NLog.LogLevel.Trace, NLog.LogLevel.Fatal, target);
+        configuration.AddRule(LogLevel.Trace, LogLevel.Fatal, target);
         logFactory.Configuration = configuration;
         return (service, logFactory);
     }

@@ -24,7 +24,7 @@ public sealed class AppLoggingConfigurationTest
     {
         var configuration = AppLoggingConfiguration.Create(new LiveLogTarget());
         var fileTarget = configuration.AllTargets.OfType<FileTarget>().Single();
-        var logEvent = new LogEventInfo(NLog.LogLevel.Error, "TestCategory", "file failed")
+        var logEvent = new LogEventInfo(LogLevel.Error, "TestCategory", "file failed")
         {
             Exception = new InvalidOperationException("file boom")
         };

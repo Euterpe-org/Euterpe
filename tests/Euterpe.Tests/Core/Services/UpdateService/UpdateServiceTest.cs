@@ -26,9 +26,8 @@ public sealed partial class UpdateServiceTest
         string currentVersion = CurrentStableVersion,
         IFileDownloader? feedDownloader = null,
         IPlatformInfo? platformInfo = null,
-        bool isInstalled = true)
-    {
-        return new UpdateService
+        bool isInstalled = true) =>
+        new()
         {
             Config = config ?? Config,
             FeedDownloader = feedDownloader ?? new TestFeedDownloader(CreateFeed()),
@@ -38,7 +37,6 @@ public sealed partial class UpdateServiceTest
                 ? new TestVelopackLocator(AppId, currentVersion, AppContext.BaseDirectory)
                 : CreateNotInstalledVelopackLocator()
         };
-    }
 
     private static IVelopackLocator CreateNotInstalledVelopackLocator()
     {
@@ -55,12 +53,10 @@ public sealed partial class UpdateServiceTest
         return mock;
     }
 
-    private static string CreateFeed(string? version = null)
-    {
-        return version is null
+    private static string CreateFeed(string? version = null) =>
+        version is null
             ? """{"Assets":[]}"""
             : $$"""{"Assets":[{"PackageId":"{{AppId}}","Version":"{{version}}","Type":"Full","FileName":"{{AppId}}-{{version}}-full.nupkg","SHA1":"0123456789012345678901234567890123456789","Size":1}]}""";
-    }
 
     private sealed class TestFeedDownloader(string response) : IFileDownloader
     {
@@ -72,15 +68,10 @@ public sealed partial class UpdateServiceTest
             Action<int> progress,
             IDictionary<string, string>? headers = null,
             double timeout = 30,
-            CancellationToken cancelToken = default)
-        {
+            CancellationToken cancelToken = default) =>
             throw new NotSupportedException();
-        }
 
-        public Task<byte[]> DownloadBytes(string url, IDictionary<string, string>? headers = null, double timeout = 30)
-        {
-            throw new NotSupportedException();
-        }
+        public Task<byte[]> DownloadBytes(string url, IDictionary<string, string>? headers = null, double timeout = 30) => throw new NotSupportedException();
 
         public Task<string> DownloadString(string url, IDictionary<string, string>? headers = null, double timeout = 30)
         {

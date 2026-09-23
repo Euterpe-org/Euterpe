@@ -4,7 +4,6 @@ using Euterpe.Contracts.Charts;
 using Euterpe.Core.Http.Clients;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
-using TUnit.Mocks.Http;
 
 namespace Euterpe.Tests.Core.Extensions;
 

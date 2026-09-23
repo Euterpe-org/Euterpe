@@ -1,3 +1,4 @@
+using NLog;
 using Velopack;
 using static Euterpe.Bootstrapper;
 using static Euterpe.CrashHandler;
@@ -37,7 +38,7 @@ internal static class Program
         finally
         {
             StopActivationPipeServer();
-            NLog.LogManager.Shutdown();
+            LogManager.Shutdown();
         }
     }
 

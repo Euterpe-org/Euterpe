@@ -11,7 +11,7 @@ public sealed class CoverImageTest : HeadlessTest
 {
     private static readonly byte[] MinimalAnimatedWebp =
         Convert.FromBase64String("UklGRoQAAABXRUJQVlA4WAoAAAACAAAAAQAAAQAAQU5JTQYAAAAAAAAAAABBTk1GKAAAAAAAAAAAAAEAAAEAAGQAAAJWUDhMDwAAAC8BQAAA"
-                                + "BxD9j/4HIqL/AQBBTk1GKAAAAAAAAAAAAAEAAAEAAMgAAAJWUDhMDwAAAC8BQAAABxDR//4HIqL/AQA=");
+                                 + "BxD9j/4HIqL/AQBBTk1GKAAAAAAAAAAAAAEAAAEAAMgAAAJWUDhMDwAAAC8BQAAABxDR//4HIqL/AQA=");
 
     private static readonly byte[] MinimalWebp =
         Convert.FromBase64String("UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoEAAQAAgA0JaACdLoB+AADsAD+8Oj3/yC5YXXI1/8gP+QH/ID/+PIAAAA=");

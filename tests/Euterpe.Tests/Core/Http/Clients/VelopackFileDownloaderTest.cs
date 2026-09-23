@@ -24,7 +24,7 @@ public sealed class VelopackFileDownloaderTest
         var downloader = CreateDownloader(provider);
         var feedUrl = $"{new Uri(EuterpeApi.BaseUrl).GetLeftPart(UriPartial.Authority)}{feedPath}";
 
-        await downloader.DownloadString(feedUrl, null, 30);
+        await downloader.DownloadString(feedUrl);
 
         using var assertions = Assert.Multiple();
         await Assert.That(primary.Requests).HasSingleItem();
@@ -77,11 +77,9 @@ public sealed class VelopackFileDownloaderTest
         return services.BuildServiceProvider();
     }
 
-    private static IFileDownloader CreateDownloader(ServiceProvider provider)
-    {
-        return new VelopackFileDownloader
+    private static IFileDownloader CreateDownloader(ServiceProvider provider) =>
+        new VelopackFileDownloader
         {
             HttpClientFactory = provider.GetRequiredService<IHttpClientFactory>()
         };
-    }
 }

@@ -39,11 +39,13 @@ public sealed partial class DependencyAcquireServiceTest
     {
         var client = IEuterpeDistributionClient.Mock();
         client.GetLatestDependenciesAsync(true, Any<CancellationToken>())
-            .Returns([CreateDependency(
-                "MelonLoader",
-                TestMelonLoaderVersion,
-                "any-sha",
-                dotNetRuntimeVersion: TestDotNetRuntimeVersion)]);
+            .Returns([
+                CreateDependency(
+                    "MelonLoader",
+                    TestMelonLoaderVersion,
+                    "any-sha",
+                    dotNetRuntimeVersion: TestDotNetRuntimeVersion)
+            ]);
         var sut = CreateService(client);
 
         await sut.GetLatestMelonLoaderReleaseAsync();

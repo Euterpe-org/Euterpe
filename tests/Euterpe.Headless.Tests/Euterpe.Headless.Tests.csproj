@@ -11,7 +11,7 @@
         <PackageReference Include="Irihi.Ursa"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi"/>
         <PackageReference Include="JetBrains.Annotations"/>
-        <PackageReference Include="JetBrains.dotCover.Framework" />
+        <PackageReference Include="JetBrains.dotCover.Framework"/>
         <PackageReference Include="Semi.Avalonia"/>
         <PackageReference Include="TUnit"/>
         <PackageReference Include="TUnit.Mocks"/>

@@ -1,5 +1,4 @@
 using System.Net;
-using Euterpe.Releaser;
 using Microsoft.Extensions.DependencyInjection;
 using Semver;
 using TUnit.Mocks.Http;
@@ -58,7 +57,7 @@ public sealed class VelopackApiClientTest
         await using var provider = CreateProvider(primary);
         var client = provider.GetRequiredService<VelopackApiClient>();
 
-        Func<Task> act = () => client.PublishAsync(
+        var act = () => client.PublishAsync(
             SemVersion.Parse("2.1.0-beta.2", SemVersionStyles.Strict),
             CancellationToken.None);
 

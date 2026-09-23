@@ -64,6 +64,14 @@ public sealed partial class DebouncedAsyncActionTest
             return true;
         }
 
+        public void Dispose() => Interlocked.Exchange(ref _isScheduled, 0);
+
+        public ValueTask DisposeAsync()
+        {
+            Dispose();
+            return ValueTask.CompletedTask;
+        }
+
         public void Elapse()
         {
             if (Interlocked.Exchange(ref _isScheduled, 0) == 0)
@@ -72,14 +80,6 @@ public sealed partial class DebouncedAsyncActionTest
             }
 
             callback(state);
-        }
-
-        public void Dispose() => Interlocked.Exchange(ref _isScheduled, 0);
-
-        public ValueTask DisposeAsync()
-        {
-            Dispose();
-            return ValueTask.CompletedTask;
         }
 
         public Task WaitForNextScheduleAsync()

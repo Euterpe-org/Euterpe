@@ -20,10 +20,10 @@ public sealed class AnimatedImageSourceExtension(string uri) : MarkupExtension
         var parsedUri = new Uri(Uri, UriKind.RelativeOrAbsolute);
         if (parsedUri.IsAbsoluteUri)
         {
-            return IAnimatedBitmap.Load(AssetLoader.Open(parsedUri), disposeStream: true);
+            return IAnimatedBitmap.Load(AssetLoader.Open(parsedUri), true);
         }
 
         var baseUri = serviceProvider.GetRequiredService<IUriContext>().BaseUri;
-        return IAnimatedBitmap.Load(AssetLoader.Open(parsedUri, baseUri), disposeStream: true);
+        return IAnimatedBitmap.Load(AssetLoader.Open(parsedUri, baseUri), true);
     }
 }
