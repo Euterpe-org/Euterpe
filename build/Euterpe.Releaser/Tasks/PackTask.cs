@@ -24,7 +24,7 @@ public sealed class PackTask : FrostingTask<ReleaseContext>
                 "--packDir", context.ApplicationDirectory.FullPath,
                 "--runtime", context.Rid,
                 "--channel", channel,
-                "--delta", "BestSpeed",
+                "--delta", "BestSize",
                 "--outputDir", context.GetPackageDirectory(channel).FullPath,
                 .. context.PlatformVpkArguments
             ]));
